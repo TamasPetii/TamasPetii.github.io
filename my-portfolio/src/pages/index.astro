@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+---
+
+<Layout title="Tamás Péter | Graphics Programmer">
+    
+    <header class="relative min-h-[60vh] flex items-center justify-center bg-[url('/Sponza.png')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-gray-950/70 backdrop-blur-sm"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-12">
+            
+            <img src="/Profile.png" alt="Tamás Péter" class="w-32 h-32 mx-auto rounded-full mb-6 border-4 border-gray-800 shadow-2xl object-cover" />
+
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
+                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Tamás Péter</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">
+                Graphics Programmer. Creator of the Synapse Engine. Passionate about GPU-driven rendering and high-performance computing.
+            </p>
+            
+            <div class="flex gap-4 justify-center">
+                <a href="mailto:tamaspeti3451@gmail.com" class="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+                    Get in touch
+                </a>
+                <a href="https://github.com/TamasPetii" target="_blank" class="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8">Featured Projects</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <ProjectCard 
+                title="Synapse Engine"
+                description="A high-performance, GPU-driven rendering engine with modern mesh shader support, hierarchical culling, and a data-oriented Entity-Component-System."
+                tags={['C++', 'Vulkan', 'Mesh Shaders', 'GPU-driven']}
+                link="https://github.com/TamasPetii/SynapseEngine"
+            />
+
+            <ProjectCard 
+                title="Learn Graphics API"
+                description="An upcoming tutorial series breaking down modern rendering techniques, from basic setup to advanced compute shader culling."
+                tags={['Tutorial', 'OpenGL', 'Notion', 'WIP']}
+                link="#"
+            />
+
+        </div>
+    </main>
+
+</Layout>
