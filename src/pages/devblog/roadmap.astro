@@ -1,0 +1,60 @@
+---
+import DevblogLayout from '../../layouts/DevblogLayout.astro';
+import { getRoadmapItems } from '../../lib/notion';
+
+type RoadmapItem = {
+    status: string;
+    title: string;
+    description?: string;
+    priority: number;
+};
+
+const items: RoadmapItem[] = await getRoadmapItems();
+items.sort((a, b) => b.priority - a.priority);
+
+const columns = {
+    'Ideas / Backlog': items.filter(i => i.status === 'Backlog' || i.status === 'Idea' || i.status === 'Not started'),
+    'In Progress': items.filter(i => i.status === 'In progress'),
+    'Done': items.filter(i => i.status === 'Done')
+};
+---
+
+<DevblogLayout title="Roadmap" activeSlug="roadmap">
+    <h1>Synapse Engine Roadmap</h1>
+    <p>Tracking the current development directions, active tasks, and future ideas for the engine.</p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-12 not-prose">
+        {Object.entries(columns).map(([columnName, tasks]) => (
+            <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-5 flex flex-col">
+                <div class="flex items-center gap-2 mb-4 pb-3 border-b border-gray-800">
+                    <h2 class="text-lg font-bold text-gray-200">{columnName}</h2>
+                    <span class="px-2 py-0.5 bg-gray-800 text-gray-400 text-xs rounded-full">{tasks.length}</span>
+                </div>
+                
+                <div class="flex flex-col gap-3 flex-1">
+                    {tasks.length === 0 ? (
+                        <p class="text-gray-600 text-sm italic text-center py-4">No tasks in this phase.</p>
+                    ) : (
+                        tasks.map(task => (
+                            <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 hover:border-blue-500/50 transition-colors shadow-sm">
+                                
+                                <div class="flex justify-between items-start mb-1 gap-2">
+                                    <h3 class="font-semibold text-blue-400 text-sm">{task.title}</h3>
+                                    {task.priority !== 99 && (
+                                        <span class="px-1.5 py-0.5 bg-gray-800 border border-gray-700 text-gray-400 text-[10px] font-bold rounded">
+                                            P{task.priority}
+                                        </span>
+                                    )}
+                                </div>
+
+                                {task.description && (
+                                    <p class="text-xs text-gray-400 leading-relaxed">{task.description}</p>
+                                )}
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
+        ))}
+    </div>
+</DevblogLayout>

@@ -24,14 +24,29 @@ const sortedPosts = allPosts.sort((a: CollectionEntry<'devblog'>, b: CollectionE
 				<p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Synapse Engine</p>
 			</div>
 			
+			<div class="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-2 px-3 mt-4">Project</div>
+
 			<nav class="space-y-2">
+				<a 
+					href="/devblog/roadmap"
+					class={`block py-2 px-3 rounded-lg text-sm transition-colors mb-6 ${
+						activeSlug === 'roadmap' 
+						? 'bg-blue-600/20 text-blue-400 font-medium border border-blue-500/30' 
+						: 'text-gray-400 hover:bg-gray-800 hover:text-gray-200 border border-transparent'
+					}`}
+				>
+					Project Roadmap
+				</a>
+
+				<div class="text-xs text-gray-600 font-semibold uppercase tracking-wider mb-2 px-3">Tutorials</div>
+
 				{sortedPosts.map((post: CollectionEntry<'devblog'>) => (
 					<a 
 						href={`/devblog/${post.id}`}
 						class={`block py-2 px-3 rounded-lg text-sm transition-colors ${
 							activeSlug === post.id 
 							? 'bg-blue-600/20 text-blue-400 font-medium border border-blue-500/30' 
-							: 'text-gray-400 hover:bg-gray-800 hover:text-gray-200'
+							: 'text-gray-400 hover:bg-gray-800 hover:text-gray-200 border border-transparent'
 						}`}
 					>
 						{post.data.title}
