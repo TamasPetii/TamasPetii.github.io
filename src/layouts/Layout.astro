@@ -5,6 +5,7 @@ interface Props {
 	title: string;
 }
 const { title } = Astro.props;
+const pathname = Astro.url.pathname;
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
@@ -30,10 +31,10 @@ const { title } = Astro.props;
 					
 					<div class="hidden md:block">
 						<div class="ml-10 flex items-center space-x-8">
-							<a href="/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-semibold transition-colors">Home</a>
-							<a href="/devblog/01-welcome-to-synapse-engine" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-semibold transition-colors">Devblog</a>
-							<a href="/about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-semibold transition-colors">About</a>
-							<a href="/contact" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-semibold transition-colors">Contact</a>
+							<a href="/" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname === '/' ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Home</a>
+							<a href="/devblog/01-welcome-to-synapse-engine" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/devblog') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Devblog</a>
+							<a href="/about" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/about') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>About</a>
+							<a href="/contact" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/contact') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Contact</a>
 						</div>
 					</div>
 					
@@ -50,10 +51,10 @@ const { title } = Astro.props;
 
 			<div class="md:hidden hidden bg-gray-900 border-b border-gray-800" id="mobile-menu">
 				<div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-					<a href="/" class="hover:bg-gray-800 block px-3 py-2 rounded-md text-lg font-medium text-gray-300 hover:text-white">Home</a>
-					<a href="/devblog/01-welcome-to-synapse-engine" class="hover:bg-gray-800 block px-3 py-2 rounded-md text-lg font-medium text-gray-300 hover:text-white">Devblog</a>
-					<a href="/about" class="hover:bg-gray-800 block px-3 py-2 rounded-md text-lg font-medium text-gray-300 hover:text-white">About</a>
-					<a href="/contact" class="hover:bg-gray-800 block px-3 py-2 rounded-md text-lg font-medium text-gray-300 hover:text-white">Contact</a>
+					<a href="/" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname === '/' ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Home</a>
+					<a href="/devblog/01-welcome-to-synapse-engine" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/devblog') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Devblog</a>
+					<a href="/about" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/about') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>About</a>
+					<a href="/contact" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/contact') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Contact</a>
 				</div>
 			</div>
 		</nav>

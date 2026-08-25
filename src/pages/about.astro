@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About | Tamás Péter - Graphics Programmer">
+    
+    <header class="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gray-950">
+        
+        <div class="absolute inset-0 bg-[url('/Images/Bistro.png')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-950/60 via-gray-950/80 to-gray-950"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-20 mt-10">
+            
+            <img src="/Images/Profile.png" alt="Tamás Péter" class="w-32 h-32 mx-auto rounded-full mb-8 border-4 border-gray-800 shadow-[0_0_30px_rgba(168,85,247,0.3)] object-cover" />
+            
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4 text-white drop-shadow-2xl">
+                Tamás <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 pb-1 pt-1">Péter</span>
+            </h1>
+            
+            <h2 class="text-xl md:text-2xl font-medium text-purple-300 mb-8">
+                Graphics Programmer & Engine Developer
+            </h2>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-10">
+                I am a Computer Engineering M.Sc. student specializing in Visual Informatics at the Budapest University of Technology and Economics (BME). My absolute passion lies in low-level 3D graphics programming, modern GPU-driven rendering pipelines, and building high-performance, data-oriented engine architectures from scratch.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">C++23</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">Vulkan / OpenGL</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">GLSL / Slang</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">Engine Architecture</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-24 space-y-32">
+        
+        <div class="text-center mb-20">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Selected <span class="text-purple-400">Projects</span></h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+                    Current Focus
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Synapse <span class="text-purple-400">Engine</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    My flagship project: a research-oriented, high-performance rendering framework built with C++23 and modern Vulkan. It features a fully custom Data-Oriented Entity-Component-System (ECS), a strict GPU-driven pipeline utilizing Task and Mesh shaders, and a proprietary Dual-HiZ Adaptive Clustered Forward+ rendering technique.
+                </p>
+                <div class="pt-4 flex gap-4">
+                    <a href="https://github.com/TamasPetii/SynapseEngine" target="_blank" class="px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl border border-gray-700 hover:border-purple-500 transition-all hover:-translate-y-1 flex items-center gap-2">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source Code
+                    </a>
+                    <a href="/" class="px-6 py-3 bg-purple-600/20 text-purple-300 font-semibold rounded-xl border border-purple-500/30 hover:bg-purple-600/40 hover:text-white transition-all hover:-translate-y-1">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Synapse.png" alt="Synapse Engine" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 border border-gray-700 text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    B.Sc. Thesis Project
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Dendrite <span class="text-purple-400">Engine</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Developed as my Bachelor of Science thesis, Dendrite Engine served as my comprehensive deep dive into core engine architecture and graphics programming. It laid the crucial foundational knowledge for my current research, focusing heavily on robust rendering pipelines, memory management, and API utilization before my transition to modern Vulkan.
+                </p>
+                <div class="pt-4">
+                    <a href="https://github.com/TamasPetii/DendriteEngine" target="_blank" class="inline-flex px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl border border-gray-700 hover:border-purple-500 transition-all hover:-translate-y-1 items-center gap-2">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source Code
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Dendrite.png" alt="Dendrite Engine" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 border border-gray-700 text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    University Team Project
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">CityBuilder<span class="text-purple-400">3D</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    A comprehensive 3D city simulation game developed collaboratively during my B.Sc. studies. The project features complex grid-based building placement, background resource management, and a robust underlying architecture designed to simulate and render a dynamic, ever-growing urban environment efficiently.
+                </p>
+                <div class="pt-4">
+                    <a href="https://github.com/TamasPetii/CityBuilder3D" target="_blank" class="inline-flex px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl border border-gray-700 hover:border-purple-500 transition-all hover:-translate-y-1 items-center gap-2">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source Code
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/CityBuilder.jpg" alt="CityBuilder3D" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800 border border-gray-700 text-gray-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    Unity Game Dev
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Strategy <span class="text-purple-400">Quiz Game</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    An exploratory team project built in Unity using C#. By leveraging a decoupled, event-driven Model-View-Controller (MVC) architecture, the project focused heavily on clean code separation, custom card UI animations, and establishing efficient collaborative development workflows within a team setting.
+                </p>
+                <div class="pt-4">
+                    <a href="https://github.com/Szoftverarchitekturak-Csepeli-Gang/QuizGame" target="_blank" class="inline-flex px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl border border-gray-700 hover:border-purple-500 transition-all hover:-translate-y-1 items-center gap-2">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Source Code
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/QuizGame.png" alt="Quiz Game" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+    </section>
+
+</Layout>
