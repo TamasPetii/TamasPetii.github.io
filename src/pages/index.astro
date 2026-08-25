@@ -1,55 +1,196 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 ---
 
-<Layout title="Tamás Péter | Graphics Programmer">
+<Layout title="Synapse Engine | Modern GPU-Driven Architecture">
     
-    <header class="relative min-h-[60vh] flex items-center justify-center bg-[url('/Sponza.png')] bg-cover bg-center">
-        <div class="absolute inset-0 bg-gray-950/70 backdrop-blur-sm"></div>
-        
-        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-12">
-            
-            <img src="/Profile.png" alt="Tamás Péter" class="w-32 h-32 mx-auto rounded-full mb-6 border-4 border-gray-800 shadow-2xl object-cover" />
+    <header class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gray-950">
+        <div class="absolute inset-0 bg-[url('/Images/Sponza.png')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-950/40 via-gray-950/80 to-gray-950"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
-                Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Tamás Péter</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">
-                Graphics Programmer. Creator of the Synapse Engine. Passionate about GPU-driven rendering and high-performance computing.
-            </p>
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center py-20 mt-10">
             
-            <div class="flex gap-4 justify-center">
-                <a href="mailto:tamaspeti3451@gmail.com" class="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">
-                    Get in touch
+            <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 text-white drop-shadow-2xl">
+                Synapse <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 pb-1 pt-1">Engine</span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+                A strictly research-oriented, high-performance rendering framework built on a custom <strong class="text-white">Data-Oriented ECS</strong> and a fully <strong class="text-white">GPU-driven</strong> pipeline.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">C++23</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">Modern Vulkan</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">GPU-Driven</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">Data-Oriented ECS</span>
+                <span class="px-4 py-1.5 rounded-full bg-gray-900/80 border border-gray-700 text-gray-300 text-sm font-medium backdrop-blur-md">AAA-Grade Architecture</span>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
+                
+                <a href="/Presentations/SynapseEnginePresentation_20260825.pdf" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-500 transition-all shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                    View Presentation
                 </a>
-                <a href="https://github.com/TamasPetii" target="_blank" class="px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg border border-gray-700 hover:bg-gray-700 transition-colors">
-                    GitHub
+
+                <a href="/Presentations/Grafgeo_High_Performance_Gpu_Driven_Rendering.pdf" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-fuchsia-900/30 text-fuchsia-200 font-bold rounded-xl border border-fuchsia-500/30 hover:bg-fuchsia-800/50 hover:text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    Read Research Paper
                 </a>
+
+                <a href="https://github.com/TamasPetii/SynapseEngine" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-gray-900/80 backdrop-blur-sm text-gray-300 font-bold rounded-xl border border-gray-700 hover:border-purple-500 hover:text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
+                    GitHub Repository
+                </a>
+
             </div>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8">Featured Projects</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <ProjectCard 
-                title="Synapse Engine"
-                description="A high-performance, GPU-driven rendering engine with modern mesh shader support, hierarchical culling, and a data-oriented Entity-Component-System."
-                tags={['C++', 'Vulkan', 'Mesh Shaders', 'GPU-driven']}
-                link="https://github.com/TamasPetii/SynapseEngine"
-            />
+    <section class="max-w-7xl mx-auto px-6 py-24 space-y-32">
 
-            <ProjectCard 
-                title="Synapse Engine Devblog"
-                description="A step-by-step tutorial series documenting the architecture and rendering techniques behind a modern GPU-driven engine."
-                tags={['Tutorial', 'Vulkan', 'C++', 'Engine Dev']}
-                link="/devblog/01-welcome-to-synapse-engine"
-            />
-
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Editor & <span class="text-purple-400">Workspaces</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Designed for developer productivity, the engine features a comprehensive editor environment built on the Model-View-Intent (MVI) architecture. This approach cleanly decouples the rendering logic from the user interface, enabling highly customizable workspaces, real-time asset management, and intuitive visual debugging tools without sacrificing performance.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Editor.png" alt="Editor and Workspaces" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
         </div>
-    </main>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Data-Oriented <span class="text-purple-400">ECS</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Overcoming the severe performance bottlenecks of traditional object-oriented programming. The engine utilizes a fully custom Segmented Sparse-Set Entity-Component-System. Components are strictly laid out in contiguous memory using a Static-Dynamic-Stream partition, ensuring maximum CPU cache locality, O(1) lookups, and zero CPU-GPU synchronization overhead.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Pool.svg" alt="Data-Oriented ECS" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Thoughtful <span class="text-purple-400">Architecture</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Built from the ground up to be heavily multi-threaded and decoupled. By leveraging Taskflow, the engine distributes work across all available CPU cores efficiently through graph-based parallel execution. This ensures that rendering, physics simulation, and engine logic run asynchronously without blocking the main execution thread.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Architecture.svg" alt="Thoughtful Architecture" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">GPU-Driven <span class="text-purple-400">Culling</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    The CPU generates zero direct draw calls. Complete visibility determination is executed entirely on the GPU. Using advanced compute shaders, the pipeline performs Frustum, Hi-Z Occlusion, and Zero-Pixel Triangle culling, ensuring that only the truly visible geometry is pushed to the rasterizer, drastically reducing driver overhead.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Culling.png" alt="GPU-Driven Culling" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11l-7 4-7-4m14-3l-7 4-7-4m14 6l-7 4-7-4" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Material <span class="text-purple-400">Bucketing</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    To maintain maximum efficiency across diverse materials and rendering pipelines, the architecture utilizes a custom eight-bucket indirect draw command system. Combined with a double-indirection material override mechanism and bindless resources, meshes of varying types (e.g., Opaque, Transparent) are dynamically routed and batched entirely on the GPU, completely eliminating traditional CPU-side binding bottlenecks.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Rendering.png" alt="Material Bucketing and Indirect Draw" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Mesh <span class="text-purple-400">Shaders</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Completely replacing the traditional vertex pipeline, high-poly geometry is partitioned into small, optimized meshlets. The modern Task and Mesh shader pipeline processes these clusters in parallel, applying highly efficient cone culling at the meshlet level to discard back-facing geometry before it even reaches the rasterization stage.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Meshlet.png" alt="Mesh Shaders" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Adaptive <span class="text-purple-400">Forward+</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    A proprietary Dual-HiZ Adaptive Clustered Forward+ rendering technique developed to dynamically adapt light culling without relying on fixed 3D spatial grids. This approach is fully integrated with bindless textures, Screen-Space Ambient Occlusion (SSAO), and Image-Based Lighting (IBL) for highly performant, physically accurate illumination.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-fuchsia-500/20 to-orange-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Forward+.png" alt="Adaptive Forward+" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
+            <div class="flex-1 space-y-6">
+                <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-2 border border-purple-500/30">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Virtual <span class="text-purple-400">Shadows</span></h2>
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Delivering high-resolution, robust shadow mapping without the severe memory and performance overhead of traditional cascaded setups. The modern shadow pipeline supports advanced filtering and transparent colored shadow mapping, allowing for physically accurate light interactions through translucent surfaces.
+                </p>
+            </div>
+            <div class="flex-1 w-full relative group">
+                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
+                <img src="/Images/Shadow.png" alt="Virtual Shadow Mapping" class="relative rounded-2xl border border-gray-700 shadow-2xl object-cover w-full aspect-video bg-gray-900" />
+            </div>
+        </div>
+
+    </section>
+
+    <section class="border-t border-gray-800 bg-gray-950 py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('/Images/grid.svg')] opacity-10 bg-center"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <img src="/Images/Profile.png" alt="Tamás Péter" class="w-24 h-24 mx-auto rounded-full mb-6 border-4 border-gray-800 shadow-xl object-cover" />
+            <h3 class="text-2xl font-bold text-white mb-3">Tamás Péter</h3>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                Computer Engineering M.Sc. student specializing in low-level graphics programming, shader development, and engine architecture.
+            </p>
+            <a href="/about" class="px-6 py-3 bg-gray-900 text-white font-medium rounded-lg border border-gray-700 hover:border-purple-500 transition-colors inline-block">
+                View Full Profile
+            </a>
+        </div>
+    </section>
 
 </Layout>
