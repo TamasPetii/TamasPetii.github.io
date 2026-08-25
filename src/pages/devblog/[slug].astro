@@ -1,0 +1,22 @@
+---
+import { getCollection, render } from 'astro:content';
+import DevblogLayout from '../../layouts/DevblogLayout.astro';
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('devblog');
+    return blogEntries.map(entry => {
+        const slug = entry.id.replace(/\.[^/.]+$/, "");
+        return {
+            params: { slug }, 
+            props: { entry },
+        };
+    });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<DevblogLayout frontmatter={entry.data}>
+    <Content />
+</DevblogLayout>
