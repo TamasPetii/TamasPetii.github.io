@@ -13,40 +13,72 @@ const pathname = Astro.url.pathname;
         <meta charset="UTF-8" />
         <meta name="description" content="Tamás Péter - Graphics Programmer & Creator of Synapse Engine" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/Icons/dark_icon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/Icons/logo.svg" />
         <title>{title}</title>
+        <script is:inline>
+            const theme = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                    return localStorage.getItem('theme');
+                }
+                return 'dark';
+            })();
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+            window.localStorage.setItem('theme', theme);
+        </script>
     </head>
-    <body class="bg-gray-950 text-gray-200 font-sans antialiased min-h-screen flex flex-col">
+    <body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-200 font-sans antialiased min-h-screen flex flex-col transition-colors duration-300">
         
-        <nav class="sticky top-0 z-50 w-full border-b border-gray-800 bg-gray-950/80 backdrop-blur-md">
+        <nav class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     
                     <div class="flex-shrink-0 flex items-center">
                         <a href="/" class="flex items-center gap-3 group">
-                            <img src="/Icons/dark_icon.svg" alt="Synapse Engine Logo" class="w-10 h-10 rounded-md group-hover:scale-105 transition-transform" />
-                            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-fuchsia-500 pb-1 pt-1">Synapse Engine</span>
+                            <img src="/Icons/logo.svg" alt="Synapse Engine Logo" class="w-10 h-10 rounded-md group-hover:scale-105 transition-transform" />
+                            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-fuchsia-600 dark:from-purple-400 dark:to-fuchsia-500 pb-1 pt-1">Synapse Engine</span>
                         </a>
                     </div>
                     
                     <div class="hidden md:block">
-                        <div class="ml-10 flex items-center space-x-8">
-                            <a href="/" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname === '/' ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Home</a>
-                            <a href="/devblog" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/devblog') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Devblog</a>
-                            <a href="/about" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/about') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>About</a>
-                            <a href="/contact" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/contact') ? 'text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-300 hover:text-white'}`}>Contact</a>
+                        <div class="ml-10 flex items-center space-x-6">
+                            <a href="/" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname === '/' ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'}`}>Home</a>
+                            <a href="/devblog" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/devblog') ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'}`}>Devblog</a>
+                            <a href="/about" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/about') ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'}`}>About</a>
+                            <a href="/contact" class={`px-3 py-2 rounded-md text-base font-semibold transition-all duration-300 ${pathname.startsWith('/contact') ? 'text-purple-600 dark:text-purple-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.6)]' : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'}`}>Contact</a>
                             
-                            <a href="/sponsors" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900/50 border border-gray-800 hover:border-pink-500/50 text-sm font-medium text-gray-300 hover:text-white transition-all group">
+                            <a href="/sponsors" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-800 hover:border-pink-500/50 dark:hover:border-pink-500/50 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all group">
                                 <svg class="w-4 h-4 text-pink-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                 </svg>
                                 Sponsor
                             </a>
+
+                            <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none">
+                                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                                </svg>
+                                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     
-                    <div class="-mr-2 flex md:hidden">
-                        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none">
+                    <div class="-mr-2 flex items-center md:hidden gap-2">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none">
+                            <svg id="theme-toggle-dark-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                            <svg id="theme-toggle-light-icon-mobile" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+
+                        <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
                             <span class="sr-only">Open main menu</span>
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -56,15 +88,15 @@ const pathname = Astro.url.pathname;
                 </div>
             </div>
 
-            <div class="md:hidden hidden bg-gray-900 border-b border-gray-800" id="mobile-menu">
+            <div class="md:hidden hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800" id="mobile-menu">
                 <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-                    <a href="/" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname === '/' ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Home</a>
-                    <a href="/devblog" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/devblog') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Devblog</a>
-                    <a href="/about" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/about') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>About</a>
-                    <a href="/contact" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/contact') ? 'text-purple-400 bg-purple-900/20' : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}>Contact</a>
+                    <a href="/" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname === '/' ? 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}>Home</a>
+                    <a href="/devblog" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/devblog') ? 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}>Devblog</a>
+                    <a href="/about" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/about') ? 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}>About</a>
+                    <a href="/contact" class={`block px-3 py-2 rounded-md text-lg font-medium transition-all ${pathname.startsWith('/contact') ? 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/20' : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800'}`}>Contact</a>
                     
                     <div class="pt-4 pb-2">
-                        <a href="/sponsors" class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-700 hover:border-pink-500/50 text-base font-bold text-white transition-all group">
+                        <a href="/sponsors" class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-pink-500/50 dark:hover:border-pink-500/50 text-base font-bold text-gray-900 dark:text-white transition-all group">
                             <svg class="w-5 h-5 text-pink-500 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                             </svg>
@@ -79,7 +111,7 @@ const pathname = Astro.url.pathname;
             <slot />
         </main>
 
-        <footer class="border-t border-gray-800 bg-gray-950 py-8 text-center text-sm text-gray-500 mt-auto">
+        <footer class="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 py-8 text-center text-sm text-gray-500 mt-auto transition-colors duration-300">
             <p>© 2026 Tamás Péter. All rights reserved.</p>
         </footer>
 
@@ -91,6 +123,63 @@ const pathname = Astro.url.pathname;
                     menu.classList.toggle('hidden');
                 });
             }
+
+            function setupThemeToggle(btnId: string, darkIconId: string, lightIconId: string) {
+                const toggleBtn = document.getElementById(btnId);
+                const darkIcon = document.getElementById(darkIconId);
+                const lightIcon = document.getElementById(lightIconId);
+
+                if(!toggleBtn || !darkIcon || !lightIcon) return;
+
+                if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    lightIcon.classList.remove('hidden');
+                } else {
+                    darkIcon.classList.remove('hidden');
+                }
+
+                toggleBtn.addEventListener('click', function() {
+                    darkIcon.classList.toggle('hidden');
+                    lightIcon.classList.toggle('hidden');
+
+                    if (localStorage.getItem('theme')) {
+                        if (localStorage.getItem('theme') === 'light') {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('theme', 'dark');
+                        } else {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('theme', 'light');
+                        }
+                    } else {
+                        if (document.documentElement.classList.contains('dark')) {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('theme', 'light');
+                        } else {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('theme', 'dark');
+                        }
+                    }
+
+                    const otherBtnId = btnId === 'theme-toggle' ? 'theme-toggle-mobile' : 'theme-toggle';
+                    const otherDarkId = btnId === 'theme-toggle' ? 'theme-toggle-dark-icon-mobile' : 'theme-toggle-dark-icon';
+                    const otherLightId = btnId === 'theme-toggle' ? 'theme-toggle-light-icon-mobile' : 'theme-toggle-light-icon';
+                    
+                    const otherDarkIcon = document.getElementById(otherDarkId);
+                    const otherLightIcon = document.getElementById(otherLightId);
+
+                    if(otherDarkIcon && otherLightIcon) {
+                        if (localStorage.getItem('theme') === 'dark') {
+                            otherLightIcon.classList.remove('hidden');
+                            otherDarkIcon.classList.add('hidden');
+                        } else {
+                            otherDarkIcon.classList.remove('hidden');
+                            otherLightIcon.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+
+            setupThemeToggle('theme-toggle', 'theme-toggle-dark-icon', 'theme-toggle-light-icon');
+            setupThemeToggle('theme-toggle-mobile', 'theme-toggle-dark-icon-mobile', 'theme-toggle-light-icon-mobile');
         </script>
     </body>
 </html>

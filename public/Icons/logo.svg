@@ -1,0 +1,69 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="neon" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c084fc" />
+            <stop offset="50%" stop-color="#a855f7" />
+            <stop offset="100%" stop-color="#d946ef" />
+        </linearGradient>
+        <linearGradient id="spark" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#e9d5ff" />
+        </linearGradient>
+        <filter id="bloom-heavy" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="24" result="blur" />
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="0.8"/>
+            </feComponentTransfer>
+        </filter>
+        <filter id="bloom-light" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="10" result="blur" />
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="1.0"/>
+            </feComponentTransfer>
+        </filter>
+        <filter id="particle-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="2.0"/>
+            </feComponentTransfer>
+        </filter>
+    </defs>
+    
+    <!-- Heavy Bloom -->
+    <g filter="url(#bloom-heavy)">
+        <path d="M 370 160 A 115 115 0 0 0 140 160 C 140 205, 165 225, 210 230" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="210" cy="230" r="36" fill="url(#neon)" />
+        <path d="M 142 352 A 115 115 0 0 0 372 352 C 372 307, 347 287, 302 282" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="302" cy="282" r="36" fill="url(#neon)" />
+    </g>
+
+    <!-- Light Bloom -->
+    <g filter="url(#bloom-light)">
+        <path d="M 370 160 A 115 115 0 0 0 140 160 C 140 205, 165 225, 210 230" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="210" cy="230" r="36" fill="url(#neon)" />
+        <path d="M 142 352 A 115 115 0 0 0 372 352 C 372 307, 347 287, 302 282" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="302" cy="282" r="36" fill="url(#neon)" />
+    </g>
+
+    <!-- Solid Core -->
+    <g>
+        <path d="M 370 160 A 115 115 0 0 0 140 160 C 140 205, 165 225, 210 230" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="210" cy="230" r="36" fill="url(#neon)" />
+        <path d="M 142 352 A 115 115 0 0 0 372 352 C 372 307, 347 287, 302 282" fill="none" stroke="url(#neon)" stroke-width="44" stroke-linecap="round" />
+        <circle cx="302" cy="282" r="36" fill="url(#neon)" />
+    </g>
+
+    <!-- Glowing Particles -->
+    <g filter="url(#particle-glow)">
+        <circle cx="241" cy="247" r="5" fill="url(#spark)" />
+        <circle cx="256" cy="256" r="6" fill="#ffffff" />
+        <circle cx="271" cy="265" r="5" fill="url(#spark)" />
+    </g>
+
+    <!-- Solid Particles -->
+    <g>
+        <circle cx="241" cy="247" r="3.5" fill="#ffffff" />
+        <circle cx="256" cy="256" r="4.5" fill="#ffffff" />
+        <circle cx="271" cy="265" r="3.5" fill="#ffffff" />
+    </g>
+</svg>

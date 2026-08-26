@@ -4,22 +4,22 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={`${frontmatter.title} | Synapse Devblog`}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-12 transition-colors duration-300">
         
         <aside class="w-full lg:w-72 flex-shrink-0 order-2 lg:order-1">
-            <div class="sticky top-28 bg-gray-900 border border-gray-800 rounded-2xl p-6">
+            <div class="sticky top-28 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6 shadow-sm transition-colors duration-300">
                 <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-4">Table of Contents</h3>
                 <nav class="space-y-1">
-                    <a href="/devblog/01-welcome-to-synapse-engine" class="block px-3 py-2 rounded-lg text-sm font-medium text-white bg-purple-600/20 border border-purple-500/30">
+                    <a href="/devblog/01-welcome-to-synapse-engine" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-900 dark:text-white bg-purple-100 dark:bg-purple-600/20 border border-purple-200 dark:border-purple-500/30">
                         1. Core Philosophy
                     </a>
-                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 transition-colors">
                         2. Segmented ECS
                     </a>
-                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 transition-colors">
                         3. GPU-Driven Culling
                     </a>
-                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-gray-800 transition-colors">
+                    <a href="#" class="block px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800 transition-colors">
                         4. Adaptive Forward+
                     </a>
                 </nav>
@@ -27,31 +27,31 @@ const { frontmatter } = Astro.props;
         </aside>
 
         <article class="flex-1 order-1 lg:order-2">
-            <div class="mb-10 pb-10 border-b border-gray-800">
-                <h1 class="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">{frontmatter.title}</h1>
-                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400">
-                    <span class="bg-gray-900 border border-gray-800 px-3 py-1 rounded-full">{frontmatter.pubDate}</span>
+            <div class="mb-10 pb-10 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+                <h1 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4 leading-tight">{frontmatter.title}</h1>
+                <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                    <span class="bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-3 py-1 rounded-full">{frontmatter.pubDate}</span>
                     <div class="flex gap-2">
                         {frontmatter.tags.map((tag: string) => (
-                            <span class="text-purple-400 font-medium">#{tag}</span>
+                            <span class="text-purple-600 dark:text-purple-400 font-medium">#{tag}</span>
                         ))}
                     </div>
                 </div>
             </div>
 
-            <div class="prose prose-invert prose-purple max-w-none 
-                        prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-white
-                        prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
-                        prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline
-                        prose-strong:text-white
-                        prose-code:text-fuchsia-300 prose-code:bg-gray-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
-                        prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-800 prose-pre:rounded-xl prose-pre:p-6
-                        prose-img:rounded-2xl prose-img:border prose-img:border-gray-800 prose-img:shadow-xl">
+            <div class="prose prose-slate dark:prose-invert prose-purple max-w-none 
+                        prose-headings:font-bold prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:text-gray-900 dark:prose-h2:text-white
+                        prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:mb-6
+                        prose-a:text-purple-600 dark:prose-a:text-purple-400 prose-a:no-underline hover:prose-a:underline
+                        prose-strong:text-gray-900 dark:prose-strong:text-white
+                        prose-code:text-fuchsia-600 dark:prose-code:text-fuchsia-300 prose-code:bg-gray-100 dark:prose-code:bg-gray-900 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md
+                        prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-800 prose-pre:rounded-xl prose-pre:p-6
+                        prose-img:rounded-2xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-800 prose-img:shadow-xl">
                 <slot />
             </div>
 
-            <div class="mt-20 pt-10 border-t border-gray-800">
-                <h3 class="text-2xl font-bold text-white mb-6">Comments</h3>
+            <div class="mt-20 pt-10 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Comments</h3>
                 
                <script src="https://giscus.app/client.js"
                     data-repo="TamasPetii/SynapseEngine"
@@ -63,7 +63,7 @@ const { frontmatter } = Astro.props;
                     data-reactions-enabled="1"
                     data-emit-metadata="0"
                     data-input-position="bottom"
-                    data-theme="transparent_dark"
+                    data-theme="preferred_color_scheme"
                     data-lang="en"
                     crossorigin="anonymous"
                     async>
