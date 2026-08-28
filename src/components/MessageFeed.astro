@@ -1,0 +1,82 @@
+---
+import ChatBubble from './ChatBubble.astro';
+import ChatImageGrid from './ChatImageGrid.astro';
+import messages from '../data/journey.json';
+---
+
+<div class="mt-12 space-y-2">
+    {messages.map((msg) => (
+        <ChatBubble 
+            author={msg.author} 
+            timestamp={msg.timestamp} 
+            isOwnMessage={msg.isOwnMessage}
+        >
+            <p class="whitespace-pre-wrap" set:html={msg.text} />
+            
+            {msg.images && msg.images.length > 0 && (
+                <ChatImageGrid>
+                    {msg.images.map((img) => (
+                        <a href={img} target="_blank" rel="noopener noreferrer" class="block cursor-zoom-in group">
+                            <img src={img} alt="Log attachment" class="rounded-lg w-full object-cover border border-purple-400/30 group-hover:opacity-80 transition-opacity duration-200" loading="lazy" />
+                        </a>
+                    ))}
+                </ChatImageGrid>
+            )}
+
+            {msg.videos && msg.videos.length > 0 && (
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+                    {msg.videos.map((video) => {
+                        const isYouTube = video.includes('youtube.com') || video.includes('youtu.be');
+                        let embedUrl = video;
+                        
+                        if (isYouTube && !video.includes('/embed/')) {
+                            const videoId = video.includes('v=') 
+                                ? video.split('v=')[1].split('&')[0] 
+                                : video.split('youtu.be/')[1].split('?')[0];
+                            embedUrl = `https://www.youtube.com/embed/${videoId}`;
+                        }
+
+                        return (
+                            <div class="relative rounded-lg overflow-hidden border border-purple-400/30 bg-black/50 aspect-video">
+                                {isYouTube ? (
+                                    <iframe 
+                                        class="w-full h-full object-cover" 
+                                        src={embedUrl} 
+                                        title="YouTube video player"
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen>
+                                    </iframe>
+                                ) : (
+                                    <video 
+                                        controls 
+                                        preload="metadata"
+                                        class="w-full h-full object-contain"
+                                    >
+                                        <source src={video} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {msg.attachments && msg.attachments.length > 0 && (
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+                    {msg.attachments.map((file) => (
+                        <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" class="block group relative border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                            <img src={file.previewUrl} alt={file.name} class="w-full h-32 object-cover group-hover:opacity-75 transition-opacity duration-200" loading="lazy" />
+                            <div class="absolute bottom-0 inset-x-0 bg-gray-900/70 backdrop-blur-sm px-3 py-2">
+                                <span class="text-xs font-bold text-white flex items-center gap-2">
+                                    📄 {file.name}
+                                </span>
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            )}
+        </ChatBubble>
+    ))}
+</div>

@@ -1,0 +1,2613 @@
+Root:
+  Settings:
+    pipelineType: 1
+    tileSize: 64
+    useDebugCamera: false
+    enableGeometryGpuCulling: true
+    enablePointLightGpuCulling: true
+    enableSpotLightGpuCulling: true
+    enableHiz: true
+    enableStaticBvhCulling: false
+    enableMortonBvhCulling: false
+    enableBloom: true
+    enableMeshletConeCulling: true
+    enableFrustumCulling: true
+    enableChunkFrustumCulling: true
+    enableModelFrustumCulling: true
+    enableMeshFrustumCulling: true
+    enableMeshletFrustumCulling: true
+    enablePointLightFrustumCulling: true
+    enableSpotLightFrustumCulling: true
+    enableOcclusionCulling: true
+    enableChunkOcclusionCulling: true
+    enableModelOcclusionCulling: true
+    enableMeshOcclusionCulling: true
+    enableMeshletOcclusionCulling: true
+    enablePointLightOcclusionCulling: true
+    enableSpotLightOcclusionCulling: true
+    enableDeferredEmissiveAo: true
+    enableDeferredPointLights: true
+    enableDeferredSpotLights: true
+    enableDeferredDirectionalLights: true
+    enableForwardPlusEmissiveAo: true
+    enableForwardPlusPointLights: true
+    enableForwardPlusSpotLights: true
+    enableForwardPlusDirectionalLights: true
+    enableWireframeMeshAabb: false
+    enableWireframeMeshSphere: false
+    enableStaticChunkAabbWireframe: false
+    enablePointLightSphereWireframe: false
+    enablePointLightAabbWireframe: false
+    enableSpotLightSphereWireframe: false
+    enableSpotLightAabbWireframe: false
+    enableSpotLightConeWireframe: false
+    enableSpotLightPyramidWireframe: false
+    enableBillboardCameras: true
+    enableBillboardPointLights: true
+    enableBillboardSpotLights: true
+    enableBillboardDirectionalLights: true
+    ambientStrength: 0.0500000007
+    emissiveStrength: 1
+    bloomThreshold: 1
+    bloomKnee: 0.100000001
+    bloomFilterRadius: 0.00499999989
+    bloomExposure: 1
+    bloomStrength: 1
+    enableDebugVisibility: false
+    debugVisibilityMode: 6
+    aoRadius: 0.930000007
+    aoIntensity: 100
+    maxOcclusionDistance: 3
+    depthSharpness: 0
+    bias: 0.00499999989
+    sampleCount: 16
+  SceneCameraEntity: 0
+  DebugCameraEntity: 1
+  ModelManifest:
+    data:
+      - Sphere
+      - Cube
+      - Quad
+      - ScreenQuad
+      - Cone
+      - Capsule
+      - Hemisphere
+      - C:/Users/User/Desktop/Models/Monkey/monkey.obj
+      - C:/Users/User/Desktop/Models/Sponza/sponza.obj
+  AnimationManifest:
+    data:
+      []
+  MaterialManifest:
+    data:
+      - name: EngineDefaultMaterial
+        path: EngineDefaultMaterial
+        material:
+          color:
+            x: 1
+            y: 1
+            z: 1
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: FloorMat
+        path: FloorMat
+        material:
+          color:
+            x: 0.200000003
+            y: 0.200000003
+            z: 0.200000003
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: SharedMat_0
+        path: SharedMat_0
+        material:
+          color:
+            x: 0.00125125889
+            y: 0.563585341
+            z: 0.193304241
+            w: 0.827866435
+          emissiveColor:
+            x: 0.00125125889
+            y: 0.563585341
+            z: 0.193304241
+          emissiveIntensity: 0.700582922
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0.895962417
+          roughness: 0.822840035
+          aoStrength: 0.7466048
+          doubleSided: true
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: SharedMat_1
+        path: SharedMat_1
+        material:
+          color:
+            x: 0.174108103
+            y: 0.858943462
+            z: 0.710501432
+            w: 0.562181473
+          emissiveColor:
+            x: 0.174108103
+            y: 0.858943462
+            z: 0.710501432
+          emissiveIntensity: 0.182805866
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0.364452034
+          roughness: 0.14731285
+          aoStrength: 0.165898621
+          doubleSided: true
+          isTransparent: true
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: SharedMat_2
+        path: SharedMat_2
+        material:
+          color:
+            x: 0.988525033
+            y: 0.445692301
+            z: 0.119083226
+            w: 0.104202397
+          emissiveColor:
+            x: 0.988525033
+            y: 0.445692301
+            z: 0.119083226
+          emissiveIntensity: 1.06332588
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0.571184397
+          roughness: 0.601763964
+          aoStrength: 0.607165754
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: SharedMat_3
+        path: SharedMat_3
+        material:
+          color:
+            x: 0.166234314
+            y: 0.663045108
+            z: 0.450788915
+            w: 0.416910291
+          emissiveColor:
+            x: 0.166234314
+            y: 0.663045108
+            z: 0.450788915
+          emissiveIntensity: 1.56663716
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0.802606285
+          roughness: 0.519882798
+          aoStrength: 0.301950127
+          doubleSided: true
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: SharedMat_4
+        path: SharedMat_4
+        material:
+          color:
+            x: 0.875972748
+            y: 0.726676226
+            z: 0.955900729
+            w: 0.933146179
+          emissiveColor:
+            x: 0.875972748
+            y: 0.726676226
+            z: 0.955900729
+          emissiveIntensity: 0.924161494
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0.235328227
+          roughness: 0.86223942
+          aoStrength: 0.209601119
+          doubleSided: true
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: C:/Users/User/Desktop/Models/Monkey/monkey.obj_None
+        path: C:/Users/User/Desktop/Models/Monkey/monkey.obj_None
+        material:
+          color:
+            x: 0.600000024
+            y: 0.600000024
+            z: 0.600000024
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__25
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__25
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 0
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 0
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__298
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__298
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 1
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 1
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__47
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__47
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4294967295
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4294967295
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__57
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__57
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 2
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 2
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_arch
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_arch
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 3
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 3
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_bricks
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_bricks
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 4
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 4
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_ceiling
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_ceiling
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 5
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 5
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_chain
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_chain
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 6
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 6
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_a
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_a
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 7
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 7
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_b
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_b
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 8
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 8
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_c
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_c
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 9
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 9
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_details
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_details
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 10
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 10
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_a
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_a
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 11
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 11
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_c
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_c
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 12
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 12
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_d
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_d
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 13
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 13
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_e
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_e
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 14
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 14
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_f
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_f
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 15
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 15
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_g
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_g
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 16
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 16
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_flagpole
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_flagpole
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 17
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 17
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_floor
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_floor
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 18
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 18
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_leaf
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_leaf
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 19
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 19
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_roof
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_roof
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 20
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 20
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 21
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 21
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_hanging
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_hanging
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 22
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 22
+      - name: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_round
+        path: C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_round
+        material:
+          color:
+            x: 0.470400006
+            y: 0.470400006
+            z: 0.470400006
+            w: 1
+          emissiveColor:
+            x: 0
+            y: 0
+            z: 0
+          emissiveIntensity: 1
+          uvScale:
+            x: 1
+            y: 1
+          metalness: 0
+          roughness: 1
+          aoStrength: 1
+          doubleSided: false
+          isTransparent: false
+          albedoTexture: 23
+          normalTexture: 4294967295
+          metalnessTexture: 4294967295
+          roughnessTexture: 4294967295
+          metallicRoughnessTexture: 4294967295
+          emissiveTexture: 4294967295
+          ambientOcclusionTexture: 23
+  TextureManifest:
+    data:
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\lion.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\lion.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\background.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\background.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\vase_plant.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\vase_plant.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_arch_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_arch_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\spnza_bricks_a_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\spnza_bricks_a_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_ceiling_a_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_ceiling_a_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\chain_texture.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\chain_texture.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_a_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_a_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_b_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_b_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_c_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_column_c_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_details_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_details_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_blue_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_blue_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_green_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_fabric_green_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_green_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_green_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_blue_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_curtain_blue_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_flagpole_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_flagpole_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_floor_a_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_floor_a_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_thorn_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_thorn_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\sponza_roof_diff.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\sponza_roof_diff.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\vase_dif.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\vase_dif.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\vase_hanging.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\vase_hanging.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+      - name: C:\Users\User\Desktop\Models\Sponza\textures\vase_round.tga
+        payload:
+          path: C:\Users\User\Desktop\Models\Sponza\textures\vase_round.tga
+          formatHint: ""
+          embeddedData:
+            data:
+              []
+          isUncompressed: false
+          width: 0
+          height: 0
+  Registry:
+    entityCounter: 41
+    freeEntities:
+      data:
+        []
+    Entities:
+      - ID: 0
+        TransformComponent:
+          translation:
+            x: -8.56666756
+            y: 2.16726732
+            z: 8.83519936
+          rotation:
+            x: 28.1999531
+            y: -16.2000065
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        CameraComponent:
+          nearPlane: 0.00999999978
+          farPlane: 1000
+          fov: 60
+          width: 1395
+          height: 926
+          speed: 10
+          sensitivity: 0.300000012
+          distance: 5
+        CameraComponent_Category: 2
+      - ID: 1
+        TransformComponent:
+          translation:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        CameraComponent:
+          nearPlane: 0.00999999978
+          farPlane: 1000
+          fov: 60
+          width: 1395
+          height: 926
+          speed: 10
+          sensitivity: 0.300000012
+          distance: 5
+        CameraComponent_Category: 2
+      - ID: 2
+        TransformComponent:
+          translation:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 5
+            y: 5
+            z: 5
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 7
+          materialOffset: 0
+        ModelComponent_Category: 0
+      - ID: 3
+        TransformComponent:
+          translation:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 0.200000003
+            y: 0.200000003
+            z: 0.200000003
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 8
+          materialOffset: 1
+        ModelComponent_Category: 0
+      - ID: 4
+        TransformComponent:
+          translation:
+            x: 0
+            y: -1
+            z: 0
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 500
+            y: 1
+            z: 500
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 394
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 0
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 1
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 5
+        TransformComponent:
+          translation:
+            x: 262
+            y: 449
+            z: 347
+          rotation:
+            x: 259
+            y: 237
+            z: 357
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 395
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 3
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 6
+        TransformComponent:
+          translation:
+            x: -84
+            y: 783
+            z: -71
+          rotation:
+            x: 42
+            y: 230
+            z: 155
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 2
+          materialOffset: 396
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 3
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 7
+        TransformComponent:
+          translation:
+            x: -336
+            y: 147
+            z: -160
+          rotation:
+            x: 45
+            y: 86
+            z: 328
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 397
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 6
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 8
+        TransformComponent:
+          translation:
+            x: 206
+            y: 155
+            z: -30
+          rotation:
+            x: 308
+            y: 273
+            z: 141
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 4
+          materialOffset: 398
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 9
+        TransformComponent:
+          translation:
+            x: -44
+            y: 759
+            z: -316
+          rotation:
+            x: 176
+            y: 286
+            z: 320
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 4
+          materialOffset: 399
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 10
+        TransformComponent:
+          translation:
+            x: 226
+            y: 444
+            z: -256
+          rotation:
+            x: 298
+            y: 137
+            z: 163
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 3
+          materialOffset: 400
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 4
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 11
+        TransformComponent:
+          translation:
+            x: -367
+            y: 546
+            z: 129
+          rotation:
+            x: 138
+            y: 319
+            z: 155
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 401
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 2
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 12
+        TransformComponent:
+          translation:
+            x: 73
+            y: 711
+            z: -23
+          rotation:
+            x: 305
+            y: 341
+            z: 66
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 6
+          materialOffset: 402
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 4
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 13
+        TransformComponent:
+          translation:
+            x: -23
+            y: 234
+            z: 270
+          rotation:
+            x: 312
+            y: 57
+            z: 93
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 403
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 2
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 14
+        TransformComponent:
+          translation:
+            x: 355
+            y: 241
+            z: -39
+          rotation:
+            x: 94
+            y: 255
+            z: 287
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 0
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 4
+          materialOffset: 404
+        ModelComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 4
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 15
+        TransformComponent:
+          translation:
+            x: -59
+            y: 274.992615
+            z: -50
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 405
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 6
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 16
+        TransformComponent:
+          translation:
+            x: 107
+            y: 154.99231
+            z: 166
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 406
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 3
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 17
+        TransformComponent:
+          translation:
+            x: 57
+            y: 61.9923744
+            z: -193
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 407
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 4
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 18
+        TransformComponent:
+          translation:
+            x: -55
+            y: 307.992615
+            z: -47
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 408
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 6
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 19
+        TransformComponent:
+          translation:
+            x: 21
+            y: 82.9924011
+            z: 9
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 1
+          materialOffset: 409
+        ModelComponent_Category: 0
+        BoxColliderComponent:
+          halfExtents:
+            x: 1
+            y: 1
+            z: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        BoxColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 20
+        TransformComponent:
+          translation:
+            x: 106
+            y: 70.9923096
+            z: -178
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 0
+          materialOffset: 410
+        ModelComponent_Category: 0
+        SphereColliderComponent:
+          radius: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        SphereColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 2
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 21
+        TransformComponent:
+          translation:
+            x: -100
+            y: 292.992615
+            z: -187
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 0
+          materialOffset: 411
+        ModelComponent_Category: 0
+        SphereColliderComponent:
+          radius: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        SphereColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 3
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 22
+        TransformComponent:
+          translation:
+            x: 10
+            y: 0.999999881
+            z: 162
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 0
+          materialOffset: 412
+        ModelComponent_Category: 0
+        SphereColliderComponent:
+          radius: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        SphereColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 6
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 23
+        TransformComponent:
+          translation:
+            x: 148
+            y: 61.9923744
+            z: -176
+          rotation:
+            x: 0
+            y: -0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 0
+          materialOffset: 413
+        ModelComponent_Category: 0
+        SphereColliderComponent:
+          radius: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        SphereColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 24
+        TransformComponent:
+          translation:
+            x: -198
+            y: 0.999999881
+            z: 195
+          rotation:
+            x: -0.021181833
+            y: -3.91538242e-06
+            z: -0.0211818218
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 0
+          materialOffset: 414
+        ModelComponent_Category: 0
+        SphereColliderComponent:
+          radius: 1
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        SphereColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 2
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 25
+        TransformComponent:
+          translation:
+            x: -23.5920048
+            y: 0.702763915
+            z: 91.2160797
+          rotation:
+            x: 172.616425
+            y: -73.9503479
+            z: 121.038399
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 415
+        ModelComponent_Category: 0
+        CapsuleColliderComponent:
+          radius: 0.5
+          halfHeight: 0.5
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        CapsuleColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 26
+        TransformComponent:
+          translation:
+            x: -115.138756
+            y: 0.805669963
+            z: 199.637543
+          rotation:
+            x: 125.874626
+            y: 51.3053741
+            z: -2.33726478
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 416
+        ModelComponent_Category: 0
+        CapsuleColliderComponent:
+          radius: 0.5
+          halfHeight: 0.5
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        CapsuleColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 6
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 27
+        TransformComponent:
+          translation:
+            x: -100
+            y: 262.992615
+            z: -182
+          rotation:
+            x: -72.9999924
+            y: 52.9999924
+            z: 8.00000858
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 417
+        ModelComponent_Category: 0
+        CapsuleColliderComponent:
+          radius: 0.5
+          halfHeight: 0.5
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        CapsuleColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 5
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 28
+        TransformComponent:
+          translation:
+            x: -117
+            y: 172.99231
+            z: -107
+          rotation:
+            x: 89.9999847
+            y: -80.9999847
+            z: -12.9999809
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 418
+        ModelComponent_Category: 0
+        CapsuleColliderComponent:
+          radius: 0.5
+          halfHeight: 0.5
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        CapsuleColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 4
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 29
+        TransformComponent:
+          translation:
+            x: 109
+            y: 238.992462
+            z: -187
+          rotation:
+            x: -9.00000286
+            y: -34.9999962
+            z: -123.999992
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        ModelComponent:
+          castShadow: true
+          receiveShadow: true
+          hasDirectxNormals: false
+          modelIndex: 5
+          materialOffset: 419
+        ModelComponent_Category: 0
+        CapsuleColliderComponent:
+          radius: 0.5
+          halfHeight: 0.5
+          localOffset:
+            x: 0
+            y: 0
+            z: 0
+        CapsuleColliderComponent_Category: 0
+        RigidBodyComponent:
+          motionType: 2
+          mass: 1
+          friction: 0.200000003
+          restitution: 0
+          layer: 1
+        RigidBodyComponent_Category: 0
+        MaterialOverrideComponent:
+          materials:
+            data:
+              - 2
+          sharedMaterialEntity: 4294967295
+        MaterialOverrideComponent_Category: 2
+      - ID: 30
+        TransformComponent:
+          translation:
+            x: 0
+            y: 0
+            z: 0
+          rotation:
+            x: -45
+            y: 45
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        DirectionLightComponent:
+          color:
+            x: 0.550000012
+            y: 0.522499979
+            z: 0.467500031
+          strength: 5
+          useShadow: true
+        DirectionLightComponent_Category: 2
+        DirectionLightShadowComponent:
+          shadowFarPlane: 200
+          cascadeSplits:
+            x: 0
+            y: 0
+            z: 0
+            w: 0
+        DirectionLightShadowComponent_Category: 2
+      - ID: 31
+        TransformComponent:
+          translation:
+            x: 156
+            y: 19
+            z: -151
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        PointLightComponent:
+          color:
+            x: 0.189947203
+            y: 0.924802363
+            z: 0.695760965
+          strength: 24
+          useShadow: false
+          radius: 10
+          weakenDistance: 0
+        PointLightComponent_Category: 2
+      - ID: 32
+        TransformComponent:
+          translation:
+            x: 102
+            y: 89
+            z: 9
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        PointLightComponent:
+          color:
+            x: 0.0943937525
+            y: 0.625171661
+            z: 0.0975066349
+          strength: 28
+          useShadow: false
+          radius: 5
+          weakenDistance: 0
+        PointLightComponent_Category: 2
+      - ID: 33
+        TransformComponent:
+          translation:
+            x: 103
+            y: 14
+            z: 187
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        PointLightComponent:
+          color:
+            x: 0.410718113
+            y: 0.769066453
+            z: 0.227301866
+          strength: 10
+          useShadow: false
+          radius: 10
+          weakenDistance: 0
+        PointLightComponent_Category: 2
+      - ID: 34
+        TransformComponent:
+          translation:
+            x: -119
+            y: 98
+            z: -4
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        PointLightComponent:
+          color:
+            x: 0.854792953
+            y: 0.634723961
+            z: 0.597827077
+          strength: 27
+          useShadow: false
+          radius: 9
+          weakenDistance: 0
+        PointLightComponent_Category: 2
+      - ID: 35
+        TransformComponent:
+          translation:
+            x: 92
+            y: 38
+            z: -178
+          rotation:
+            x: 0
+            y: 0
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        PointLightComponent:
+          color:
+            x: 0.555131674
+            y: 0.737907052
+            z: 0.184270754
+          strength: 13
+          useShadow: false
+          radius: 9
+          weakenDistance: 0
+        PointLightComponent_Category: 2
+      - ID: 36
+        TransformComponent:
+          translation:
+            x: -112
+            y: 15
+            z: -9
+          rotation:
+            x: -81
+            y: 76
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        SpotLightComponent:
+          color:
+            x: 0.740745246
+            y: 0.080385752
+            z: 0.494460881
+          strength: 17
+          useShadow: false
+          range: 30
+          weakenDistance: 0
+          innerAngle: 23
+          outerAngle: 44
+        SpotLightComponent_Category: 2
+      - ID: 37
+        TransformComponent:
+          translation:
+            x: -167
+            y: 75
+            z: -114
+          rotation:
+            x: -72
+            y: 349
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        SpotLightComponent:
+          color:
+            x: 0.667775512
+            y: 0.0432142094
+            z: 0.727683365
+          strength: 26
+          useShadow: false
+          range: 73
+          weakenDistance: 0
+          innerAngle: 17
+          outerAngle: 33
+        SpotLightComponent_Category: 2
+      - ID: 38
+        TransformComponent:
+          translation:
+            x: -124
+            y: 57
+            z: -101
+          rotation:
+            x: -89
+            y: 172
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        SpotLightComponent:
+          color:
+            x: 0.0793481246
+            y: 0.326914281
+            z: 0.154881433
+          strength: 16
+          useShadow: false
+          range: 35
+          weakenDistance: 0
+          innerAngle: 18
+          outerAngle: 32
+        SpotLightComponent_Category: 2
+      - ID: 39
+        TransformComponent:
+          translation:
+            x: -11
+            y: 1
+            z: 88
+          rotation:
+            x: -88
+            y: 135
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        SpotLightComponent:
+          color:
+            x: 0.737998605
+            y: 0.323038429
+            z: 0.15265359
+          strength: 22
+          useShadow: false
+          range: 60
+          weakenDistance: 0
+          innerAngle: 23
+          outerAngle: 34
+        SpotLightComponent_Category: 2
+      - ID: 40
+        TransformComponent:
+          translation:
+            x: -68
+            y: 32
+            z: -43
+          rotation:
+            x: -84
+            y: 209
+            z: 0
+          scale:
+            x: 1
+            y: 1
+            z: 1
+        TransformComponent_Category: 2
+        SpotLightComponent:
+          color:
+            x: 0.609637737
+            y: 0.524582684
+            z: 0.784966588
+          strength: 5
+          useShadow: false
+          range: 54
+          weakenDistance: 0
+          innerAngle: 23
+          outerAngle: 45
+        SpotLightComponent_Category: 2

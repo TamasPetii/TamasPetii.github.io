@@ -1,0 +1,3327 @@
+{
+    "Root": {
+        "AnimationManifest": {
+            "data": []
+        },
+        "DebugCameraEntity": 1,
+        "MaterialManifest": {
+            "data": [
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "EngineDefaultMaterial",
+                    "path": "EngineDefaultMaterial"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.20000000298023224,
+                            "y": 0.20000000298023224,
+                            "z": 0.20000000298023224
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "FloorMat",
+                    "path": "FloorMat"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 0.7466048002243042,
+                        "color": {
+                            "w": 0.8278664350509644,
+                            "x": 0.0012512588873505592,
+                            "y": 0.5635853409767151,
+                            "z": 0.19330424070358276
+                        },
+                        "doubleSided": true,
+                        "emissiveColor": {
+                            "x": 0.0012512588873505592,
+                            "y": 0.5635853409767151,
+                            "z": 0.19330424070358276
+                        },
+                        "emissiveIntensity": 0.7005829215049744,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.8959624171257019,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 0.8228400349617004,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "SharedMat_0",
+                    "path": "SharedMat_0"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 0.1658986210823059,
+                        "color": {
+                            "w": 0.5621814727783203,
+                            "x": 0.1741081029176712,
+                            "y": 0.8589434623718262,
+                            "z": 0.7105014324188232
+                        },
+                        "doubleSided": true,
+                        "emissiveColor": {
+                            "x": 0.1741081029176712,
+                            "y": 0.8589434623718262,
+                            "z": 0.7105014324188232
+                        },
+                        "emissiveIntensity": 0.1828058660030365,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": true,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.3644520342350006,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 0.14731284976005554,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "SharedMat_1",
+                    "path": "SharedMat_1"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 0.6071657538414001,
+                        "color": {
+                            "w": 0.10420239716768265,
+                            "x": 0.9885250329971313,
+                            "y": 0.4456923007965088,
+                            "z": 0.1190832257270813
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.9885250329971313,
+                            "y": 0.4456923007965088,
+                            "z": 0.1190832257270813
+                        },
+                        "emissiveIntensity": 1.0633258819580078,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.5711843967437744,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 0.6017639636993408,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "SharedMat_2",
+                    "path": "SharedMat_2"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 0.3019501268863678,
+                        "color": {
+                            "w": 0.4169102907180786,
+                            "x": 0.1662343144416809,
+                            "y": 0.6630451083183289,
+                            "z": 0.4507889151573181
+                        },
+                        "doubleSided": true,
+                        "emissiveColor": {
+                            "x": 0.1662343144416809,
+                            "y": 0.6630451083183289,
+                            "z": 0.4507889151573181
+                        },
+                        "emissiveIntensity": 1.5666371583938599,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.8026062846183777,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 0.5198827981948853,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "SharedMat_3",
+                    "path": "SharedMat_3"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 0.20960111916065216,
+                        "color": {
+                            "w": 0.9331461787223816,
+                            "x": 0.8759727478027344,
+                            "y": 0.7266762256622314,
+                            "z": 0.9559007287025452
+                        },
+                        "doubleSided": true,
+                        "emissiveColor": {
+                            "x": 0.8759727478027344,
+                            "y": 0.7266762256622314,
+                            "z": 0.9559007287025452
+                        },
+                        "emissiveIntensity": 0.9241614937782288,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.23532822728157043,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 0.862239420413971,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "SharedMat_4",
+                    "path": "SharedMat_4"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.6000000238418579,
+                            "y": 0.6000000238418579,
+                            "z": 0.6000000238418579
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Monkey/monkey.obj_None",
+                    "path": "C:/Users/User/Desktop/Models/Monkey/monkey.obj_None"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 0,
+                        "ambientOcclusionTexture": 0,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__25",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__25"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 1,
+                        "ambientOcclusionTexture": 1,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__298",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__298"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4294967295,
+                        "ambientOcclusionTexture": 4294967295,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__47",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__47"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 2,
+                        "ambientOcclusionTexture": 2,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__57",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_Material__57"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 3,
+                        "ambientOcclusionTexture": 3,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_arch",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_arch"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 4,
+                        "ambientOcclusionTexture": 4,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_bricks",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_bricks"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 5,
+                        "ambientOcclusionTexture": 5,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_ceiling",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_ceiling"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 6,
+                        "ambientOcclusionTexture": 6,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_chain",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_chain"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 7,
+                        "ambientOcclusionTexture": 7,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_a",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_a"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 8,
+                        "ambientOcclusionTexture": 8,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_b",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_b"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 9,
+                        "ambientOcclusionTexture": 9,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_c",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_column_c"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 10,
+                        "ambientOcclusionTexture": 10,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_details",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_details"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 11,
+                        "ambientOcclusionTexture": 11,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_a",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_a"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 12,
+                        "ambientOcclusionTexture": 12,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_c",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_c"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 13,
+                        "ambientOcclusionTexture": 13,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_d",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_d"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 14,
+                        "ambientOcclusionTexture": 14,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_e",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_e"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 15,
+                        "ambientOcclusionTexture": 15,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_f",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_f"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 16,
+                        "ambientOcclusionTexture": 16,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_g",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_fabric_g"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 17,
+                        "ambientOcclusionTexture": 17,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_flagpole",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_flagpole"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 18,
+                        "ambientOcclusionTexture": 18,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_floor",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_floor"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 19,
+                        "ambientOcclusionTexture": 19,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_leaf",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_leaf"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 20,
+                        "ambientOcclusionTexture": 20,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_roof",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_roof"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 21,
+                        "ambientOcclusionTexture": 21,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 22,
+                        "ambientOcclusionTexture": 22,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_hanging",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_hanging"
+                },
+                {
+                    "material": {
+                        "albedoTexture": 23,
+                        "ambientOcclusionTexture": 23,
+                        "aoStrength": 1.0,
+                        "color": {
+                            "w": 1.0,
+                            "x": 0.47040000557899475,
+                            "y": 0.47040000557899475,
+                            "z": 0.47040000557899475
+                        },
+                        "doubleSided": false,
+                        "emissiveColor": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "emissiveIntensity": 1.0,
+                        "emissiveTexture": 4294967295,
+                        "isTransparent": false,
+                        "metallicRoughnessTexture": 4294967295,
+                        "metalness": 0.0,
+                        "metalnessTexture": 4294967295,
+                        "normalTexture": 4294967295,
+                        "roughness": 1.0,
+                        "roughnessTexture": 4294967295,
+                        "uvScale": {
+                            "x": 1.0,
+                            "y": 1.0
+                        }
+                    },
+                    "name": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_round",
+                    "path": "C:/Users/User/Desktop/Models/Sponza/sponza.obj_vase_round"
+                }
+            ]
+        },
+        "ModelManifest": {
+            "data": [
+                "Sphere",
+                "Cube",
+                "Quad",
+                "ScreenQuad",
+                "Cone",
+                "Capsule",
+                "Hemisphere",
+                "C:/Users/User/Desktop/Models/Monkey/monkey.obj",
+                "C:/Users/User/Desktop/Models/Sponza/sponza.obj"
+            ]
+        },
+        "Registry": {
+            "Entities": [
+                {
+                    "CameraComponent": {
+                        "distance": 5.0,
+                        "farPlane": 1000.0,
+                        "fov": 60.0,
+                        "height": 926.0,
+                        "nearPlane": 0.009999999776482582,
+                        "sensitivity": 0.30000001192092896,
+                        "speed": 10.0,
+                        "width": 1395.0
+                    },
+                    "CameraComponent_Category": 2,
+                    "ID": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 28.199953079223633,
+                            "y": -16.20000648498535,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -8.566667556762695,
+                            "y": 2.167267322540283,
+                            "z": 8.835199356079102
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CameraComponent": {
+                        "distance": 5.0,
+                        "farPlane": 1000.0,
+                        "fov": 60.0,
+                        "height": 926.0,
+                        "nearPlane": 0.009999999776482582,
+                        "sensitivity": 0.30000001192092896,
+                        "speed": 10.0,
+                        "width": 1395.0
+                    },
+                    "CameraComponent_Category": 2,
+                    "ID": 1,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 0,
+                        "modelIndex": 7,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 5.0,
+                            "y": 5.0,
+                            "z": 5.0
+                        },
+                        "translation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 3,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 1,
+                        "modelIndex": 8,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 0.20000000298023224,
+                            "y": 0.20000000298023224,
+                            "z": 0.20000000298023224
+                        },
+                        "translation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 4,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                1
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 394,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 0,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 500.0,
+                            "y": 1.0,
+                            "z": 500.0
+                        },
+                        "translation": {
+                            "x": 0.0,
+                            "y": -1.0,
+                            "z": 0.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 5,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                3
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 395,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 259.0,
+                            "y": 237.0,
+                            "z": 357.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 262.0,
+                            "y": 449.0,
+                            "z": 347.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 6,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                3
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 396,
+                        "modelIndex": 2,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 42.0,
+                            "y": 230.0,
+                            "z": 155.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -84.0,
+                            "y": 783.0,
+                            "z": -71.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 7,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                6
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 397,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 45.0,
+                            "y": 86.0,
+                            "z": 328.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -336.0,
+                            "y": 147.0,
+                            "z": -160.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 8,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 398,
+                        "modelIndex": 4,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 308.0,
+                            "y": 273.0,
+                            "z": 141.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 206.0,
+                            "y": 155.0,
+                            "z": -30.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 9,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 399,
+                        "modelIndex": 4,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 176.0,
+                            "y": 286.0,
+                            "z": 320.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -44.0,
+                            "y": 759.0,
+                            "z": -316.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 10,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                4
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 400,
+                        "modelIndex": 3,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 298.0,
+                            "y": 137.0,
+                            "z": 163.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 226.0,
+                            "y": 444.0,
+                            "z": -256.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 11,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                2
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 401,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 138.0,
+                            "y": 319.0,
+                            "z": 155.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -367.0,
+                            "y": 546.0,
+                            "z": 129.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 12,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                4
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 402,
+                        "modelIndex": 6,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 305.0,
+                            "y": 341.0,
+                            "z": 66.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 73.0,
+                            "y": 711.0,
+                            "z": -23.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 13,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                2
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 403,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 312.0,
+                            "y": 57.0,
+                            "z": 93.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -23.0,
+                            "y": 234.0,
+                            "z": 270.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "ID": 14,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                4
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 404,
+                        "modelIndex": 4,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 94.0,
+                            "y": 255.0,
+                            "z": 287.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 355.0,
+                            "y": 241.0,
+                            "z": -39.0
+                        }
+                    },
+                    "TransformComponent_Category": 0
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 15,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                6
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 405,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -59.0,
+                            "y": 274.99261474609375,
+                            "z": -50.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 16,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                3
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 406,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 107.0,
+                            "y": 154.9923095703125,
+                            "z": 166.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 17,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                4
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 407,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 57.0,
+                            "y": 61.992374420166016,
+                            "z": -193.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 18,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                6
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 408,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -55.0,
+                            "y": 307.99261474609375,
+                            "z": -47.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "BoxColliderComponent": {
+                        "halfExtents": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "BoxColliderComponent_Category": 0,
+                    "ID": 19,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 409,
+                        "modelIndex": 1,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 21.0,
+                            "y": 82.99240112304688,
+                            "z": 9.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 20,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                2
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 410,
+                        "modelIndex": 0,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "SphereColliderComponent": {
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 1.0
+                    },
+                    "SphereColliderComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 106.0,
+                            "y": 70.9923095703125,
+                            "z": -178.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 21,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                3
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 411,
+                        "modelIndex": 0,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "SphereColliderComponent": {
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 1.0
+                    },
+                    "SphereColliderComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -100.0,
+                            "y": 292.99261474609375,
+                            "z": -187.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 22,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                6
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 412,
+                        "modelIndex": 0,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "SphereColliderComponent": {
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 1.0
+                    },
+                    "SphereColliderComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 10.0,
+                            "y": 0.9999998807907104,
+                            "z": 162.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 23,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 413,
+                        "modelIndex": 0,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "SphereColliderComponent": {
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 1.0
+                    },
+                    "SphereColliderComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": -0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 148.0,
+                            "y": 61.992374420166016,
+                            "z": -176.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 24,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                2
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 414,
+                        "modelIndex": 0,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "SphereColliderComponent": {
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 1.0
+                    },
+                    "SphereColliderComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -0.021181832998991013,
+                            "y": -3.915382421837421e-06,
+                            "z": -0.021181821823120117
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -198.0,
+                            "y": 0.9999998807907104,
+                            "z": 195.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CapsuleColliderComponent": {
+                        "halfHeight": 0.5,
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 0.5
+                    },
+                    "CapsuleColliderComponent_Category": 0,
+                    "ID": 25,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 415,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 172.61642456054688,
+                            "y": -73.95034790039063,
+                            "z": 121.03839874267578
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -23.592004776000977,
+                            "y": 0.7027639150619507,
+                            "z": 91.21607971191406
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CapsuleColliderComponent": {
+                        "halfHeight": 0.5,
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 0.5
+                    },
+                    "CapsuleColliderComponent_Category": 0,
+                    "ID": 26,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                6
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 416,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 125.87462615966797,
+                            "y": 51.30537414550781,
+                            "z": -2.3372647762298584
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -115.13875579833984,
+                            "y": 0.8056699633598328,
+                            "z": 199.63754272460938
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CapsuleColliderComponent": {
+                        "halfHeight": 0.5,
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 0.5
+                    },
+                    "CapsuleColliderComponent_Category": 0,
+                    "ID": 27,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                5
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 417,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -72.99999237060547,
+                            "y": 52.99999237060547,
+                            "z": 8.000008583068848
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -100.0,
+                            "y": 262.99261474609375,
+                            "z": -182.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CapsuleColliderComponent": {
+                        "halfHeight": 0.5,
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 0.5
+                    },
+                    "CapsuleColliderComponent_Category": 0,
+                    "ID": 28,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                4
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 418,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 89.99998474121094,
+                            "y": -80.99998474121094,
+                            "z": -12.999980926513672
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -117.0,
+                            "y": 172.9923095703125,
+                            "z": -107.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "CapsuleColliderComponent": {
+                        "halfHeight": 0.5,
+                        "localOffset": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "radius": 0.5
+                    },
+                    "CapsuleColliderComponent_Category": 0,
+                    "ID": 29,
+                    "MaterialOverrideComponent": {
+                        "materials": {
+                            "data": [
+                                2
+                            ]
+                        },
+                        "sharedMaterialEntity": 4294967295
+                    },
+                    "MaterialOverrideComponent_Category": 2,
+                    "ModelComponent": {
+                        "castShadow": true,
+                        "hasDirectxNormals": false,
+                        "materialOffset": 419,
+                        "modelIndex": 5,
+                        "receiveShadow": true
+                    },
+                    "ModelComponent_Category": 0,
+                    "RigidBodyComponent": {
+                        "friction": 0.20000000298023224,
+                        "layer": 1,
+                        "mass": 1.0,
+                        "motionType": 2,
+                        "restitution": 0.0
+                    },
+                    "RigidBodyComponent_Category": 0,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -9.00000286102295,
+                            "y": -34.999996185302734,
+                            "z": -123.99999237060547
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 109.0,
+                            "y": 238.99246215820313,
+                            "z": -187.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "DirectionLightComponent": {
+                        "color": {
+                            "x": 0.550000011920929,
+                            "y": 0.5224999785423279,
+                            "z": 0.4675000309944153
+                        },
+                        "strength": 5.0,
+                        "useShadow": true
+                    },
+                    "DirectionLightComponent_Category": 2,
+                    "DirectionLightShadowComponent": {
+                        "cascadeSplits": {
+                            "w": 0.0,
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "shadowFarPlane": 200.0
+                    },
+                    "DirectionLightShadowComponent_Category": 2,
+                    "ID": 30,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -45.0,
+                            "y": 45.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 31,
+                    "PointLightComponent": {
+                        "color": {
+                            "x": 0.1899472028017044,
+                            "y": 0.9248023629188538,
+                            "z": 0.69576096534729
+                        },
+                        "radius": 10.0,
+                        "strength": 24.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "PointLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 156.0,
+                            "y": 19.0,
+                            "z": -151.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 32,
+                    "PointLightComponent": {
+                        "color": {
+                            "x": 0.09439375251531601,
+                            "y": 0.6251716613769531,
+                            "z": 0.09750663489103317
+                        },
+                        "radius": 5.0,
+                        "strength": 28.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "PointLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 102.0,
+                            "y": 89.0,
+                            "z": 9.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 33,
+                    "PointLightComponent": {
+                        "color": {
+                            "x": 0.4107181131839752,
+                            "y": 0.7690664529800415,
+                            "z": 0.22730186581611633
+                        },
+                        "radius": 10.0,
+                        "strength": 10.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "PointLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 103.0,
+                            "y": 14.0,
+                            "z": 187.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 34,
+                    "PointLightComponent": {
+                        "color": {
+                            "x": 0.8547929525375366,
+                            "y": 0.634723961353302,
+                            "z": 0.5978270769119263
+                        },
+                        "radius": 9.0,
+                        "strength": 27.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "PointLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -119.0,
+                            "y": 98.0,
+                            "z": -4.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 35,
+                    "PointLightComponent": {
+                        "color": {
+                            "x": 0.5551316738128662,
+                            "y": 0.7379070520401001,
+                            "z": 0.18427075445652008
+                        },
+                        "radius": 9.0,
+                        "strength": 13.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "PointLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": 92.0,
+                            "y": 38.0,
+                            "z": -178.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 36,
+                    "SpotLightComponent": {
+                        "color": {
+                            "x": 0.7407452464103699,
+                            "y": 0.08038575202226639,
+                            "z": 0.4944608807563782
+                        },
+                        "innerAngle": 23.0,
+                        "outerAngle": 44.0,
+                        "range": 30.0,
+                        "strength": 17.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "SpotLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -81.0,
+                            "y": 76.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -112.0,
+                            "y": 15.0,
+                            "z": -9.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 37,
+                    "SpotLightComponent": {
+                        "color": {
+                            "x": 0.6677755117416382,
+                            "y": 0.043214209377765656,
+                            "z": 0.7276833653450012
+                        },
+                        "innerAngle": 17.0,
+                        "outerAngle": 33.0,
+                        "range": 73.0,
+                        "strength": 26.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "SpotLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -72.0,
+                            "y": 349.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -167.0,
+                            "y": 75.0,
+                            "z": -114.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 38,
+                    "SpotLightComponent": {
+                        "color": {
+                            "x": 0.079348124563694,
+                            "y": 0.3269142806529999,
+                            "z": 0.15488143265247345
+                        },
+                        "innerAngle": 18.0,
+                        "outerAngle": 32.0,
+                        "range": 35.0,
+                        "strength": 16.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "SpotLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -89.0,
+                            "y": 172.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -124.0,
+                            "y": 57.0,
+                            "z": -101.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 39,
+                    "SpotLightComponent": {
+                        "color": {
+                            "x": 0.7379986047744751,
+                            "y": 0.3230384290218353,
+                            "z": 0.15265358984470367
+                        },
+                        "innerAngle": 23.0,
+                        "outerAngle": 34.0,
+                        "range": 60.0,
+                        "strength": 22.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "SpotLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -88.0,
+                            "y": 135.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -11.0,
+                            "y": 1.0,
+                            "z": 88.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                },
+                {
+                    "ID": 40,
+                    "SpotLightComponent": {
+                        "color": {
+                            "x": 0.6096377372741699,
+                            "y": 0.5245826840400696,
+                            "z": 0.7849665880203247
+                        },
+                        "innerAngle": 23.0,
+                        "outerAngle": 45.0,
+                        "range": 54.0,
+                        "strength": 5.0,
+                        "useShadow": false,
+                        "weakenDistance": 0.0
+                    },
+                    "SpotLightComponent_Category": 2,
+                    "TransformComponent": {
+                        "rotation": {
+                            "x": -84.0,
+                            "y": 209.0,
+                            "z": 0.0
+                        },
+                        "scale": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "z": 1.0
+                        },
+                        "translation": {
+                            "x": -68.0,
+                            "y": 32.0,
+                            "z": -43.0
+                        }
+                    },
+                    "TransformComponent_Category": 2
+                }
+            ],
+            "entityCounter": 41,
+            "freeEntities": {
+                "data": []
+            }
+        },
+        "SceneCameraEntity": 0,
+        "Settings": {
+            "ambientStrength": 0.05000000074505806,
+            "aoIntensity": 100.0,
+            "aoRadius": 0.9300000071525574,
+            "bias": 0.004999999888241291,
+            "bloomExposure": 1.0,
+            "bloomFilterRadius": 0.004999999888241291,
+            "bloomKnee": 0.10000000149011612,
+            "bloomStrength": 1.0,
+            "bloomThreshold": 1.0,
+            "debugVisibilityMode": 6,
+            "depthSharpness": 0.0,
+            "emissiveStrength": 1.0,
+            "enableBillboardCameras": true,
+            "enableBillboardDirectionalLights": true,
+            "enableBillboardPointLights": true,
+            "enableBillboardSpotLights": true,
+            "enableBloom": true,
+            "enableChunkFrustumCulling": true,
+            "enableChunkOcclusionCulling": true,
+            "enableDebugVisibility": false,
+            "enableDeferredDirectionalLights": true,
+            "enableDeferredEmissiveAo": true,
+            "enableDeferredPointLights": true,
+            "enableDeferredSpotLights": true,
+            "enableForwardPlusDirectionalLights": true,
+            "enableForwardPlusEmissiveAo": true,
+            "enableForwardPlusPointLights": true,
+            "enableForwardPlusSpotLights": true,
+            "enableFrustumCulling": true,
+            "enableGeometryGpuCulling": true,
+            "enableHiz": true,
+            "enableMeshFrustumCulling": true,
+            "enableMeshOcclusionCulling": true,
+            "enableMeshletConeCulling": true,
+            "enableMeshletFrustumCulling": true,
+            "enableMeshletOcclusionCulling": true,
+            "enableModelFrustumCulling": true,
+            "enableModelOcclusionCulling": true,
+            "enableMortonBvhCulling": false,
+            "enableOcclusionCulling": true,
+            "enablePointLightAabbWireframe": false,
+            "enablePointLightFrustumCulling": true,
+            "enablePointLightGpuCulling": true,
+            "enablePointLightOcclusionCulling": true,
+            "enablePointLightSphereWireframe": false,
+            "enableSpotLightAabbWireframe": false,
+            "enableSpotLightConeWireframe": false,
+            "enableSpotLightFrustumCulling": true,
+            "enableSpotLightGpuCulling": true,
+            "enableSpotLightOcclusionCulling": true,
+            "enableSpotLightPyramidWireframe": false,
+            "enableSpotLightSphereWireframe": false,
+            "enableStaticBvhCulling": false,
+            "enableStaticChunkAabbWireframe": false,
+            "enableWireframeMeshAabb": false,
+            "enableWireframeMeshSphere": false,
+            "maxOcclusionDistance": 3.0,
+            "pipelineType": 1,
+            "sampleCount": 16,
+            "tileSize": 64,
+            "useDebugCamera": false
+        },
+        "TextureManifest": {
+            "data": [
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\lion.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\lion.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\background.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\background.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_plant.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_plant.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_arch_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_arch_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\spnza_bricks_a_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\spnza_bricks_a_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_ceiling_a_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_ceiling_a_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\chain_texture.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\chain_texture.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_a_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_a_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_b_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_b_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_c_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_column_c_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_details_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_details_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_blue_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_blue_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_green_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_fabric_green_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_green_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_green_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_blue_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_curtain_blue_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_flagpole_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_flagpole_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_floor_a_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_floor_a_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_thorn_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_thorn_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_roof_diff.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\sponza_roof_diff.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_dif.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_dif.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_hanging.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_hanging.tga",
+                        "width": 0
+                    }
+                },
+                {
+                    "name": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_round.tga",
+                    "payload": {
+                        "embeddedData": {
+                            "data": []
+                        },
+                        "formatHint": "",
+                        "height": 0,
+                        "isUncompressed": false,
+                        "path": "C:\\Users\\User\\Desktop\\Models\\Sponza\\textures\\vase_round.tga",
+                        "width": 0
+                    }
+                }
+            ]
+        }
+    }
+}

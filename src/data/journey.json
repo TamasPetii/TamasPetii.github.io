@@ -1,0 +1,923 @@
+[
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Feb 12, 2026 - 12:09",
+    "isOwnMessage": false,
+    "text": "Hi! How did you plan the spring semester? Would you like to continue with the thesis now?",
+    "images": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Feb 12, 2026 - 12:48",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Yes, I ended up activating the current spring semester. Even in January, I often thought it might be smarter to skip a semester and go passive for certain reasons, but I ultimately decided to continue with my studies. So my semester is active, and I have registered for Thesis 1 in Neptun. I assume I also need to register the topic again on the IIT portal.<br><br>Between the holidays in December, I thought a lot about the game engine since I had some time to rest. I managed to rethink it quite well in many aspects: how to do it better, modernize it, use more modern Vulkan solutions, and build a more modular, optimized, beautifully structured, and future-proof architecture.<br><br>(An actual full template metaprogramming-based modular ECS which turned out quite cool, static/dynamic entity handling, vcpkg manifest setup, CI/CD, MVI architecture, an ImGui Compose-like abstraction, modern Vulkan extensions like shader objects and descriptor buffers, VMA, volk, shader reflection, a custom internal system threadpool, a very nice fully parallel processing setup, flag-based optimization mechanisms, dirty list handling, a ton of stuff on the shader side, and much more...)<br><br>I gathered these ideas into Notion, and I have extensive plans for most parts of it.<br><br>And once again, I fall into the same trap where I am my own worst enemy; I burn myself out completely because of my own foolishness... The old version isn't bad either, in fact, it's easily 3x better than average, but it feels very inflexible to me now. It works fine, but it's hard to expand and develop. I started writing the project in the 1st semester when Vulkan was absolutely new to me. I had no idea what problems, solutions, and unforeseen issues I would have to solve during development, and because of this, I couldn't get a clean start with the project. Since then, I feel like I've managed to expand my perspective in programming.<br><br>After realizing how much I could improve, I completely lost my motivation and desire to work on the Project Laboratory 2 version. (Many ideas can be carried over, of course; I wouldn't scrap everything, but a lot of things would change at a very fundamental level...) The new version, which I have thoroughly thought out and features a truly beautiful architecture, would be put together very correctly, but it would take way too much time to build, which makes me reluctant to move forward with it...<br><br>So currently, I'm in this quantum state where I want to progress with the project because I genuinely love working on this topic, but at the same time, I have absolutely no desire to start... I am completely burned out from the university, the project lab, the constant joyless maximizing of performance, myself, and pretty much life right now...<br><br>Despite all this, I am continuing with Thesis 1. If possible, I'll stick to the topic, I'm just waiting for inspiration to strike one day so I can start again. I don't know how Thesis 1 differs from the Project Lab? Is it pretty much the same, just requiring a topic declaration? Where we summarize roughly what the project needs to know and what it will do?<br><br>Are researches and measurements needed? I don't know if the MSc level strictly requires them. Because if so, I really like this GPU-driven branch, so I could do \"measurements\" there, but currently, a few things would need to change there as well (the old ECS wasn't well prepared for it, for example) for it to be truly useful.<br><br>Here are two images from Notion.",
+    "images": [
+      "/Devblog/Journey/02-12-notion-plan-1.png",
+      "/Devblog/Journey/02-12-notion-plan-2.png"
+    ]
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Feb 12, 2026 - 13:19",
+    "isOwnMessage": false,
+    "text": "Oh, I'm sorry to hear that things turned out this way and that you're not enjoying university right now.<br><br>The thesis is a bit different from the project lab. The topic and the task description must be officially announced, which will concretize what needs to be fulfilled within the subject. However, what you have created so far during the project lab already exceeds what would be required for a thesis, in my opinion!<br><br>Regarding the rewriting of the architecture: I strongly advise against students starting such a thing during thesis preparation, because rewriting and refactoring usually consume all the time. There is no time left to create new features (after all, the thesis document must be written at some point), and refactoring is not something that can be easily formulated in the text as a completed task; it generally doesn't look good.<br><br>However! Since your current state is already exceptionally good, if that's what you want, I think starting a rewrite is acceptable, but I would still phrase the topic in a way that avoids specifics between the old or new plan. I would suggest writing the topic description so that a large percentage covers or draws from the areas that are already completed. During an MSc, it is indeed appropriate to support claims with measurements.",
+    "images": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Feb 25, 2026 - 08:08",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Here are the little presentations from yesterday. I thought I'd send them over since I pretty much finished them anyway, you never know who might find them useful in the future.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "02-25-ECS.pptx",
+        "fileUrl": "/Devblog/Journey/02-25-ecs.pptx",
+        "previewUrl": "/Devblog/Journey/02-25-ecs-preview.png"
+      },
+      {
+        "name": "02-25-MeshPipeline.pptx",
+        "fileUrl": "/Devblog/Journey/02-25-meshpipeline.pptx",
+        "previewUrl": "/Devblog/Journey/02-25-mesh-preview.png"
+      }
+    ]
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Feb 25, 2026 - 13:40",
+    "isOwnMessage": false,
+    "text": "Thank you!",
+    "images": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Feb 25, 2026 - 08:08",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>A quick status update: Wow, I managed to make a ton of progress with the engine rewrite.<br><br>I finalized the model/mesh handling. I think it turned out really beautiful architecturally, and I was even able to apply the entire architectural approach to Image textures.<br><br>(ImageBuilder, ImageSource (File/Procedural), ImageProcessor, ImagePipeline, ImageLoader, Raw/Cooked/GPU image, ImageManager. You can load textures from files, stb_image, multiple formats with gli, generate mipmaps on the CPU/GPU level, or even procedural height maps, and everything can be handled uniformly with this architecture.)<br><br>When loading models, I also generate LOD levels for the normal pipeline using meshoptimizer, and I generate meshlets separately for the LOD levels, so the mesh shader will also be LOD compatible.<br><br>The entire model handling is data-oriented (basically \"Batched\", meaning there is 1 vertex buffer, 1 mixed flat index buffer, 1 meshlet vertex index buffer, and 1 meshlet triangle index buffer), and it is solved with offset descriptors so that the model can still be rendered and handled at the Mesh level.<br><br>The old version renderer was a completely Batched renderer, meaning it packed the 392 separate meshes of the Sponza model into the buffer in a similarly data-oriented way and drew everything with 1 render call, but this would not be LOD compatible (or rather, only model-level LOD, which is not good), and you can't cull at the mesh level this way either.<br><br>The new renderer is completely Multi-Draw Indirect based in both CPU-driven and GPU-driven implementations. This was also necessary because LOD data needs to be generated per mesh. There are 4 LOD levels in the engine right now, but it's not certain that 4 levels can be generated for every mesh. For a cube, there is only LOD0, multiple LOD levels are meaningless, and meshoptimizer recognizes and handles this. The old batched rendering at the model level would have been bad because in such cases it would have required a lot of duplication, literally copying the given mesh index data 4 times, and this would have only provided full model-level LOD... However, if I use Multi-Draw Indirect rendering, meaning every mesh has its own IndirectDrawCommand, then on one hand, I can cull and render at the mesh level, and on the other hand, I can achieve completely dynamic mesh-level LOD rendering this way. Meaning, I render Sponza, and LODs can be swapped even within the model, so the curtains further away appear with LOD1 instead of LOD0 in the case of Sponza!! Well, it wasn't easy to write all this, but the Multi-Draw Indirect solution seems very promising, and if you think back to the cube case, index data doesn't need to be duplicated for non-existent LOD levels this way, because the LOD is also handled with offset descriptors like the meshes. LOD1, LOD2, and LOD3 will essentially be descriptors for LOD0, with the compromise that there will be a fixed 4 IndirectDrawCommands for the same cube. So we handle LOD at a high level, and we will write the appropriate LOD indirect command based on distance, but at a low level, they will point to the same index and vertex range in cases where there are not actually 4 LOD levels.<br><br>Here are a few pictures with the Nvidia Bistro.<br><br>* Normal Rendering LOD0: 1200fps<br>* Normal Rendering LOD3: 2800fps (Full LOD3)<br>* Mesh shader LOD0: 2000 fps<br>* Mesh shader LOD3: 4400 fps<br><br>So there will be full mesh-level culling for both CPU and GPU culling. It will probably be slower for the CPU since a lot of collision testing is needed, but for the GPU-driven culling, I think this will be criminally hardcore!!!<br><br>By the way, the mesh shader solution also works with MultiDrawIndirect now. It will be possible to cull meshes in the compute shader, so there will be fewer instances in the Draw Commands, less work, since I exclude a ton of meshlets by default that won't even start. For the ones that do start, I can cull again in the task shader, potentially with occlusion culling, which will be brutal.<br><br>Oh, and the GPU-driven solution will also be much better, it will be fully offset-based too.<br><br>1 Global Instance Index buffer. (It will be issued with offsets for the meshes and models, this will probably be huge in size).<br>1 Global Indirect Draw Command buffer. (It will be issued with offsets for the models).<br><br>The ECS ModelComponent contains references to loaded models, so I know at CPU time how many Models there are and the maximum number of occurrences for each. This way, if it changed (only needed on change!), the ModelComponentSystem will regenerate the offsets into the Global Instance Index buffer and the Indirect Draw Command Buffer. (In Project Lab 2, models had dedicated instance index buffers, now there will be 1 global). With this, it will be fully GPU-Driven, and I think all models can be realized with 1 render call using a massive Indirect Draw Buffer for all meshes of all models, WITH COMPLETELY DYNAMIC LOD HANDLING!!!",
+    "images": [
+      "/Devblog/Journey/03-08-normal-lod0.png",
+      "/Devblog/Journey/03-08-normal-lod3.png",
+      "/Devblog/Journey/03-08-mesh-shader-lod0.png",
+      "/Devblog/Journey/03-08-mesh-shader-lod3.png"
+    ]
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 09, 2026 - 10:50",
+    "isOwnMessage": false,
+    "text": "Wow, this really looks very promising, especially with the performance difference! How do you see the update part, how slow will that be (when the two buffers need to be regenerated, if a new model is loaded or if a new instance is added)?<br><br>Oh, and by the way, could the mesh shader and the normal workload run simultaneously (drawing some things one way, and some the other way)?",
+    "images": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 10, 2026 - 09:17",
+    "isOwnMessage": true,
+    "text": "I don't think it will be slow at all.<br><br>When I divide the global instance index buffer between the models and meshes, it is very fast because the contents of the buffer don't matter, only the offsets and ranges need to be allocated correctly. And to avoid constantly regenerating the entire buffer upon changes, this can be solved using a \"windowed\" approach, where the buffer capacity is always slightly larger than the actual required index ranges. This means if 1 entity is deleted or added (depending on the window size, I could even set it to 256), the entire buffer doesn't need to be regenerated. So, in theory, it's just about correctly allocating offsets, and from then on, the culling will update the buffer with the appropriate entity indices. The entire buffer will only need to be regenerated if a large number of entities are deleted/added.<br><br>For the global indirect draw buffer, it's basically the same story. The buffer size will be generated using the same windowed method, and offsets and ranges will be allocated among models and meshes. Here, the only addition is that I cache the indirect draw commands themselves in a `std::vector` on the CPU side within the model for all meshes, so that the `vertexCount` and `firstVertex` parameters belonging to the meshes don't have to be constantly adjusted. When the model receives the offset and the range, I literally just copy the contents of the indirect draw command vector to that range using a single `std::memcpy`. The only thing is that the `instanceCount` will be 0, and this will be set by either the CPU culling or the GPU culling later.<br><br>So, thinking it through like this, I believe it will be super fast and very efficient.<br><br>I think the mesh and normal workloads can run simultaneously. Actually, it can be toggled at the mesh level whether it uses the normal or the mesh shader. So, even within a single model, there can be parts drawn by the mesh shader and parts by the normal pipeline. However, this might require me to split the global indirect draw buffer into two parts, so there is a normal workload and a mesh shader workload. (Although this might even be solvable within the global buffer using a [normal | mesh shader] layout partition). In reality, if every mesh has a flag indicating which one to use, from that point on, it all depends purely on the offset allocation. And there's no need for all of a model's meshes to be compactly next to each other, since the renderer and the architecture don't think in terms of models, but in terms of meshes. I think it will be easily achievable with the current architecture, by the way.<br><br>(It could even be adjustable at the mesh LOD level, so that LODs 2-3 are rendered by the normal pipeline, and LODs 0-1 by the mesh shader. I'm not sure if this has any practical use, but at least thinking it through, even this will be possible.)",
+    "images": [],
+    "attachments": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 10, 2026 - 11:42",
+    "isOwnMessage": false,
+    "text": "Ah, I see! Then this really does seem very efficient even in the event of changes!",
+    "images": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 12, 2026 - 22:00",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Sorry for bombarding you with messages again, but I just have to write this down xd<br><br>THE RENDERER IS WORKING!!!!<br><br>I still can't believe it, but everything came together. I was able to perfectly build the renderer I described in the previous message on top of the new model/mesh-based representation I came up with. I am able to handle all entities, all the separate meshes of all their models at all their LOD levels individually, yet render them all together. What's more, yes, I am even able to toggle between the traditional and mesh shader versions one by one!!! Specifically, what you see in the video is a single `vkCmdDrawIndirectCount` API call. Currently, it's still fully on the traditional pipeline, but the code is already completely prepared on the GPU side for mesh shader handling as well!!!<br><br>Yes, meanwhile the new entity-component-system also turned out insanely good, the static/dynamic/streamed distribution is very nice. Imagine this, it can be adjusted at the component level, so it is entirely possible that all `ModelComponent`s which change relatively rarely are static (meaning the System finishes instantly since it almost always iterates on a 0-length vector), while the transform, for example, is dynamic. But even here, it is handled with a dynamic flag, and the entire Pool status is tracked as well, so if not a single dynamic one has changed, we skip the entire dynamic range too. This is very important because this way it will match the speed of the GPU-Driven approach on the CPU side, since the old ECS wasn't thoroughly optimized!!<br><br>Oh, and finally, I am using the taskflow library because it fits perfectly into the whole engine. Iterating and updating static/dynamic/streamed entities is fully parallel with taskflow this way. Data uploading to the GPU also goes through taskflow, that is fully parallel too. I can handle the dependencies between systems very well with taskflow, and I always achieve maximum parallelism between systems. (And within the systems, as I mentioned, I can skip very well because of the static/flag setup).<br><br>Moreover, I load the models asynchronously on background threads using taskflow, and hold on tight!! The model/mesh representation I came up with, the raw/cooked/gpu representation, and the separate processors can all be parallelized concurrently by meshes!!! The collider processor iterates on the vertices of all the meshes of the entire model, calculates AABB and OBB, and then for the entire model as well! This is also fully parallelizable at the mesh level! Furthermore, even in the ASSIMP loader, the loading of vertex and index data is parallelized per mesh using taskflow, and even the meshlet and LOD generators are processors that again operate at the mesh level, so that is parallelized with taskflow too!!!<br><br>And everything is perfectly data-oriented: the renderer, instance management, model/mesh handling, and the entity-component-system. Perfectly data-oriented, which means it perfectly matches how the GPU operates!<br><br>The point in the videos is that there are tons of shapes, multiple types, and very complex Sponza/Bistro models too.<br>Regarding the coloring: red/green/blue/yellow = LOD0, LOD1, LOD2, LOD3.<br>The reason it flickers a lot is because right now I am telling it randomly every frame which LOD to render with. In the case of Sponza, you can even see the lower-level LOD representation at the arch of the walls! AND YES!!! It also works with multi-buffering, even with 2-3 frames in flight (or however many we want).",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/F0sXha-a9Qo",
+      "https://youtu.be/Hy1SKBe8i6g",
+      "https://youtu.be/UKaNgWfyrwc"
+    ]
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 13, 2026 - 06:33",
+    "isOwnMessage": true,
+    "text": "Here is the shader and the render call, just so you can see it. It is worth checking out the vertex shader, it is a miracle xd<br><br>Plus, here is an image where you can really see that LOD levels can be swapped per mesh even within a model.",
+    "images": [
+      "/Devblog/Journey/03-13-mesh-lod-swap.png"
+    ],
+    "attachments": [
+      {
+        "name": "03-13-Traditional.vert",
+        "fileUrl": "/Devblog/Journey/03-13-Traditional.vert",
+        "previewUrl": "/Devblog/Journey/03-13-shader-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 13, 2026 - 06:57",
+    "isOwnMessage": true,
+    "text": "Oh, and one more thing, this is really the last message xd<br><br>This architecture is also capable of handling animation. (The previous engine was similar in this regard).<br><br>Since all shaders use vertex pulling, the per-vertex animation weights and bone indices don't need to be baked into the vertex structure. This way, it is enough to load the static vertex positions and attributes once, and swapping the animation per entity can be implemented in a bindless, data-oriented manner, which will be rendered by the exact same vertex shader as the ones without animation!! And animation will even work with different LOD levels per mesh!!! So animation can also be perfectly integrated into the GPU-driven culling parts!!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 13, 2026 - 18:50",
+    "isOwnMessage": false,
+    "text": "I've looked through it! The results are very good, especially how well the systems you designed fit together! I've also been looking into taskflow these past few days, and it really does fit perfectly into a system designed this way.<br><br>If I see correctly, multiple cameras can also be uploaded at once, from which you select dynamically?<br><br>What you wrote at the end about the animation is the part that is still partially unclear to me, but I remember we talked about this at the beginning of the semester too. It's clear that the animation data can come from a separate buffer so it doesn't need to be next to the vertex data. However, when you write that the exact same vertex shader will do it, does that mean there will be a runtime 'if'? Based on whether the model is animated or not. And if it is animated, then based on the skinning data, it retrieves the matrices corresponding to the appropriate bones, which I assume will also be in an array indexable by an entityId. This is not a problem, of course, I'm just asking to see if I understand it correctly?<br><br>Also, right now this is a single render pass if I saw correctly. Before you move forward, you might want to check if any problems arise if you create and use, say, a simple shadow map with this structure, even for just a single directional light source. To me, it seems like practically nothing would need to change for it, and pretty much the exact same thing would run smoothly just without a fragment shader.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 13, 2026 - 19:07",
+    "isOwnMessage": true,
+    "text": "Yeah, you understand the animation part perfectly well.<br><br>Indexing into the AnimationMap with the entity ID, if it's UINT_MAX, then there is no animation component. If it's a valid number, then this is the corresponding animation component in the compact array, and from here on it's just bones and matrix multiplications.<br><br>The animation buffer addresses (the ones containing the vertex bone IDs and weights) would also be stored compactly in one buffer, similarly to the buffer addresses of the currently loaded models (vertex, node, index, etc.). Based on the animation component, knowing this index, I can pull the animation data. The animation component would also contain the matrices belonging to the bone hierarchy calculated per frame. I will probably be able to solve this by using 1 large buffer and dividing it among the animation components with offsets. (In the previous engine, there was a dedicated buffer in the component. For 1000 animations, there were 1000 buffers containing the matrices to be calculated per frame, but thinking about it, this could also be a 1 buffer offset-based approach!)<br><br>Regarding the shadow map, I think everything will work. The directional light source is indeed very simple. Moreover, since the vertex positions are in a separate buffer, the shader won't even read the normals, tangents, and so on. (+ This is why it's great to have a mesh/node index next to the vec3 position, because this way I can also access the node transform, and the model will actually appear correctly.)<br><br>The point light and spot light sources are more complex, because there you can cull based on volume again. But even there, I can apply the current flat data-oriented architecture 1:1. 1 large instance index buffer, which is divided per shadow point light source, and within that, again by models and meshes.<br><br>So I think it will be very efficient here too.<br><br>By the way, what I just did for the CPU-driven culling is also great. Because I iterate based on the model components completely in parallel. First, I check if it's visible based on the model's global Sphere collider. If not, all of its mesh tests are skipped!!!<br><br>If it is visible, then an AABB test follows, and if that is also visible, then I go through all the meshes with another Sphere + AABB collider test, though this part is no longer done in parallel.<br><br>And even with CPU-driven, I could build a 2-3 depth tree out of AABB / Sphere colliders, and for something like the Nvidia Bistro, which is 4k meshes, I could cull it in smaller batches of 256. Things like this are possible because it's data-oriented, so hierarchical CPU culling could work really beautifully.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 13, 2026 - 19:06",
+    "isOwnMessage": false,
+    "text": "Awesome, this part sounds great!<br><br>One more question: <a href=\"https://docs.vulkan.org/refpages/latest/refpages/source/vkCmdDrawIndexedIndirectCount.html\" target=\"_blank\" rel=\"noopener noreferrer\">https://docs.vulkan.org/refpages/latest/refpages/source/vkCmdDrawIndexedIndirectCount.html</a><br><br>You are currently using vkCmdDrawIndirectCount, but is it possible to use the Indexed call?<br><br>I haven't thought it through completely how it would fit into the whole thing, or what exactly this means and how it's different. However, you have index buffers, and if this really does what I think it does, then in theory it tells the GPU where to look for the index buffer. This can be useful because then \"vertex caching\" can work, and the vertex shader won't run multiple times for duplicated vertices (if the mesh is well-optimized, but since you use meshoptimizer, it supposedly optimizes for this).",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 13, 2026 - 19:07",
+    "isOwnMessage": true,
+    "text": "Basically, it's because I had issues with this last semester when I was still using normal rendering. If I recall correctly, I had to bind an index buffer if I rendered it as indexed. And I removed it there because with GPU-driven rendering, we shouldn't bind any index buffers, since we are handling multiple different index buffers under one umbrella.<br><br>Because of this, I wrote the code so that it calls a normal Draw, and the `vertexCount` is actually the `indexCount` of the mesh. Then, based on `gl_VertexIndex`, I read the index buffer in the shader, which I then use to read the vertex buffer. But I'll look into it, because it's possible that `vkCmdDrawIndexedIndirectCount` doesn't require an index buffer, and in that case, it would be more optimal.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 13, 2026 - 19:35",
+    "isOwnMessage": true,
+    "text": "For example, this scene: Nvidia Bistro + Sponza + 100k shapes (12 different types).<br><br>4 LOD levels. As you can see, the CPU culling is working now, and it dynamically swaps the LOD based on distance, which is visible from the coloring.<br><br>600 fps alongside CPU culling. I'm curious how brutal it will be with GPU culling, especially since there the buffers can originate from device local memory, because the CPU side won't need to touch them! (Oh, and yes, this is still the traditional pipeline; it will be even faster with the mesh shader.)<br><br>And here is a video!",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/OQWL6lVkilU"
+    ]
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 14, 2026 - 16:44",
+    "isOwnMessage": true,
+    "text": "The mesh shader solution is also working! There was a minor indexing issue, but I managed to fix it, and now it works completely with the mesh shader too. I made a visualization for it, you can see the dynamic LOD swapping per meshlet, and in the red/greenish video I randomly use either the traditional or the mesh shader pass per mesh, so you can see that the two can be mixed and used together.<br><br>Questions:<br><br>1. Thinking about it, shouldn't LOD be calculated from the size of the screen-space projection of the Sphere/AABB collider rather than distance? Just because right now it's based on distance, but distance isn't what really matters, it's how big it is on screen. If it's small, it should be less detailed, right? (The projection calculation isn't an issue, I'll need it for occlusion culling anyway.)<br><br>2. Do you think I should only use Sphere colliders for the GPU-driven compute shader culling? Because there is AABB as well, but the collider is in model space, so it has to be converted to World space, which requires a matrix multiplication. Thinking about it, I don't think it would be worth it. On the CPU side maybe yes, but on the GPU I don't know, maybe the Sphere is enough. (For CPU, sphere first, then AABB if visible.)<br><br>3. In the case of GPU-driven culling, do you think this approach is the most optimal? A 2-pass culling will be needed: first pass per model, then a second pass for all meshes belonging to the visible models.<br><br>The first compute shader iterates through the Models (ModelComponent holds a reference to a model, this is accessible in an indexed format on the GPU). Based on its collider, Sphere vs Frustum test:<br><br>&emsp;I. If the model is not visible -> return (In this case, all of its meshes are skipped. If the entire Bistro is not visible, we don't need to check X thousand meshes).<br><br>&emsp;II. If it is visible, and the model consists of 1 mesh, then model = mesh, so we immediately and atomically increment the instance counter in the corresponding Indirect Command.<br><br>&emsp;III. If it consists of multiple meshes, then we put the mesh index (probably a [model, mesh] index pair) into a global flattened index buffer, also atomically, but this has to be a shared counter across all threads!<br><br>The size of the 2nd culling comes from the 1st culling, so an Indirect Compute Dispatch is needed, meaning the 1st compute shader also calculates the group size for the 2nd. Currently, we have all the meshes in 1 large buffer, do the same Sphere vs Frustum collision test, and if it's visible, we increment the corresponding Indirect Command instance counter.<br><br>And then this is the end of the culling. Of course, we still have to pay attention to whether it's a mesh or traditional pipeline, so there will be one more branch in it. At first glance, I don't see a better solution than this. Do you also think this seems the most optimal? Or do you have any additional insights on it?",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/jAkH3Zf72V0",
+      "https://youtu.be/eDjrKLk-BSU",
+      "https://youtu.be/Mk1FUeQtC6c"
+    ]
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 14, 2026 - 18:51",
+    "isOwnMessage": true,
+    "text": "Furthermore, for the GPU-driven approach, it occurred to me that if the model's global collider volume in the 1st pass is completely inside the frustum, then all of its corresponding meshes are too. So the 2nd compute culling at the mesh level is only needed if a plane of the camera frustum intersects the collider.<br><br>But even here, I know how many meshes the model consists of. So if it has only a few meshes (say < than a threshold of 8), and few vertices (the vertex count is also saved in the model), then I just assume all of them are visible, because it's not worth culling them one by one.<br><br>The question is, won't it be problematic that at the model level in the 1st culling, the threads are iterating randomly over their meshes? For example, the Bistro has X thousand mesh iterations, while another model only has a few X iterations... Or would this still be faster than doing a 2nd culling... Even if it's redundant?? Hmm.<br><br>(This applies to CPU culling as well, so I just added it because it's a huge optimization for CPU culling too!!! :DD)",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 14, 2026 - 23:02",
+    "isOwnMessage": true,
+    "text": "Sorry again for writing so much, I'm just in such a state of excitement that I can't even describe it xD<br><br>I wrote the GPU-driven renderer. Specifically, I had to rewrite the CPU version, but I managed to come up with a lot of clever tricks. I didn't implement exactly the version I described above, but rather a 2-pass model/mesh culling compute shader similar to the logic of a mesh shader.<br><br>&bull; CPU culling, 100k shapes: 700 fps<br>&bull; CPU culling, 1 million shapes: 80 fps<br>&bull; GPU culling, 100k shapes: 3400 fps<br>&bull; GPU culling, 1 million shapes: 400 fps<br><br>I still can't believe it works. It was so incredibly difficult and complex to think this through blindly that it's unbelievable, but IT WORKS!!! And there isn't even occlusion culling in it yet! There isn't even meshlet culling either; it will be even faster with that!",
+    "images": [
+      "/Devblog/Journey/03-14-gpu-culling-1.png",
+      "/Devblog/Journey/03-14-gpu-culling-2.png",
+      "/Devblog/Journey/03-14-gpu-culling-3.png",
+      "/Devblog/Journey/03-14-gpu-culling-4.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 14, 2026 - 23:10",
+    "isOwnMessage": true,
+    "text": "I still can't believe it works. It was so incredibly difficult and complex to think this through blindly that it's unbelievable, but IT WORKS!!! And there isn't even occlusion culling in it yet! There isn't even meshlet culling either; it will be even faster with that! (Oh, and it's still using persistent coherent mapping, the buffers aren't device local yet! So it will be even faster later)",
+    "images": [],
+    "attachments": [
+      {
+        "name": "03-14-ModelCulling.comp",
+        "fileUrl": "/Devblog/Journey/03-14-ModelCulling.comp",
+        "previewUrl": "/Devblog/Journey/03-14-model-shader-preview.png"
+      },
+      {
+        "name": "03-14-MeshCulling.comp",
+        "fileUrl": "/Devblog/Journey/03-14-MeshCulling.comp",
+        "previewUrl": "/Devblog/Journey/03-14-mesh-shader-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 16, 2026 - 10:03",
+    "isOwnMessage": false,
+    "text": "Wow, that's a lot of info! And as I see, the questions above might not even be relevant anymore. I'll still try to gather my thoughts on them below, but feel free to ignore them where they no longer apply. I also looked at the codes and have a few thoughts on them.<br><br>In ModelCulling.comp, the shaders currently increment the atomic counter one by one. I see there is a commented-out code snippet for this, but couldn't it be done per workgroup (which is currently the only subgroup here) with a single call? Did the commented-out code not work, or did it yield worse performance?<br><br>Right now, a hierarchical shader dispatch happens through indirect compute, but mesh shaders actually enable exactly this kind of hierarchical call: the task shader is the first level and the mesh shader is the second level. They can be used for arbitrary hierarchical compute work. Again, I haven't thought through whether it could actually work; what might be a problem is the limited data transfer capability between task and mesh shaders, but if that can be bypassed/solved, it could be an interesting direction.<br><br>The other thing is that what you are using now is practically a two-level, fairly simple spatial partitioning scheme: there are the models that provide a large AABB, and the meshes within them with smaller AABBs. The question is whether other, more complex spatial partitioning schemes could be applied, like k-d tree, octree, R-tree, BVH, etc. And how efficient their construction and usage on the GPU would be. I mention this because, fundamentally, in a game engine, spatial partitioning appears in multiple places: the physics engine needs one for collision detection, game logic often wants to know about surrounding objects, and rendering also wants to use such a data structure for culling.<br><br>For example, in the case of the Bistro, you wrote that if the whole thing is not visible, you don't have to look through the tons of objects in it. But this is not a realistic situation; it's more likely that only a part of it is visible, so you still have to look through the whole thing after all. However, if the models were actually in a hierarchical spatial partitioning structure, it would be enough to just intersect that with the camera frustum. Of course, this is a completely different approach, especially since it doesn't take into account your current data hierarchy, to which what you've just implemented probably fits best.<br><br>I can't give a definitive answer to the AABB vs Sphere question; I think a matrix multiplication shouldn't add that much weight, but this is exactly what can only be decided through benchmarking.<br><br>Most of the time, distance is a good and simple approximation for LOD, but indeed, the screen space projection could also be a good LOD selection factor. It's just a bit harder to calculate, so the situation is similar to the previous point: it can only be decided based on measurements (and both this and the previous one are probably scene-specific optimizations).",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 16, 2026 - 12:16",
+    "isOwnMessage": true,
+    "text": "1. The subgroup atomic increment works, I am currently using the commented-out code in the shader. I didn't notice a huge performance difference, but it is certainly faster just for theoretical reasons. (It was commented out because the shader didn't work at first, a 64-bit identifier was swapped in the push constant... I was looking for a bug and commented it out because of that and it stayed that way, but the subgroup one works!)<br><br>2. The task shader idea is actually very good and interesting. The truth is that I don't know how the task shader works yet, I haven't looked into it, but it will be necessary anyway because of the meshlet culling. I will look into this idea. The question is, does the task shader think in terms of meshes or meshlets? Because if it's meshlets, then I think it would be worth keeping the current model/mesh culling. Because if a mesh consists of 250 meshlets, and if the mesh is not visible, then those 250 meshlets won't even start in the task shader. (But as I said, I have to look into the task shader because I don't know exactly how it works yet).<br><br>(+ The reason it is like this now is that the traditional and mesh shader pipelines can be used together, and this way I can cull them together in the shader. With the task shader, I would only be able to cull mesh shader meshes, which isn't a problem, but things would need to be reorganized here.)<br><br>3. Yes, BVH and other spatial partitioning divisions could actually be applied within the model for the meshes, or even for the models themselves, but then a 3-level culling would be needed. Now this is also something I haven't looked into. I haven't dealt with such spatial partitioning data structures on the GPU yet, so I don't know, but since it would work 100% in a CPU-driven case, it would definitely work on the GPU too, I just don't know how the threads and workgroups should be synchronized with the spatial partitioning data structure in the shader.<br><br>4. Regarding the model culling, yes, it's more realistic that the Bistro is divided in space, and then culled like that, but regardless of that, it's a nice little optimization that if the model is not visible, we throw away all of its meshes. But yes, I actually think that spatial partitioning at the model level, and at the mesh level within models, can also be done later. I'm just not experienced in this either, but this is a good idea too!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 16, 2026 - 12:29",
+    "isOwnMessage": false,
+    "text": "It's actually worth thinking about the task and mesh shaders as a simple two-level hierarchical compute work. The task shader runs first and tells how many mesh shaders to start. But we can talk about what I meant tomorrow at the GPU lab if you have any questions.<br><br>Spatial partitioning can also make sense if it's independent of the model-mesh hierarchy, meaning it partitions all the meshes together. At least as long as you are loading scenes similar to the Bistro, but that's not a realistic use case either.<br><br>In reality, the Bistro wouldn't be loaded from a single file, but it would be a scene with many smaller local models. In this case, we can assume that the meshes within a model are close to each other, and then it's enough to do the spatial partitioning at the model level. But yes, there are quite a lot of things to think about and possibilities in this.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 16, 2026 - 12:35",
+    "isOwnMessage": true,
+    "text": "Oh yeah, I think I understand and this could be implemented too. The model hierarchy, or thinking in terms of models, would have to be kept at least on the CPU side for the entity-component-system, handling entities, models, and for the editor. However, not on the GPU side, so it could easily be that every model, for example the Bistro, is cut into such submodels. And it actually thinks in terms of submodels. And there is 1 global array, based on the model we have the offset -> and from the offset, the Bistro is divided into X number of submodels. And then this kind of renderer would be absolutely feasible to implement.<br><br>(+ Moreover, the current model loading splits it into ASSIMP meshes per material, right! However, meshes could be batched here too, because exactly for this reason, next to every vertex `vec3` pos there is a packed index, and the local model mesh index is stored on 16 bits, from which I will decode the material data later, here again through a lookup table from the global material array!! So this kind of optimization is actually fully doable!)",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 18, 2026 - 10:44",
+    "isOwnMessage": true,
+    "text": "Hi!<br>I've written the thesis proposal!<br><br>Title: Adatorientált játékmotor tervezése és fejlesztése modern Vulkan környezetben<br>English title: Developing a Data-Oriented Game Engine using Modern Vulkan<br><br>Description of the task:<br><br>The focal point of contemporary real-time computer graphics and game engine development has undergone a paradigm shift in recent years. Traditional, object-oriented approaches and processor-driven (CPU-driven) rendering techniques are increasingly becoming bottlenecks in the era of modern, multi-core processors and massively parallel GPUs. To achieve maximum performance, the industry is increasingly shifting towards Data-Oriented Design and GPU-driven architectures, which are made possible by low-level, modern graphics APIs like Vulkan.<br><br>The goal of the thesis is to design and implement a modern, high-performance, data-oriented game engine in a C++ environment. The core of the engine is formed by an efficient Entity-Component-System architecture, while the graphics subsystem is entirely built on the modern Vulkan toolset (bindless architecture, mesh shaders, Multi-Draw Indirect). A prominent part of the task is not only the implementation of the technologies, but also the in-depth performance comparison of various modern rendering techniques and culling methods.<br><br>The student's tasks must cover the following:<br><br>&bull; Architecture and framework design: Design a clean, modular C++ codebase that supports asynchronous and multi-threaded execution!<br>&bull; Implementation of a data-oriented core: Implement a cache-friendly Entity-Component-System architecture ensuring compact data representation, which enables efficient data processing on both the CPU and GPU sides!<br>&bull; Development of a modern Vulkan renderer: Design a fully bindless, GPU-driven rendering engine using modern Vulkan features!<br>&bull; Research and measurement of culling techniques: Implement CPU and GPU-based culling solutions! Conduct a detailed performance comparison between CPU-driven and GPU-driven approaches!<br>&bull; Comparison of graphics pipelines: Implement and compare the performance of traditional and Mesh Shader-based rendering pipelines, as well as Deferred and Forward+ rendering techniques!<br>&bull; Prototype and evaluation: Create a game prototype demonstrating the engine's capabilities!<br><br>This pretty much perfectly summarizes the direction; everything specific besides Forward+ is roughly completely done already :DD<br>But I included it anyway, because I know 100% that I will be able to do it, because I understand it, I have already thought it through deeply, it's just a matter of time until it's done!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 18, 2026 - 10:50",
+    "isOwnMessage": true,
+    "text": "Very important main guidelines:<br><br>&bull; Beautiful, modular, extensible code structure with modern C++ elements, MVI editor architecture (clean codebase, dependency inversion, interchangeability, avoiding god-classes and singletons).<br>&bull; Data-oriented design and data-oriented data structures on both CPU and GPU sides. (Maximum cache locality, compact data representation, efficient data access).<br>&bull; Efficient fully multi-threaded, parallel processing, support for asynchronous operation.<br>&bull; Efficient data-oriented entity-component-system as the main architecture.<br>&bull; Efficient CPU-driven and especially GPU-driven culling, and rendering (Frustum, Occlusion, Meshlet, Light sources).<br>&bull; Modern Vulkan tools, extensions, fully bindless architectural solutions. (Shader objects, bindless, descriptor buffers, dynamic rendering).<br>&bull; Physics simulation.<br><br>Main graphics solutions:<br><br>&bull; Fully multi-draw indirect rendering, GPU-driven architecture.<br>&bull; GPU compute shader model, mesh, point, spot, and shadow culling.<br>&bull; Full support for traditional and Mesh shader pipelines, performance comparison.<br>&bull; Full support for efficient deferred rendering or forward+ rendering techniques, and performance comparison.<br>&bull; Comprehensive support for CPU-driven and GPU-driven culling, and performance comparison.<br>&bull; Direction/Point/Spot light shadow simulation.<br>&bull; Hierarchical bloom simulation.<br>&bull; Occlusion culling with depth Hi-Z map generation.<br>&bull; PBR shading materials.<br>&bull; Animation simulation, efficient rendering.<br>&bull; Multi-level LOD support with dynamic swapping.<br><br>Further development possibilities for upcoming semesters:<br><br>&bull; C++ DLL scripting (Or Mono C#?).<br>&bull; DirectX 12 support.<br><br>Also, here are the main directions roughly summarized and collected. If there's something you don't like in the proposal, or if you'd put more emphasis on something else, you can even rephrase it based on this!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 18, 2026 - 11:13",
+    "isOwnMessage": false,
+    "text": "Thanks! It turned out great, I practically barely changed it. I mostly compressed it to fit on one page (removed the title words in the bulleted list, and changed it in a few places) + I added to the first task to review the capabilities of the Vulkan API. There always needs to be some kind of literature research task in it.<br><br>I uploaded it to the thesis portal, check if you think it's good too.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 19, 2026 - 15:37",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>I'm just writing down the progress because there's no point keeping it to myself, maybe it will give you some ideas, thoughts, or new insights. But you don't have to reply, I don't want to constantly bombard you with messages, it's just that I think these turned out to be good solutions, and maybe you'll really find them useful at some point.<br><br>I've made a lot of progress again, now I have task shader culling before the mesh shader. By the way, I think the model + mesh compute culling pass is mandatory, and then the meshlet culling for the meshes builds on top of this in the task shader. (Or at least the architecture I came up with in the engine fits this best, since I dispatch the task shader with `vkCmdDrawMeshTasksIndirectCountEXT`, and 1 such command belongs to 1 mesh, which contains the meshlet count, and for this, mesh culling is mandatory to reduce the number of meshes in advance within this structure as well).<br><br>I re-implemented the Hi-Z generation. Here, too, I realized along the way that I didn't handle every edge case last semester, because in the case of a texture with an odd size, the size of the next smaller mipmap is even, meaning the values on the last edge of the XY row/column were not read from the larger texture in the compute shader. This needs to be handled additionally, which is why a Max Reduction sampler cannot be used for Hi-Z generation, but it works excellently in the shaders during culling.<br><br>Meanwhile, I started working on materials. The new material lookup table-based material management can also be incredibly well integrated into the current GPU-driven \"batched\" architecture!<br><br>Furthermore, the planned material indexing even allows me to separately change or override the materials of any mesh belonging to the model for 2 entities that share the same model (e.g., Sponza), without messing with the other one. And it even supports having a shared material index range, meaning if one overrides it, it changes immediately for the other as well.<br><br>I made a diagram for this as well.<br><br>Oh, and what's even better! The currently designed GPU-driven architecture and instance management will be very, very nicely breakable into 4 material types:<br><br>Actually, I just need to follow the same logic as when I did the Traditional/Mesh shader separation, just per material now!<br><br>&bull; Opaque 1 sided material meshes<br>&bull; Opaque 2 sided material meshes<br>&bull; Transparent 1 sided material meshes<br>&bull; Transparent 2 sided material meshes<br><br>I can perfectly fit this into the renderer written so far without needing any major changes. The point is, I will cull every mesh of every model exactly once, and alongside this, I'll be able to perfectly build the indirect render commands and the instance indices according to the 4 material types!<br><br>Indirect commands buffer layout: [Traditional: Opaque1, Opaque2, Transparent1, Transparent2 | Mesh shader: Opaque1, Opaque2, Transparent1, Transparent2] -> Managed with offsets in 1 buffer, indicating where the render call should start and how long it lasts.<br><br>Instance index for 1 mesh: [Opaque1, Opaque2, Transparent1, Transparent2] -> Its size is max instances, and on the CPU side, I will pre-allocate the index range per material. (All occurrences of 1 mesh can have different materials, but they must be handled together during culling!!)<br><br>I can already see that everything can be solved perfectly by managing offsets, and then the entire scene will be 8 render calls:<br><br>&bull; Traditional pipeline: 2x opaque, 2x transparent<br>&bull; Mesh shader pipeline: 2x opaque, 2x transparent<br><br>And it's still `vkCmdDrawIndirectCount`, completely GPU-driven.<br><br>+ The material indices can already be pre-calculated in the vertex/mesh shader, everything is available for it so it doesn't burden the fragment shader!<br><br>And here is an image of 100k objects, each has separate random materials, but you see I'm still rendering everything together.",
+    "images": [
+      "/Devblog/Journey/03-19-material-lookup-table.png",
+      "/Devblog/Journey/03-19-material-types-diagram.png",
+      "/Devblog/Journey/03-19-100k-objects-materials.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 20, 2026 - 09:31",
+    "isOwnMessage": false,
+    "text": "Awesome! I think I understand the gist of it, though I definitely needed the picture for it",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 22, 2026 - 09:58",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Just so you don't go without reading material for the weekend :DDD<br><br>It's somewhat amazing how well I managed to think everything through. The entire framework is incredibly beautiful, and every single one of the ideas I came up with seems to perfectly integrate and interconnect, working together seamlessly within the GPU-driven data-oriented pipeline.<br><br>I also ported over the bloom compute shaders from last semester, so now bloom can also be simulated as a post-process effect in the new engine too!",
+    "images": [
+      "/Devblog/Journey/03-22-bloom-1.png",
+      "/Devblog/Journey/03-22-bloom-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 22, 2026 - 09:59",
+    "isOwnMessage": true,
+    "text": "I made it possible to visualize the AABB and Sphere colliders at the Model/Mesh/Meshlet level.<br><br>This was also dead simple because of the GPU-driven architecture. The indirect command buffer is mapped 1:1 to a Cube and Sphere indirect command buffer, and a compute shader literally copies over the `instanceCount`s.<br><br>Yes, rendering all the colliders is just 1 render call too.",
+    "images": [
+      "/Devblog/Journey/03-22-collider-vis-1.png",
+      "/Devblog/Journey/03-22-collider-vis-2.png",
+      "/Devblog/Journey/03-22-collider-vis-3.png",
+      "/Devblog/Journey/03-22-collider-vis-4.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 22, 2026 - 10:05",
+    "isOwnMessage": true,
+    "text": "I also implemented animation handling, it can be managed very nicely and dynamically. It's enough to load the static model once, and just save the animation bone/weight + colliders in a data-oriented way.<br><br>And in the shader, during Model/Mesh/Meshlet culling, it is very, very easy to query whether the model has an animation. If it does, I use the colliders belonging to the frame instead of the static collider, at the Model/Mesh/Meshlet level as well.<br><br>I haven't noticed any performance issues, everything is very efficient, including animation rendering.<br><br>Specifically, the multi-layered pipeline-like model/mesh architecture I showed at the last consultation could be applied 1:1 to animation handling as well.<br><br>(Raw/Cooked/GPU animation structures | IAnimationSource -> FileAnimationSource, ProceduralAnimationSource | AnimationLoader -> AssimpAnimationLoader | AnimationProcessor -> BakeProcessor, ColliderProcessor | Converters and co.)<br><br>This designed architecture could be applied 1:1 to Model/Image/Animation handling and loading. Oh, and yes, the whole thing can be fully parallelized, so everything loads asynchronously, completely in parallel.<br><br>There was an idea from last semester to pre-calculate the colliders for the animation frames and cache them, so that pin-point accurate culling can be achieved -> the ColliderProcessor calculates this very fast, fully in parallel.",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/ONTQMu9Yq60",
+      "https://youtu.be/jWzhrxQyfkc"
+    ]
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 22, 2026 - 10:08",
+    "isOwnMessage": true,
+    "text": "Oh, and yes! Rendering the entire scene is still just 1 single `vkCmdDrawMeshTasksIndirectCountEXT` or `vkCmdDrawIndirectCount` call.<br><br>Culling and rendering are completely independent of the animation during the call; I will decode in the shader whether it needs to be animated.<br><br>Furthermore, the animation is perfectly LOD compatible, and even within the animation, it can be changed completely per mesh whether to use the traditional or mesh shader pipeline!! Also, I handle both the static and animated versions of a model together in the shaders.<br><br>I haven't noticed any performance issues because of this, everything interconnects wonderfully, and it all came together :DD<br><br>Scene:<br>Sponza + 500k shapes (with 500k unique materials) + 50k animated characters (5 different animations randomly assigned, with random movement speeds)<br>The entire scene is 1 render call!!!<br>(The occlusion culling is still a bit buggy, that's why meshlets disappear sometimes)<br><br>And this scene is 50k animations purely on their own, just so the movement is more visible here.",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/zMacvPwwmo0",
+      "https://youtu.be/eyTZyw-dx7w",
+      "https://youtu.be/gIxJ-_zNXg4"
+    ]
+  },
+{
+    "author": "Tamás Péter",
+    "timestamp": "Mar 22, 2026 - 10:10",
+    "isOwnMessage": true,
+    "text": "Also, here are the essential shaders, in case you are interested in anything from them. The animation handling is clearly visible from this.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "03-22-ModelCulling.comp",
+        "fileUrl": "/Devblog/Journey/03-22-ModelCulling.comp",
+        "previewUrl": "/Devblog/Journey/03-22-ModelCulling.png"
+      },
+      {
+        "name": "03-22-Traditional.vert",
+        "fileUrl": "/Devblog/Journey/03-22-Traditional.vert",
+        "previewUrl": "/Devblog/Journey/03-22-ModelCulling.png"
+      },
+      {
+        "name": "03-22-MeshletTask.task",
+        "fileUrl": "/Devblog/Journey/03-22-MeshletTask.task",
+        "previewUrl": "/Devblog/Journey/03-22-ModelCulling.png"
+      },
+      {
+        "name": "03-22-MeshletMesh.mesh",
+        "fileUrl": "/Devblog/Journey/03-22-MeshletMesh.mesh",
+        "previewUrl": "/Devblog/Journey/03-22-ModelCulling.png"
+      },
+      {
+        "name": "03-22-MeshCulling.comp",
+        "fileUrl": "/Devblog/Journey/03-22-MeshCulling.comp",
+        "previewUrl": "/Devblog/Journey/03-22-ModelCulling.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 23, 2026 - 12:45",
+    "isOwnMessage": false,
+    "text": "Awesome!<br><br>The project compiled without any issues! The currently uploaded version without modifications (without the Sponza and monster meshes): FPS: 130 (7.6923075 ms/frame)",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 23, 2026 - 13:04",
+    "isOwnMessage": true,
+    "text": "Awesome!<br><br>I guess you noticed then that the new version of the codebase is on the \"remake\" branch.<br>I think the main branch wouldn't have even started, that's still the old önlab2 version, so I assume you tested it with the current engine then.<br>You can adjust things in TestScene, the mesh count, materials (you have to bump up the max material in the material manager if you want to test something like 2M+!), but I guess you already noticed this too :DD<br>And in RendererFactory you can toggle the rendering pipeline, turn bloom, wireframe, and others on or off.<br>For the meshlet wireframe visualization, you have to change `pc.visualizeMeshlet = 1`. But don't test this if the scene is large, only with 1-2 animations because with many objects I think the buffer size will overflow (although I haven't tested this, but for sure).<br><br>By the way, 130 fps feels very low, especially if you tested it on the 4090. On the laptop inside, 10k animations and 100k objects ran at 550 fps, but there are only 250k objects in the github code anyway. Looking at the code, GPU culling is enabled. Did you build and test it in the Dist version?<br><br>At home: RTX 4060, i5-13600K:<br>Scene: Sponza + 50k animations + 1 million shapes: 200 fps<br><br>Or maybe your monitor is 4K, and the Hi-Z generation takes a lot of time? Or the bloom pass if it's turned on?",
+    "images": [
+      "/Devblog/Journey/03-23-performance-test.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 23, 2026 - 14:02",
+    "isOwnMessage": true,
+    "text": "Oh, and I quickly tested it from a different camera angle; you can clearly see the frustum culling from the main camera, and correctly, nothing is rendered outside the frustum!!",
+    "images": [
+      "/Devblog/Journey/03-23-frustum-culling-1.png",
+      "/Devblog/Journey/03-23-frustum-culling-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 28, 2026 - 13:25",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>I'm roughly done with the rendering architecture based on material types. As I said, it was perfectly integratable into the system I came up with. The culling runs uniformly at once, but in both CPU and GPU-driven cases, the data is organized depending on whether the mesh has an opaque/transparent, 1/2 sided, or traditional/mesh shader material. The entire scene is 8 render calls; the Indirect Commands are also batched in a single buffer, divided within it by traditional/mesh shader and material type. So during rendering, the difference is basically just changing the command count and offset in all 8 cases!<br><br>I implemented the WBOIT (Weighted Blended Order-Independent Transparency) technique for objects with transparent materials. It works absolutely great, and so now it's really completely visible that the whole architecture is viable in practice!<br><br>I also started working on the editor part. I've set up the MVI viewmodel ImGui concept really well, which perfectly supports undo/redo operations too! Now the Gizmo appears again, and transformations can be changed either with it or on the right side!<br><br>The small hitch was that in the transparent WBOIT passes, there is no depth testing, so I can't write the entity ID belonging to the given object into the EntityID texture here, because it would always write the one rendered last, not the one that is closest... (Based on the Entity ID texture, I know what we selected on the GUI upon clicking, and the Gizmo will be drawn on that!!)<br><br>So unfortunately, in editor mode, it's necessary to create a separate secondary depth texture, copy the original contents into it, and use this to re-render all traditional/mesh shader transparent 1/2 sided objects, but with depth testing and treating them as if they were Opaque. The fragment shader here only writes the entity ID into the texture, but this is necessary for accurate entity/object picking and Gizmo handling...<br><br>Here you can see a ton of transparent objects (there's no light simulation yet), as well as the contents of the accumulation and reveal textures.",
+    "images": [
+      "/Devblog/Journey/03-28-wboit-1.png",
+      "/Devblog/Journey/03-28-wboit-2.png",
+      "/Devblog/Journey/03-28-wboit-3.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Mar 28, 2026 - 13:30",
+    "isOwnMessage": true,
+    "text": "Here the editor and the gizmo are also visible.<br>This scene is 500k objects + 10k animations + Sponza:<br>Completely random with a 50% chance for traditional/mesh shader pipeline, 50% chance for 1/2 sided, and 50% chance for opaque/transparent.<br>This is basically a full material stress test, and it looks like everything works!!<br><br>Oh yes, and I was also thinking about handling transparent objects: Deferred rendering only works for opaque objects, not for transparent ones, right? For transparent ones, Forward rendering is needed.<br><br>However, I will support the Forward+ technique by default alongside Deferred anyway, so I can use this perfectly for Transparent objects.<br><br>For Opaque objects, it will be adjustable at the engine level whether to use Deferred or Forward+.<br><br>For Transparent objects, it's fixed to Forward+, and if Opaque is set to Deferred and there isn't a single transparent object, then the entire Forward+ culling and initialization part will be inactive until then.",
+    "images": [
+      "/Devblog/Journey/03-28-editor-gizmo.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Mar 30, 2026 - 15:35",
+    "isOwnMessage": false,
+    "text": "Awesome! I was thinking a bit about whether the double rendering of the transparent objects could be bypassed, but I couldn't find a solution. With Multiview rendering, they could be split into two render targets, but the depth test setting cannot be changed.<br><br>It would help if depth write is enabled for transparents as well, just without testing, because then the final result will already be in the depth buffer. And then the transparents can come again, but without depth write and with depth test set to equals. And then only those fragments will survive that are the very first ones anyway. This way, perhaps the depth buffer wouldn't need to be copied.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 04, 2026 - 10:09",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Oh boy, well I've made a ton of progress again, and now I think I've reached the end of the entire refactor. Basically, everything needed for writing the article is in the engine, and 99% of the functionality from the önlab2 version is also there, just now built really beautifully and efficiently. Now I'm going to take a little break from coding and start focusing on writing the article.<br><br>In the past 1.5-2 months, I think I've been working on the engine for 12 hours a day xdd. I finally counted it up, and the entire engine in its current state is 31.5k lines of C++ and GLSL code.<br><br>In the last few days, I also implemented the complete deferred rendering. Directional, point, and spot lights can be simulated, even with tens of thousands of lights; point and spot lights are also culled, and it works with both CPU and GPU culling versions.<br><br>What's still missing is Forward+ and Shadow, as well as directional/point/spot light shadow object culling, and the Doom-style texture handling. I've already thought these through, and I think there will be very good solutions here too, but these are bigger tasks and I won't start on them now because they aren't that relevant for the article anyway.<br><br>The entire codebase, the shaders, and the ideas really turned out beautiful. Actually, the whole engine was written from line 0 with the aim of choosing the best possible solution everywhere, and it's really efficient to develop in the framework. By the way, if you're interested later, take a look at the code Vulkan abstractions, renderer, managers, and the like I think you'll find some good ideas and solutions in it that might be useful to you too.<br><br>I also created a Performance startup option where every unnecessary render pass has been trashed. It's a completely minimal rendering mode focusing on culling, where you can best measure the performance of the traditional/mesh shader renderer according to the 4 material types. (No GUI, no bloom, nothing is in it, just what's needed for culling and rendering!!)<br><br>And now there's also a GPU profiler with time queries, so you can see how much time each pass took!<br><br>The other versions have a GUI, and I created a Settings panel where you can adjust all sorts of things.<br><br>You can change at runtime whether the engine uses CPU or GPU-driven culling, and all render passes can be toggled on and off.<br><br>Occlusion culling, Hi-Z generation, bloom simulation, deferred light simulation, wireframe AABB and Sphere shapes all sorts of things can be toggled on and off!<br><br>AND THE BEST PART: I made a debug camera mode, where if you turn it on, you can use a debug camera from an external viewpoint to see exactly what remains in the scene from the main camera's perspective.<br><br>I also made Billboards, so if you click on the main camera, you can even move and rotate it at runtime in debug camera mode and watch from the outside how the culling changes.<br><br>Oh yes: I merged the refactor branch, the latest engine version is on the DEV branch from now on!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 04, 2026 - 10:12",
+    "isOwnMessage": true,
+    "text": "Here is the GUI version where you can adjust the settings; this is the main camera's view, what it sees.<br>1.5 million objects all around the entire Sponza.<br><br>This is the debug camera's perspective, where I disabled occlusion culling.<br><br>This is viewed from the debug camera, and here occlusion culling is enabled.<br><br>(Every parameter can be changed in real-time, the main camera can be moved, you can play around with it.)",
+    "images": [
+      "/Devblog/Journey/04-04-gui-main-camera.png",
+      "/Devblog/Journey/04-04-debug-camera-no-occlusion.png",
+      "/Devblog/Journey/04-04-debug-camera-occlusion.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 04, 2026 - 10:14",
+    "isOwnMessage": true,
+    "text": "This is also the perspective from the debug camera, where you can see that the object behind the curtain disappears very nicely, and only a small part of the bistro appears.",
+    "images": [
+      "/Devblog/Journey/04-04-debug-occlusion-1.png",
+      "/Devblog/Journey/04-04-debug-occlusion-2.png",
+      "/Devblog/Journey/04-04-debug-occlusion-3.png",
+      "/Devblog/Journey/04-04-debug-occlusion-4.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 04, 2026 - 10:16",
+    "isOwnMessage": true,
+    "text": "And here is the GPU benchmark too.<br>Scene: 1 Sponza + 100 animations + 500k geometry (12 different shapes, 25 different materials) + (1+250+250 lights, but not simulated)<br><br>Home PC: Nvidia RTX 4060 | i5-13600K:<br><br>Performance Mode:<br>FPS: 1289 | GPU Timings:<br> - HizLinearPreparePass : 0.050 ms<br> - Perf_Meshlet_Opaque_2Sided : 0.063 ms<br> - HizDownsamplePass : 0.033 ms<br> - ModelCullingPass : 0.220 ms<br> - Transparent_Composite : 0.012 ms<br> - MeshCullingPass : 0.033 ms<br> - PerformanceInitPass : 0.006 ms<br> - WboitInitPass : 0.007 ms<br> - Perf_Traditional_Opaque_1Sided : 0.000 ms<br> - Perf_Traditional_Opaque_2Sided : 0.001 ms<br> - Perf_Meshlet_Opaque_1Sided : 0.181 ms<br> - Perf_Traditional_Transparent_1Sided : 0.000 ms<br> - Perf_Traditional_Transparent_2Sided : 0.000 ms<br> - Perf_Meshlet_Transparent_1Sided : 0.038 ms<br> - Perf_Meshlet_Transparent_2Sided : 0.029 ms<br> - CompositePass : 0.025 ms<br> ------------------------------------------------<br> = TOTAL GPU TIME : 0.698 ms<br><br>Dist Mode:<br>FPS: 520 | GPU Timings:<br> - HizLinearPreparePass : 0.048 ms<br> - HizDownsamplePass : 0.030 ms<br> - ModelCullingPass : 0.216 ms<br> - Transparent_Composite : 0.008 ms<br> - MeshCullingPass : 0.033 ms<br> - PointLightCullingPass : 0.006 ms<br> - SpotLightCullingPass : 0.006 ms<br> - SpotLightBillboardPass : 0.008 ms<br> - GBufferInitPass : 0.013 ms<br> - DeferredSpotLightPass : 0.174 ms<br> - WboitInitPass : 0.007 ms<br> - BloomDownsamplePass : 0.083 ms<br> - DebugInitPass : 0.003 ms<br> - Traditional_Opaque_1Sided : 0.000 ms<br> - BloomPrefilterPass : 0.042 ms<br> - Traditional_Opaque_2Sided : 0.000 ms<br> - Meshlet_Opaque_1Sided : 0.478 ms<br> - Meshlet_Opaque_2Sided : 0.266 ms<br> - DeferredEmissiveAoPass : 0.035 ms<br> - DeferredDirectionLightPass : 0.056 ms<br> - DeferredPointLightPass : 0.010 ms<br> - Depth_Copy_Pass : 0.014 ms<br> - DirectionLightBillboardPass : 0.005 ms<br> - CameraBillboardPass : 0.002 ms<br> - PointLightBillboardPass : 0.007 ms<br> - Traditional_Transparent_1Sided : 0.003 ms<br> - Traditional_Transparent_2Sided : 0.000 ms<br> - Meshlet_Transparent_1Sided : 0.036 ms<br> - Meshlet_Transparent_2Sided : 0.017 ms<br> - BloomUpsamplePass : 0.091 ms<br> - BloomCompositePass : 0.032 ms<br> - GuiPass : 0.049 ms<br> ------------------------------------------------<br> = TOTAL GPU TIME : 1.780 ms<br><br>Laptop: RTX 4060 | i5-12400F (Laptop GPU 105W)<br><br>Performance Mode:<br>FPS: 731 | GPU Timings:<br> - HizLinearPreparePass : 0.050 ms<br> - Perf_Meshlet_Opaque_2Sided : 0.053 ms<br> - HizDownsamplePass : 0.045 ms<br> - ModelCullingPass : 0.515 ms<br> - Transparent_Composite : 0.013 ms<br> - MeshCullingPass : 0.036 ms<br> - PerformanceInitPass : 0.008 ms<br> - WboitInitPass : 0.010 ms<br> - Perf_Traditional_Opaque_1Sided : 0.000 ms<br> - Perf_Traditional_Opaque_2Sided : 0.000 ms<br> - Perf_Meshlet_Opaque_1Sided : 0.195 ms<br> - Perf_Traditional_Transparent_1Sided : 0.001 ms<br> - Perf_Traditional_Transparent_2Sided : 0.001 ms<br> - Perf_Meshlet_Transparent_1Sided : 0.030 ms<br> - Perf_Meshlet_Transparent_2Sided : 0.185 ms<br> - CompositePass : 0.035 ms<br> ------------------------------------------------<br> = TOTAL GPU TIME : 1.177 ms<br><br>Dist mode:<br>FPS: 343 | GPU Timings:<br> - HizLinearPreparePass : 0.053 ms<br> - HizDownsamplePass : 0.042 ms<br> - ModelCullingPass : 0.306 ms<br> - Transparent_Composite : 0.009 ms<br> - MeshCullingPass : 0.234 ms<br> - PointLightCullingPass : 0.007 ms<br> - SpotLightCullingPass : 0.007 ms<br> - SpotLightBillboardPass : 0.025 ms<br> - GBufferInitPass : 0.016 ms<br> - DeferredSpotLightPass : 0.283 ms<br> - WboitInitPass : 0.009 ms<br> - BloomDownsamplePass : 0.112 ms<br> - DebugInitPass : 0.004 ms<br> - Traditional_Opaque_1Sided : 0.000 ms<br> - BloomPrefilterPass : 0.051 ms<br> - Traditional_Opaque_2Sided : 0.000 ms<br> - Meshlet_Opaque_1Sided : 0.719 ms<br> - Meshlet_Opaque_2Sided : 0.322 ms<br> - DeferredEmissiveAoPass : 0.227 ms<br> - DeferredDirectionLightPass : 0.082 ms<br> - DeferredPointLightPass : 0.025 ms<br> - Depth_Copy_Pass : 0.019 ms<br> - DirectionLightBillboardPass : 0.019 ms<br> - CameraBillboardPass : 0.002 ms<br> - PointLightBillboardPass : 0.022 ms<br> - Traditional_Transparent_1Sided : 0.001 ms<br> - Traditional_Transparent_2Sided : 0.001 ms<br> - Meshlet_Transparent_1Sided : 0.033 ms<br> - Meshlet_Transparent_2Sided : 0.019 ms<br> - BloomUpsamplePass : 0.122 ms<br> - BloomCompositePass : 0.039 ms<br> - GuiPass : 0.061 ms<br> ------------------------------------------------<br> = TOTAL GPU TIME : 2.871 ms",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 09, 2026 - 14:20",
+    "isOwnMessage": true,
+    "text": "<b>[SUMMARY OF A LONG DEBUGGING SESSION WITH ANDRÁS]</b><br><br>We just had a massive debugging session trying to figure out a crazy performance anomaly. The GPU culling pass (specifically the model culling) was taking an excruciatingly slow 10+ ms on András's RTX 4090, whereas turning it off improved the total frame time to around 1-2 ms.<br><br>Here is a breakdown of what we tested and found:<br><ul><li><b>Subgroup Operations:</b> At first, I suspected the subgroup atomic int increments in the `ModelCulling.comp` shader. We commented out the subgroup macros and used global atomics to test, but it didn't solve the issue.</li><li><b>Nsight Profiling & Memory Stalls:</b> András ran it through Nsight, which showed about 50% occupancy but massive memory access stalls, specifically around the `GET_TRANSFORM` and `GET_CAMERA` macro fetches.</li><li><b>VMA & Mapped Memory:</b> We realized that because the CPU and GPU-driven culling share the same buffers, they were created with a `persistent` (mapped) flag. On the 4090, this likely fell back to non-device-local memory, causing huge bottlenecks.</li><li><b>Dedicated GPU Memory Tests:</b> András tried forcing the buffer creations to `CreateGpu`. Unsurprisingly, this instantly crashed the ECS manager (which strictly requires Mapped Sequential Write). He managed to move the `globalInstanceBuffer` to dedicated GPU memory, but weirdly, it didn't improve the performance at all.</li><li><b>RenderDoc Crashes:</b> We tried to capture the frame in RenderDoc, but it crashed throwing an \"Out of device memory\" error. We even verified that the machine only had one dedicated GPU (just the 4090).</li></ul><br><b>The conclusion? The issue is NOT solved yet!</b><br><br>Since I cannot reproduce this on my end (the culling runs flawlessly in under 0.2 ms on my setup), we had to leave it unresolved for now. The next planned step is to completely separate the CPU and GPU-driven architectures at the buffer level. This will ensure the GPU-driven mode uses 100% dedicated, non-mapped device-local memory. We also plan to replace the CPU-side zeroing of the instance counts with Vulkan's `vkCmdFillBuffer`. Hopefully, that will finally fix it, but for now, it remains a mystery!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 14, 2026 - 12:10",
+    "isOwnMessage": false,
+    "text": "<b>[SUMMARY OF FURTHER DEBUGGING - THE REBAR DISCOVERY]</b><br><br>The saga continues! We did another deep dive into the RTX 4090 performance anomaly. Although the issue wasn't fully fixed during this session, we uncovered a massive hardware-level clue.<br><br>Here is the summary of our latest attempts and theories:<br><ul><li><b>Strict Device Local Buffers & Compiler Hints:</b> I updated the GPU-driven architecture to guarantee that every buffer strictly uses GPU device-local memory. I also added the `restrict` keyword to the shader buffers to help the compiler optimize memory access.</li><li><b>Compute Shader for Zeroing:</b> I implemented a dedicated compute shader to reset the `instanceCount`. We couldn't use Vulkan's `vkCmdFillBuffer` because it would wipe out the entire indirect draw command struct (destroying the `vertexCount` and `vertexOffset` data that must be preserved).</li><li><b>The Resizable BAR (ReBAR) Theory:</b> I started researching hardware bottlenecks and realized that if Resizable BAR (or Smart Access Memory) is disabled in the BIOS, mapped/coherent buffers might not act as true device-local memory. Instead, the GPU is forced to read and write across the PCIe bus, which completely destroys performance during heavy atomic operations. <i>(Spoiler alert: We will discover later that this ReBAR issue was exactly the root cause of the entire problem!)</i></li><li><b>Nsight Confirmation:</b> András tested the new build, and while it was still slow, his Nsight profiler explicitly showed high PCIe bus load. This perfectly aligns with the ReBAR theory, as a fully GPU-driven pipeline should have near-zero PCIe traffic. He also checked the Vulkan memory heaps, noting a ~224 MB device-local + host-visible coherent heap.</li><li><b>The OpenGL Local Variable Flashback:</b> I brought up a nightmare scenario from my BSc thesis days in OpenGL, where assigning a fetched buffer struct to a local shader variable tanked performance by 10x. I attached the `DeferredPoint.frag` shader as an example of how I had to index directly into the buffer to bypass it. However, we ultimately ruled this out for modern Vulkan compilers, as the rest of the Task/Mesh shaders use local variables without any slowdown.</li></ul><br>We left it at that for the week, with András planning to check his BIOS settings for the ReBAR option next time he is at the office.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "04-04-DeferredPoint.frag",
+        "fileUrl": "/Devblog/Journey/04-04-DeferredPoint.frag",
+        "previewUrl": "/Devblog/Journey/04-04-DeferredPoint-Preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 22, 2026 - 16:11",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Sorry for the long write-up, this doesn't belong to the article but to the upcoming developments, specifically the Forward+ implementation.<br><br>I think I've come up with a pretty good Forward+ technique. I've written down the process for it, and I'm curious about your insights or if you have any additional ideas.<br><br>I've made some progress with the engine, a lot of good ideas came up again!!<br><br>I integrated Jolt Physics into the engine, it works great, I even uploaded a video about it to YouTube.<br>You can create cube, sphere, capsule, convex, and triangle colliders for rigidbodies, and everything runs in a completely parallel, data-oriented way! (Convex and Triangle aren't fully done yet, but the rest are!)<br><br>Benchmark for 5k cubes, 5k spheres, 5k capsules:<br>- PhysicsSystem [Update] : 3.228 ms<br>It runs at 230 fps, even with a ton of animations, Sponza, and other static objects present.<br><br>Actually, the only thing missing from the thesis proposal, which I've never dealt with before, is Forward+ rendering. I've been thinking about the most practical way to implement it. This will be needed anyway for the light management of transparent objects, and it will be possible to switch at run-time whether the engine uses Deferred or Forward+.<br><br>I just want to write down my thoughts on this because I think I figured out a very good solution. I'd be curious to know what you think of it and if you see any pitfalls!<br><br>There are 3 types of Forward+ techniques:<br><br>1. <b>Tiled Forward Shading</b>: This is the worst, where we only divide the screen space XY into small squares and there is no Z-direction filtering at all. So we only determine in 2D which light is visible in which tile.<br><br>2. <b>Clustered Forward Shading</b>: We divide the space in 3D using some XY tile and logarithmically in the Z direction. So this is an extension of Tiled Forward Shading, but here there is also Z-direction filtering. The grid cell size can get larger based on distance.<br><br>3. <b>Depth-Bounded Tiled Forward Shading</b>: This is a further development of Tiled Forward Shading, where a compute shader collaboratively calculates the min/max depth from the depth buffer within a 16x16 tile, barriers, and then generates the frustum from this.<br><br>The truth is I don't like any of them, but I will make my own enhanced version of the 2nd one, which works well for both opaque and transparent objects.<br><br>The 3rd solution might sound good, but I actually don't think it is. For one, if you think about it, it can't handle transparent objects. Transparent objects aren't in the depth buffer!! Yet they must be taken into account, as there is light simulation on them too. Also, with this, if there is a very close and a very far pixel depth in the 16x16 tile, the frustum will be huge, so some kind of Z-direction partitioning would definitely be needed.<br><br>What I managed to come up with as a potential implementation actually came to me completely by accident from the occlusion culling and the transparent picking 2x rendering. (You know, this was where you were thinking about the Multiview rendering idea, but it wasn't practical due to depth buffer pollution). So right now, I build a Hi-Z max depth texture from the scene depth texture, which only contains opaque objects, not transparent ones. Then, for picking, so that pixel-perfect object selection can be done even on the very first transparent object, I render the transparent objects once more but in an \"opaque\" way, so the closest transparent depth gets written into ANOTHER COPIED DEPTH BUFFER.<br><br>So currently, the frame uses 2 depth buffers: one used by Hi-Z that is opaque only, and one for opaque + transparent for the click. (Before the 2nd transparent render, I copy the depth buffer 1:1 into another depth buffer, so the original remains opaque-only for Hi-Z occlusion culling).<br><br>Furthermore, currently for deferred shading point/spot lights, there is already a compute GPU-driven culling implemented, where with frustum + occlusion culling I check which lights I will render for the deferred pipeline. So here we get how many point and spot lights are visible, and their light indices compactly in a buffer.<br><br>And here it occurred to me that actually... Almost everything is given to implement a 2-step hierarchical Forward+ blending Hi-Z based Clustered Forward Shading and Depth-Bounded Tiled Forward Shading using Hi-Z textures, which culls lights perfectly for both transparent and opaque objects.<br><br><b>Main optimization:</b><br>&bull; <b>Hierarchical light culling</b>: First, we frustum and occlusion cull the point and spot lights against the main camera, determining which are visible. (The ones that aren't visible don't even need to be considered for Forward+ tile culling) -> This is exactly the solution used in deferred shading. Then, after this, we cull these potentially visible light sources against all cells of the 3D grid and determine what is visible in which.<br>&bull; <b>HOWEVER!!</b> Doing it for all 3D grid cells is unnecessary; there might be many cells with no objects in them. So we should determine the 3D grid cells that contain objects; these will be the active cells, and we only cull the light sources against these. This way, we can exclude culling unnecessary cells. These could be determined by a Grid vs visible objects (GPU-driven model/mesh culling could do it, but rather the Hi-Z optimization will come in here).<br><br><b>The Forward+ implementation:</b><br>&bull; The Max-Reduction Opaque Hi-Z depth map is already given; I will also create a Min-Reduction Opaque+Transparent Hi-Z depth map. The Hi-Z texture chain won't be 1-channel, but 2-channel.<br>&bull; Depth -> R32f copying is currently already in a compute shader during Hi-Z preparation. Here the X channel will be the normal opaque depth texture, and Y will be the depth texture containing transparent objects after the picking 2x transparent render.<br>&bull; The Hi-Z chain generating compute shader remains the same, just reads XY: X maximum reduction, Y minimum reduction.<br>&bull; Finally, we have the MAX/MIN Hi-Z mip chain. For a 16x16 tile, I can read the corresponding Hi-Z mip chain, and I immediately have the Max and Min depth values, containing both transparent and opaque objects. With this, I have actually created a 16x16 collaborative depth Min/Max calculated by a compute shader, working for transparents as well, just by using a Hi-Z mip chain.<br>&bull; The Forward+ technique will use the Clustered Forward Shading 3D grid partitioning. So it will be a 16x16 tile, for example, and a fixed 16 divisions in the Z direction. (These are customizable).<br>&bull; A compute shader will be dispatched where a thread belongs to every cell of the 3D grid. It reads the max and min depth corresponding to the 16x16 resolution from the Hi-Z texture. It checks from where to where its frustum range lasts according to its assigned division. (It gets this from some logarithmic Z division function). If it is between the Hi-Z min/max, or intersects this range, the cell is active; if it's not in it, there are no objects in the cell, so we exclude it. After this, the active ones still calculate their corresponding frustum (its 6 planes) for collision testing within this compute shader.<br><b>IMPORTANT</b>: Here we will compactly collect the active cells in an atomic way! So there will be a visible cell index buffer, and a `visibleFrustumPlanes` buffer which will be in 6 divisions!<br>&bull; After this, we dispatch another compute shader using indirect dispatch. Size: VisibleCells x Visible Lights. And one by one, we cull the potentially visible lights against the visible cells. (IMPORTANT: Here it might be better to use a mesh shader-like, collaborative `for...+=32` light processing, it might be more worth it. And then it will be VisibleCell x 32 size, and the 32 threads collaboratively process the light sources, e.g., 1000 of them).<br>&bull; Each grid will have a large global index buffer, like the instance index buffer in rendering, which is offset, and the indices of the visible light sources belonging to the grids are put in here so they can be decoded during rendering.<br><br>I think this sounds really good, by the way. The only problem might be that there will be a 1-frame delay due to the Hi-Z. But I've already been looking into a 2-step occlusion culling solution for this, which will eliminate this problem, but in the current implementation, there will still be a 1-frame delay for Forward+ because of this!<br><br>And now comes one of the most important messages, the first iteration of my own new Forward+ idea!",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://youtu.be/6d5sVZTXBoQ"
+    ]
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 22, 2026 - 16:43",
+    "isOwnMessage": false,
+    "text": "Well, I read the forward+ too. What's not clear is what the active cell is, and what the min max range is. I'm thinking that from the hierarchical Z buffer, the min max range within it can be read for every 2D tile. This is great because it means that every tile can \"divide itself logarithmically in Z\" according to its own Z range. The first voxel starts at Z min, the last voxel ends at Z max. But in this case, all voxels will be active, no?<br><br>I think the most interesting/optimizable part will be the compute call containing the visible light x tile threads, but as you also wrote here, you could maybe use mesh shaders cooperatively. Especially if there are a lot of light sources (the number of tiles is fixed, after all). But overall, I like this architecture.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 22, 2026 - 16:48",
+    "isOwnMessage": true,
+    "text": "Hmm.. yeah.<br>The active cell is a cell that potentially contains an object. An inactive cell is one that is completely outside the Max/Min range, and light culling won't even be dispatched for it at all. This way we can exclude a bunch of cells.<br>So looking at a 16x16 tile, let's say it's divided into 16 parts; based on the Hi-Z min/max, maybe only the 8th-12th slices are activated where there is potentially an object based on depth, and the rest are inactive.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 22, 2026 - 16:49",
+    "isOwnMessage": false,
+    "text": "I mean, I phrased it poorly, I understand what you meant, every tile (the whole volume) has the same Z division and this is how you determine what is active and what is not.<br><br>But couldn't the division be made dynamic per tile based on the min max range? (This was an older thought of mine when I was reading up on and thinking about Forward+).",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 22, 2026 - 16:51",
+    "isOwnMessage": true,
+    "text": "Ahha, well thinking about it, I think it's possible, that's a good idea.<br>Because then it's not divided into a fixed 16 in advance.<br>Instead, 16 threads start, each reads the min/max based on the Hi-Z, and they divide this into 16 parts.<br>And then the frustum culler, the projection is still fully parallel across 16 threads!<br>I mean, if I understand correctly, I was thinking that the 16x16 tiles would be dynamically divided into a certain number of parts in the Z direction for simplicity's sake, let's say 16 parts again, or smaller ones based on size. Just so the calculation of the frustum faces runs in parallel; it would be good if not just 1 thread started per tile to calculate X number of frustum faces, but we parallelize this as well.<br>And then it would be optimized so that there aren't even physical grid cells for the regions outside the Min/Max.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 22, 2026 - 16:54",
+    "isOwnMessage": false,
+    "text": "Yes, this is the kind of thing I had in mind. This way, if the Z range is small, the voxels will be small, which can perhaps separate the light sources better... Of course, for this to noticeably help, there really needs to be a lot of these very small light sources.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 22, 2026 - 16:55",
+    "isOwnMessage": true,
+    "text": "Ahha, yeah, this is a really good idea, thanks.<br>I think it can be done really well with this!!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 23, 2026 - 10:25",
+    "isOwnMessage": true,
+    "text": "I was just thinking a bit more about your Forward+ idea from yesterday. And it really is a very good idea, the only thing that will be a bit problematic is reconstructing the grid cell based on depth during rendering.<br><br>Because if the Hi-Z contains the min/max depth at the tile level, and I divide this dynamically, then when I render my object and the light simulation starts, I have to somehow reconstruct which tile Z-range the object falls into based on depth, since I'll need to iterate through the lights belonging to that. And if it is divided uniformly in advance, like I first said (we divide the frustum logarithmically in advance, and we'll have visible/invisible grid cells), then determining this Z range based on pixel depth during rendering is super simple.<br><br>However, if we do it with your Hi-Z min/max range division idea, then during rendering we also have to read the min/max ranges from the texture again, know what the Z range resolution was, and which one it falls into. Although we could probably make some buffer-based accelerating structure for this so we wouldn't have to read the Hi-Z texture, and somehow determine which range it falls into faster from a buffer.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 23, 2026 - 10:34",
+    "isOwnMessage": false,
+    "text": "Actually, this would mean one extra texture read in the fragment shader, but a bunch of fragments would read the exact same texture value, so I think the cache would prevent it from being a problem there. But you could also have a quick pass after the Hi-Z that creates a buffer where it precalculates some values for every 2D tile which, as you wrote, would speed up the calculation.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 24, 2026 - 18:50",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Today I tested the engine on a friend's machine (with 1 million entities), he has an RTX 4070 Super, and imagine this, the exact same problem occurred on his machine as on yours with the RTX 4090.<br>The model culling took 18 ms, insanely slow. We looked through everything in the shader and didn't really get anywhere.<br><br>As a last resort, I checked the ReBAR setting in the BIOS, which was enabled for me. I disabled it and suddenly the model culling on my machine also became 10 ms, it slowed down brutally. The setting was also disabled on my friend's machine.<br><br>I re-enabled it, and he enabled it in his BIOS too. After that, everything became super fast.<br>RTX 4060 (Mine): 0.386 ms | Total: 1.8 ms<br>RTX 4070 Super (Friend's): 0.247 ms | Total: 1.3 ms<br><br>So this ReBAR is the problem, and then 100% memory access is the issue. The important buffers for culling are in GPU-only memory right now, but the ECS buffers (transform, camera) that change frequently are Coherent-Mapped. Probably because I store transforms for 1M entities, it doesn't fit in the device-local coherent mapped region, so it was placed in slow memory, and that's why it slowed down.<br><br>So then either ReBAR must be enabled, or we really have to put all data into GPU-only memory... It's just that ECS data, especially the transform, changes often and is huge in size... So I don't know how much copying 1 million transforms into GPU-only memory per frame will slow things down.<br><br>But the point is we found the reason why it slowed down for you too!<br>Although there's probably no other solution, every ECS buffer also has to be copied from coherent-mapped -> GPU only, just like the main buffers. I'll implement it in the next few days so that everything is staged!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Apr 25, 2026 - 08:27",
+    "isOwnMessage": false,
+    "text": "Wow, great that the issue was figured out! Then I will definitely check this ReBAR out too.<br><br>By the way, when I tried the physics version this week, the program was even slower, and toggling GPU culling didn't help either. Hopefully, the same thing will solve this as well.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 25, 2026 - 08:30",
+    "isOwnMessage": true,
+    "text": "In the BIOS, by the way, it was right here at the top of the start page for me.<br><br>But I will implement it so that ReBAR isn't needed, because it would be good to avoid such problems, but of course then it's 2x memory for everything, because a coherent mapped buffer and a GPU-only buffer are needed.<br><br>With physics, it's inherently slower due to CPU time; for me, simulating 15 thousand objects took 3-4 ms. But the Rendering remained just as fast. But theoretically, at least currently, if you have ReBAR, everything is super fast.<br><br>Oh, and by the way, until there is serialization in the engine, I'll make a startup option file in JSON where you can adjust whether there should be physics simulation, how many objects, how many light sources. The paths are extracted. And then you won't have to tinker with the C++ files; it'll be enough to change the numbers in the JSON!!<br><br>(I actually just did it, the latest is on the forward+ feature branch, it's on there, `scene_config.json` next to the scene files. And then here you can adjust how much of what you want.)",
+    "images": [
+      "/Devblog/Journey/04-25-bios-rebar.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 25, 2026 - 08:35",
+    "isOwnMessage": true,
+    "text": "By the way, I also made another scene. There are only trees appearing there, 100k of them, 5 different models. This is the only frustum, and frustum + occlusion culling; this scene might be better for the article because it's easier to see exactly what is happening in it.<br><br>Anyway, there will be a scene like this too, from which spectacular pictures can be made.",
+    "images": [
+      "/Devblog/Journey/04-25-trees-scene-1.png",
+      "/Devblog/Journey/04-25-trees-scene-2.png",
+      "/Devblog/Journey/04-25-trees-scene-3.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Apr 30, 2026 - 17:55",
+    "isOwnMessage": true,
+    "text": "<b>[SUMMARY OF PAPER FINALIZATION & GRAFGEO CONFERENCE PREP]</b><br><br>We finally wrapped up the LaTeX article for the GrafGeo conference regarding the high-performance GPU-driven rendering engine! András helped tremendously with reviewing, formatting, and rephrasing the final draft. Here are the key takeaways from our final sync regarding the paper and the upcoming presentation:<br><ul><li><b>Performance Benchmark Clarification:</b> András asked for clarification on the Component Insertion (Add operation) metrics. I explained that for the 100k and 1M entity tests, components are added sequentially. The slowdown occurs because the data is intentionally mixed (70% static, 20% dynamic, 10% stream). Inserting a static component requires adding it to the end of the vector (which is the stream region) and performing two swaps to move it back into the correct static region. (The EnTT benchmark was done exactly the same way for fairness.)</li><li><b>Formatting & Layout Tweaks:</b> Tables 9.3 and 9.4 were initially left out to save space since those metrics aren't as dominant, but I plan to shorten the text slightly to squeeze them in. I also need to fix some figure placements that are currently overlapping with subheadings.</li><li><b>Presentation Strategy:</b> The preliminary schedule shows I have a tight 10-15 minute slot around 16:10. Since time is short, I won't dive too deeply into the extreme technical minutiae. Instead, I plan to leverage all the rich visual debug materials we've accumulated like the meshlet LOD color transitions in the Nvidia Bistro scene. The goal is to make it an exciting, highly visual presentation while still covering the core mechanics of GPU-driven rendering and culling. I'll start drafting the PPT soon!</li></ul>",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 06, 2026 - 16:10",
+    "isOwnMessage": false,
+    "text": "<b>[SUMMARY OF PRESENTATION PPT FEEDBACK]</b><br><br>I finished the first draft of the PowerPoint presentation for the GrafGeo conference, and András just sent over his review. The overall structure and flow are solid, but he provided some excellent points to polish it up for the strict 10 to 15 minute time limit:<br><ul><li><b>Visual Consistency & Animations:</b> He suggested unifying the slide designs (matching straight vs. curved splits) and using step-by-step appear animations for text blocks so the audience doesn't read ahead.</li><li><b>Highlighting Data:</b> For the performance benchmark tables, I need to add animated highlights (like red boxes) to focus attention on specific rows as I talk about them.</li><li><b>Terminology & Naming:</b> Unify terms like \"render command\" and \"draw command\", and rename the awkward Hungarian \"Gyors/Lassú Path\" to simply \"Fast/Slow path\".</li><li><b>Visualizing Mesh Shaders:</b> He recommended adding a dedicated animated diagram to explain mesh shaders as \"hierarchical compute-like vertex processing.\" It should visually show task shaders dispatching workgroups and how culling drops them dynamically.</li><li><b>More Videos:</b> Include a video demonstrating the meshlet-level occlusion culling in action, ideally showing a fixed debug perspective while the main camera moves.</li><li><b>Pacing:</b> Since the time frame is extremely tight, he suggested aggressively cutting down the ECS explanation to leave more room for the core topics: GPU-driven rendering, mesh shading, and culling.</li><li><b>Title & Ending Tweaks:</b> I need to list all authors on the title slide, add the conference name and year to the footer, change \"Made by\" to \"Presenter\", and put a giant QR code on the final slide linking to the GitHub repo.</li></ul><br>I will implement these changes, add the QR code, and start practicing the timing!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 06, 2026 - 16:17",
+    "isOwnMessage": true,
+    "text": "Here is the PDF version of the presentation.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "05-06-BEMUTATO_GRAFGEO_TAMAS_PETER.pdf.pdf",
+        "fileUrl": "/Devblog/Journey/05-06-BEMUTATO_GRAFGEO_TAMAS_PETER.pdf.pdf",
+        "previewUrl": "/Devblog/Journey/05-06-pdf-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 08, 2026 - 17:57",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>The Forward+ renderer is working!!!<br><br>I had to do quite a bit of refactoring because I ran out of push constant space..., so I had to refactor all the shaders... Now there is a 'global context' buffer that contains all the buffer addresses, and globals (width, height, settings) that are essentially shared across shaders. And alongside this, only the truly shader-specific variables remained in the push constants.<br><br>I set it up nicely so that you can switch between deferred and Forward+ pipelines at runtime, so it will be great to test this too.<br><br>Deferred only works for Opaque objects, so if there's a Transparent object, the Forward+ cluster setup and light culling still have to be done. But this can also be tracked and toggled on/off if there are no transparent objects.<br><br>I implemented the solution we discussed, and for Forward+ light management I currently chose the 3-step pass: count + offset prefix sum + light culling passes. I don't like it when it's hardcoded that a maximum of X light sources can be in each tile, because it's good to be flexible and have no limits. However, this means double intersection testing and introduces prefix sum overhead!! (I used the subgroup solution for the prefix sum, not the Blelloch algorithm.)<br><br>But I think I'll also add a 1-step cluster pass where, if there are few light sources (MAX 512), I gather the lights into a shared 512-long light array per cluster. Because in such cases the light buffer remains reasonable, and it's probably faster. If for some reason we want to test with 5000 light sources, it will switch to the 3-step method, where up to 5000 lights can fit in a single cluster.<br><br>Oh, and the best part!! Since I use a Hi-Z texture for the tiles, the tile size the engine runs with can actually be modified at runtime. If there are few lights, we can set it to 64x64, or 32x32. If there are many and detailed culling is needed, then 16x16. That's why the Hi-Z solution is so great, because it is completely scene-specific and can be modified at runtime.<br><br><b>Forward+ Clustering GPU Timings</b><br><table border=\"1\" cellpadding=\"5\" style=\"border-collapse: collapse; text-align: left;\"><tr><th>Pass</th><th>16x16 Tile (ms)</th><th>32x32 Tile (ms)</th></tr><tr><td>ClusterSetupPass</td><td>0.018</td><td>0.010</td></tr><tr><td>ClusterPointLightCountPass</td><td>0.042</td><td>0.014</td></tr><tr><td>ClusterSpotLightCountPass</td><td>0.042</td><td>0.016</td></tr><tr><td>ClusterPrefixSumPass</td><td>0.056</td><td>0.020</td></tr><tr><td>ClusterPointLightWritePass</td><td>0.047</td><td>0.016</td></tr><tr><td>ClusterSpotLightWritePass</td><td>0.047</td><td>0.017</td></tr><tr><td>ClusterLightWriteSyncPass</td><td>0.000</td><td>0.000</td></tr></table><br><br>Oh, and: Since the Forward+ is done, the thesis proposal submitted for the Master's is completely fulfilled, every single part I wrote into the proposal is actually done!!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 08, 2026 - 18:11",
+    "isOwnMessage": false,
+    "text": "Wow, super! You finished this very quickly too :D the benchmark times also look very good, the time is practically minimal. How many light sources were these measurements with? Also, were you able to compare it to deferred?",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 08, 2026 - 18:14",
+    "isOwnMessage": true,
+    "text": "50 point, 50 spot lights.<br>I will test it with thousands later, and I'll also compare it with deferred.<br>Though only the Opaque pass there, because Transparent will always be Forward+, of course.<br><br>The framework is very good, everything is designed really well, and it's very easy to develop in.<br>That was the problem with the previous one all along, and that's why I wanted to rewrite it, because this time I could start in a way that I designed it from the ground up for easy development.<br>But now it's really great, and a lot of things were already given, like the Hi-Z, the entire background framework. I pretty much only had to tinker with the shaders, but since the Forward+ was fully thought out, that wasn't a big challenge either.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+{
+    "author": "Tamás Péter",
+    "timestamp": "May 08, 2026 - 18:34",
+    "isOwnMessage": true,
+    "text": "1024 point + 1024 spot<br><pre>+---[ Forward+ Clustering ]\n    |   ClusterSetupPass                           :    0.011 ms\n    |   ClusterPointLightCountPass                 :    0.048 ms\n    |   ClusterSpotLightCountPass                  :    0.111 ms\n    |   ClusterPrefixSumPass                       :    0.021 ms\n    |   ClusterPointLightWritePass                 :    0.063 ms\n    |   ClusterSpotLightWritePass                  :    0.138 ms\n    |   ClusterLightWriteSyncPass                  :    0.000 ms\n\n+---[ Lighting (Opaque) ]\n    |   OpaqueForwardTransitionPass                :    0.000 ms\n    |   MeshletOpaqueForward1Sided                 :    0.004 ms\n    |   MeshletOpaqueForward2Sided                 :    0.000 ms\n    |   TraditionalOpaqueForward1Sided             :    0.410 ms\n    |   TraditionalOpaqueForward2Sided             :    0.014 ms\n\nTotal: 0.820 ms\n\n+---[ Deferred G-Buffer (Opaque) ]\n    |   OpaqueDeferredTransitionPass               :    0.000 ms\n    |   MeshletOpaqueDeferred1Sided                :    0.004 ms\n    |   MeshletOpaqueDeferred2Sided                :    0.000 ms\n    |   TraditionalOpaqueDeferred1Sided            :    0.216 ms\n    |   TraditionalOpaqueDeferred2Sided            :    0.002 ms\n\n+---[ Deferred Lighting ]\n    |   DeferredLightTransitionPass                :    0.000 ms\n    |   DeferredEmissiveAoPass                     :    0.057 ms\n    |   DeferredDirectionLightPass                 :    0.063 ms\n    |   DeferredPointLightPass                     :    0.091 ms\n    |   DeferredSpotLightPass                      :    0.895 ms\n\nTotal: 1.328 ms</pre><br>4096 point + 4096 spot<br><pre>+---[ Forward+ Clustering ]\n    |   ClusterSetupPass                           :    0.010 ms\n    |   ClusterPointLightCountPass                 :    0.096 ms\n    |   ClusterSpotLightCountPass                  :    0.306 ms\n    |   ClusterPrefixSumPass                       :    0.017 ms\n    |   ClusterPointLightWritePass                 :    0.122 ms\n    |   ClusterSpotLightWritePass                  :    0.358 ms\n    |   ClusterLightWriteSyncPass                  :    0.000 ms\n\n+---[ Lighting (Opaque) ]\n    |   OpaqueForwardTransitionPass                :    0.000 ms\n    |   MeshletOpaqueForward1Sided                 :    0.004 ms\n    |   MeshletOpaqueForward2Sided                 :    0.000 ms\n    |   TraditionalOpaqueForward1Sided             :    0.644 ms\n    |   TraditionalOpaqueForward2Sided             :    0.012 ms\n\nTotal: 1.569 ms\n\n+---[ Deferred G-Buffer (Opaque) ]\n    |   OpaqueDeferredTransitionPass               :    0.000 ms\n    |   MeshletOpaqueDeferred1Sided                :    0.005 ms\n    |   MeshletOpaqueDeferred2Sided                :    0.000 ms\n    |   TraditionalOpaqueDeferred1Sided            :    0.238 ms\n    |   TraditionalOpaqueDeferred2Sided            :    0.004 ms\n\n+---[ Deferred Lighting ]\n    |   DeferredLightTransitionPass                :    0.000 ms\n    |   DeferredEmissiveAoPass                     :    0.062 ms\n    |   DeferredDirectionLightPass                 :    0.072 ms\n    |   DeferredPointLightPass                     :    0.372 ms\n    |   DeferredSpotLightPass                      :    3.393 ms\n\nTotal: 4.146 ms</pre><br>8192 point + 8192 spot<br><pre>+---[ Forward+ Clustering ]\n    |   ClusterSetupPass                           :    0.010 ms\n    |   ClusterPointLightCountPass                 :    0.144 ms\n    |   ClusterSpotLightCountPass                  :    0.477 ms\n    |   ClusterPrefixSumPass                       :    0.016 ms\n    |   ClusterPointLightWritePass                 :    0.172 ms\n    |   ClusterSpotLightWritePass                  :    0.551 ms\n    |   ClusterLightWriteSyncPass                  :    0.001 ms\n\n+---[ Lighting (Opaque) ]\n    |   OpaqueForwardTransitionPass                :    0.000 ms\n    |   MeshletOpaqueForward1Sided                 :    0.007 ms\n    |   MeshletOpaqueForward2Sided                 :    0.001 ms\n    |   TraditionalOpaqueForward1Sided             :    1.471 ms\n    |   TraditionalOpaqueForward2Sided             :    0.023 ms\n\nTotal: 2.873 ms\n\n+---[ Deferred G-Buffer (Opaque) ]\n    |   OpaqueDeferredTransitionPass               :    0.000 ms\n    |   MeshletOpaqueDeferred1Sided                :    0.004 ms\n    |   MeshletOpaqueDeferred2Sided                :    0.000 ms\n    |   TraditionalOpaqueDeferred1Sided            :    0.241 ms\n    |   TraditionalOpaqueDeferred2Sided            :    0.004 ms\n\n+---[ Deferred Lighting ]\n    |   DeferredLightTransitionPass                :    0.000 ms\n    |   DeferredEmissiveAoPass                     :    0.062 ms\n    |   DeferredDirectionLightPass                 :    0.070 ms\n    |   DeferredPointLightPass                     :    0.802 ms\n    |   DeferredSpotLightPass                      :    7.469 ms\n\nTotal: 8.652 ms</pre><br>The Deferred Spot Light pass is disproportionately high... I'll investigate why.<br>For Spot lights, I am drawing Pyramids (square-based) because the Spot light's cone shape fits perfectly inside it.<br>And with the Pyramid, there is no vertex resolution problem, and it consists of far fewer vertices.<br>Hm... I'll check the shader. I can only think that maybe the fragment isn't early discarding for some reason when a position outside the volume belongs to the fragment?? Weird.<br>Or is it because the spot light has a much larger extent, so way more fragments are generated, and despite the early discard it slows down this much??<br><i>(Oh, and the Depth Prepass was left out for Forward+, which was 0.078ms for 10k objects, so that should be added to the total everywhere. Also, this was tested entirely with traditional vertex shaders right now, not the mesh shader geometry rendering!!)</i>",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 08, 2026 - 19:15",
+    "isOwnMessage": true,
+    "text": "GPU Timings:<br><pre>    +---[ Setup Passes ]\n        |   GlobalFrameSetupPass                       :    0.000 ms\n        |   OpaqueInitPass                             :    0.015 ms\n        |   TransparentInitPass                        :    0.011 ms\n        |   HizInitPass                                :    0.000 ms\n\n    +---[ Geometry Culling ]\n        |   CullingCommandResetPass                    :    0.005 ms\n        |   ModelCullingPass                           :    0.374 ms\n        |   MeshCullingPass                            :    0.033 ms\n\n    +---[ Depth Prepass (Opaque) ]\n        |   OpaqueDepthTransitionPrepass               :    0.000 ms\n        |   MeshletOpaqueDepthPrepass1Sided            :    0.088 ms\n        |   MeshletOpaqueDepthPrepass2Sided            :    0.026 ms\n        |   TraditionalOpaqueZPrepass1Sided            :    0.000 ms\n        |   TraditionalOpaqueZPrepass2Sided            :    0.000 ms\n        |   Depth_Copy_Pass                            :    0.014 ms\n\n    +---[ Depth Prepass (Transparent) ]\n        |   TransparentDepthTransitionPrepass          :    0.000 ms\n        |   MeshletTransparentDepthPrepass1Sided       :    0.019 ms\n        |   MeshletTransparentDepthPrepass2Sided       :    0.019 ms\n        |   TraditionalTransparentDepthPrepass1Sided   :    0.000 ms\n        |   TraditionalTransparentDepthPrepass2Sided   :    0.000 ms\n\n    +---[ Hi-Z Generation ]\n        |   HizLinearPreparePass                       :    0.036 ms\n        |   HizDownsamplePass                          :    0.039 ms\n\n    +---[ Light Culling ]\n        |   PointLightCullingPass                      :    0.008 ms\n        |   SpotLightCullingPass                       :    0.007 ms\n\n    +---[ Forward+ Clustering ]\n        |   ClusterSetupPass                           :    0.010 ms\n        |   ClusterPointLightCountPass                 :    0.121 ms\n        |   ClusterSpotLightCountPass                  :    0.450 ms\n        |   ClusterPrefixSumPass                       :    0.030 ms\n        |   ClusterPointLightWritePass                 :    0.153 ms\n        |   ClusterSpotLightWritePass                  :    0.899 ms\n        |   ClusterLightWriteSyncPass                  :    0.000 ms\n\n    +---[ Lighting (Opaque Forward+) ]\n        |   OpaqueForwardTransitionPass                :    0.000 ms\n        |   MeshletOpaqueForward1Sided                 :    0.494 ms\n        |   MeshletOpaqueForward2Sided                 :    0.222 ms\n        |   TraditionalOpaqueForward1Sided             :    0.000 ms\n        |   TraditionalOpaqueForward2Sided             :    0.000 ms\n\n    +---[ Lighting (Transparent WBOIT) ]\n        |   TransparentForwardTransitionPass           :    0.000 ms\n        |   Meshlet_Transparent_Forward_1Sided         :    0.082 ms\n        |   Meshlet_Transparent_Forward_2Sided         :    0.267 ms\n        |   Traditional_Transparent_Forward_1Sided     :    0.000 ms\n        |   Traditional_Transparent_Forward_2Sided     :    0.000 ms\n        |   TransparentCompositeTransitionPass         :    0.000 ms\n        |   Transparent_Composite                      :    0.012 ms\n\n    +---[ Bloom Post-Processing ]\n        |   BloomPrefilterPass                         :    0.028 ms\n        |   BloomDownsamplePass                        :    0.081 ms\n        |   BloomUpsamplePass                          :    0.090 ms\n        |   BloomCompositePass                         :    0.036 ms\n\n    +---[ Presentation & UI ]\n        |   PresentationTransitionPass                 :    0.000 ms\n        |   GuiPass                                    :    0.047 ms\n\n    ======================================================================\n    = TOTAL GPU TIME                               :    3.715 ms</pre><br>Here is a full test: 1 million objects, 25 different materials + 1 Sponza.<br>4096 point and 4096 spot lights, and entirely with a mesh shader-based, meshlet culling pipeline!<br><br>Super!",
+    "images": [
+      "/Devblog/Journey/05-08-full-pipeline-test.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 09, 2026 - 20:21",
+    "isOwnMessage": true,
+    "text": "I finally made the debug visualization run as a post-process, so it doesn't need a separate texture.<br>I also made mesh and triangle visualizations, as well as heatmaps for the Forward+ cluster depth and tile-level light source count. The base scene, mesh visualization, and triangle visualization:",
+    "images": [
+      "/Devblog/Journey/05-09-base-scene.png",
+      "/Devblog/Journey/05-09-mesh-vis.png",
+      "/Devblog/Journey/05-09-triangle-vis.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 09, 2026 - 20:23",
+    "isOwnMessage": true,
+    "text": "16x16: Cluster depth visualization at the tile level.<br>16x16 light source count visualization (it's clearly visible that it's red near the ground, which is exactly where most of the light sources are!)",
+    "images": [
+      "/Devblog/Journey/05-09-cluster-depth-vis.png",
+      "/Devblog/Journey/05-09-light-count-heatmap.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 09, 2026 - 20:25",
+    "isOwnMessage": true,
+    "text": "32x32, 64x64, 128x128 light count visualization (slightly different scenes, that's why it's not red in the exact same spot).<br>And here you can see perfectly that the tile size can indeed be adjusted at runtime!! I see huge potential in this, by the way, because it can be scene-specific: if we are indoors in a room, it can be large (64/128), and if we go outside into an open space with many lights, it can be more detailed (16/32).",
+    "images": [
+      "/Devblog/Journey/05-09-light-count-32x32.png",
+      "/Devblog/Journey/05-09-light-count-64x64.png",
+      "/Devblog/Journey/05-09-light-count-128x128.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 11, 2026 - 09:23",
+    "isOwnMessage": false,
+    "text": "The results are very good! I think it's clearly visible how much better Forward+ can scale!<br><br>Did you figure out what's causing the issue with the spot lights? The kind of testing I can think of is actually counting the shaded fragment count and comparing the performance to that...",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 11, 2026 - 09:28",
+    "isOwnMessage": true,
+    "text": "Yes!!<br><br>I looked into it for deferred, by the way, and I think the spot light is written perfectly fine, with the exact same logic as the point light. Simply because the cone angle is relatively large, the spatial extent of the light sources is quite big, so a huge amount of fragments are generated during rendering, which, although they often get discarded early because the position in the G-Buffer is not inside the spot light cone, it's still slow. I'll take another look at it, because the spot light is suspiciously slow to me, but at first glance, everything is written correctly.<br><br>With Forward+, the spot is also a bit slower:<br><pre>    |   ClusterPointLightCountPass                 :    0.144 ms\n    |   ClusterSpotLightCountPass                  :    0.477 ms</pre><br>Here it's because for point lights, there is only a sphere vs cluster test.<br>In the case of spot lights, it's a Sphere, and then if necessary, an AABB as well. We can also test here if the AABB is worth it. It's possible that much better performance can be achieved if we only intersect with a Sphere collider, and sometimes have to simulate slightly more spot lights due to the inaccuracy.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 14, 2026 - 11:18",
+    "isOwnMessage": true,
+    "text": "I found what the problem was with deferred shading, it was suspicious that the spot light part was too slow.<br>The AABB and Sphere colliders were fine, culling too, but in the background when I was rendering the Pyramid shape for deferred, it was 2x larger than it should be xdd<br>The light itself appeared correctly, of course, but way, way more pixels were rasterized since the shape was larger.<br><br>And so this is the correct one, I made the Cone visualization, and I saw there that something wasn't right.",
+    "images": [
+      "/Devblog/Journey/05-14-cone-vis-1.png",
+      "/Devblog/Journey/05-14-cone-vis-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 14, 2026 - 14:04",
+    "isOwnMessage": true,
+    "text": "<pre>8x8     = TOTAL GPU TIME :   20.412 ms\n16x16   = TOTAL GPU TIME :    7.168 ms\n32x32   = TOTAL GPU TIME :    3.274 ms\n64x64   = TOTAL GPU TIME :    2.362 ms\n128x128 = TOTAL GPU TIME :    2.921 ms\n256x256 = TOTAL GPU TIME :    4.009 ms\n512x512 = TOTAL GPU TIME :    9.033 ms\n\nDeferred + 64x64 = TOTAL GPU TIME : 4.866 ms</pre><br>I tested it with 4k+4k light sources, the 64x64 tile size was the best, and in the case of deferred, it is 2x slower.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 14, 2026 - 14:07",
+    "isOwnMessage": false,
+    "text": "Great, then this is resolved too! The fact that you can go up to such a large tile size will also be spectacular, especially if we visualize it in a graph. And this way, the deferred results have become consistent.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 15, 2026 - 12:56",
+    "isOwnMessage": true,
+    "text": "Hi, listen to this...<br><br>Yesterday I was thinking a lot about the engine, and I started thinking about shadow light GPU-driven rendering too. And it occurred to me that the [Static/Dynamic/Stream] ECS division is brilliant, especially because everything is stored in 1 vector. It just hit me that the Static region contains objects that almost never change, so we could build a BVH hierarchy for it on the CPU.<br><br>I created a Binned Surface Area Heuristic Bounding Volume Hierarchy, which essentially groups static objects in space based on their AABB (taking the AABB size into account as well!!). I built a BVH that is actually completely compact and data-oriented, breaking static entities into groups of 64. So I'm not maintaining a parent-child hierarchy, but a flat hierarchy, meaning the leaf levels of the BVH are basically laid out flat.<br><br>The point is, the GPU-Driven culling can be improved even further! First, we go through the static chunks in a compute shader (the chunks know the combined AABB of the models inside them). We perform frustum + occlusion culling on these first, then save the visible chunks into a buffer. A chunk can currently hold a max of 64 models. In an indirectly dispatched compute shader, we collaboratively process the models inside the chunks—this is the model-level culling already detailed in the article, and from here on it remains mesh/task shader-based.<br><br>It's great that everything is in 1 vector, because the current model->mesh->meshlet culling remains completely intact for the dynamic/stream regions, but for the static region it will be chunk->model->mesh->meshlet, making the culling even better.<br><br>And this is exactly what the Work Graph will be amazing for later! Right now, at the chunk and model levels, we still have to save visible chunks/models into a buffer and indirectly dispatch the compute shaders based on that. With a Work Graph, this will be dynamically beautiful!!<br><br>1 million entities<br><pre>+---[ Geometry Culling ] - With Static SAH BVH\n    |   CullingCommandResetPass                    :    0.006 ms\n    |   MeshCullingPass                            :    0.003 ms   \n    |   StaticChunkCullingPass                     :    0.010 ms\n    |   StaticModelCullingPass                     :    0.125 ms\n\n+---[ Geometry Culling ] - Culling from the article\n    |   CullingCommandResetPass                    :    0.005 ms\n    |   ModelCullingPass                           :    0.544 ms\n    |   MeshCullingPass                            :    0.003 ms</pre>",
+    "images": [
+      "/Devblog/Journey/05-15-sah-bvh-culling.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 16, 2026 - 06:49",
+    "isOwnMessage": false,
+    "text": "Wow, very cool :D if I see correctly, it became almost 5x faster in that phase?",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 16, 2026 - 08:17",
+    "isOwnMessage": true,
+    "text": "Yeah, the culling is about 5x faster for large entity counts.<br>And the best part is that it scales much better; even at around 2 million entities, the culling time is exactly the same, whereas the one in the article is fast too, but its scaling is worse.<br><br><i>(Oh, and for CPU-Driven culling, this resulted in an insane speedup!! The BVH hierarchy is very important there!!)</i><br><br>I fixed the engine, because previously it crashed above 2M+ entities, now it can handle any amount.<br>This test was done with 10 MILLION different entities.<br>And just look at how beautifully the static BVH scales.<br>The GPU-driven culling from the article kind of falls flat here :D<br><br><pre>+---[ CullingPasses ] - Total: 0.264 ms\n    |   CullingCommandResetPass                    :    0.005 ms\n    |   StaticChunkCullingPass                     :    0.069 ms\n    |   StaticModelCullingPass                     :    0.164 ms\n    |   ModelCullingPass                           :    0.005 ms\n    |   MeshCullingPass                            :    0.003 ms\n    |   PointLightCullingPass                      :    0.012 ms\n    |   SpotLightCullingPass                       :    0.006 ms\n\n+---[ CullingPasses ] - Total: 5.908 ms\n    |   CullingCommandResetPass                    :    0.006 ms\n    |   ModelCullingPass                           :    5.885 ms\n    |   MeshCullingPass                            :    0.003 ms\n    |   PointLightCullingPass                      :    0.007 ms\n    |   SpotLightCullingPass                       :    0.006 ms</pre>",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 27, 2026 - 18:01",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Quick status update!!<br><br>Engine development hasn't stopped, it's happening every single day!! :))<br><br>I fixed a few things and made a lot of stuff more dynamic (no more hardcoded constant sizes for buffers, everything resizes dynamically now!).<br><br><b>Main development: Serialization.</b> Man, this was an insanely huge amount of work... Now that the engine has come together and is stable, it was time to be able to save the scene and everything else. However, I wanted to build the absolute best, most beautiful architecture possible for this too. I report: success! I managed to nail it, this part of the engine turned out incredibly beautiful. I found a highly modular, scalable, and nicely decoupled solution, meaning essentially anything in the engine can be saved to any format. Seriously, you just have to define 1 input and output archive file for a specific format, and from then on, everything just works.<br><br>The scene can currently be saved in the following formats:<br><ul><li><b>Binary</b> (Data-oriented ECS is amazing here because the vector can be dumped 1:1 in binary :DD)</li><li><b>JSON</b></li><li><b>YAML</b></li><li><b>XML</b></li><li><b>TOML</b></li></ul><br>Furthermore, this entire serializer abstraction could be applied to models and animations as well. These can also be saved in any format, but binary was the main goal here. The Raw->Cooked->GPU representation is completely data-oriented again, so it was incredibly easy to save it in binary!! So now there is not only shader caching, but model and animation caching too. (It loads scenes with millions of vertices almost instantly because it doesn't need to parse the FBX and generate colliders/meshlets on the fly!!)<br><br>Oh, and it's also a huge advantage that it can save to any format: obviously, binary is the best format for the final game, YAML is perfect for Git version control and development so it's human-readable. And for sending data over a network (the serializer abstraction is prepped for this too), you can use XML, JSON, or even Protobuf thanks to the binary support!!<br><br>Here are 4 files: json, toml, xml, and yaml, with their preview images.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "05-27-scene.json",
+        "fileUrl": "/Devblog/Journey/05-27-scene.json",
+        "previewUrl": "/Devblog/Journey/05-27-json-preview.png"
+      },
+      {
+        "name": "05-27-scene.toml",
+        "fileUrl": "/Devblog/Journey/05-27-scene.toml",
+        "previewUrl": "/Devblog/Journey/05-27-toml-preview.png"
+      },
+      {
+        "name": "05-27-scene.xml",
+        "fileUrl": "/Devblog/Journey/05-27-scene.xml",
+        "previewUrl": "/Devblog/Journey/05-27-xml-preview.png"
+      },
+      {
+        "name": "05-27-scene.yaml",
+        "fileUrl": "/Devblog/Journey/05-27-scene.yaml",
+        "previewUrl": "/Devblog/Journey/05-27-yaml-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "May 28, 2026 - 15:24",
+    "isOwnMessage": false,
+    "text": "Hi! Great, this way it will be easier to manage the scenes for testing!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "May 30, 2026 - 22:56",
+    "isOwnMessage": true,
+    "text": "The GPU-Driven directional light shadow culling is coming together!! :DD<br><br>Wow, I came up with some really great ideas, directional, point, and spot light shadow rendering can also be done in a completely GPU-driven way. The already established architecture could be reused incredibly well. It uses literally the exact same 1:1 indirect render buffer, I just copy the one used for the models. (I mean, the layout is the same, only the <code>instanceCount</code> will be different of course). And in the instance buffer, I store <code>(cascadeIndex, lightIndex, entityIndex)</code>, naturally packed together with some bit magic.<br><br>It's really great because I have a shadow atlas. Currently 1024x1024, but it can be any size. So actually, all visible models for all cascades of all directional lights are rendered at once, because I'll set the projection in the vertex shader so that it projects onto the correct part of the texture!!<br><br>And this will be true for point/spot lights as well. That will also be 1 render call, and all meshes of all visible models for all faces of all lights will be rendered together in one go.<br><br>Oh, and the exact same model->mesh->meshlet (or even static chunk->model->mesh->meshlet) hierarchical culling can be applied to it, both in CPU and GPU-driven ways. Furthermore, I was thinking that Occlusion Hi-Z culling could also be applied. We could implement a region atlas layout-aware max reduction chain. And then, using the Hi-Z texture built from the previous frame's depth atlas, we could apply model, mesh, and meshlet occlusion culling in a fully GPU-driven way during the shadow map generation as well!!!<br><br>It's going to be so good!!<br><br><i>(We can also do GPU-driven Morton BVH partitioning for point lights, this is an evolution of the GPU-driven shadow rendering from my Project Laboratory 2. I've already thought it through and it will be great. Also, we can set up on the GPU how much texture resolution a given light gets based on distance: a nearby point light gets a huge 1024x1024, a distant one a small 256x256!!!)</i>",
+    "images": [
+      "/Devblog/Journey/05-30-gpu-driven-shadows.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 01, 2026 - 11:31",
+    "isOwnMessage": false,
+    "text": "Super, I like this solution too!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 04, 2026 - 19:43",
+    "isOwnMessage": true,
+    "text": "The engine UI got a little facelift!",
+    "images": [
+      "/Devblog/Journey/06-04-engine-ui-facelift.png"
+    ],
+    "attachments": [],
+    "videos": []
+  }
+]
