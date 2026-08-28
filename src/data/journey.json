@@ -919,5 +919,476 @@
     ],
     "attachments": [],
     "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 07, 2026 - 13:05",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Recently, I redid the engine's project setup. I completely removed the VS26 solution and vcxproj-based project structure. I looked into what the most modern solution is nowadays, and my choice fell on xmake. In xmake, you can describe project-specific things in a Lua script, and xmake can build for Windows, Linux, and Mac. It can also generate VS26 solution-based projects or native CMake projects (which can be opened in both VS26 and VS Code), plus there's a VS Code extension for it that makes managing the whole thing much easier.<br><br>Oh, and this way the engine became Linux compatible! I built it for Linux without any issues alongside vcpkg, and it compiled the project perfectly, although on Linux there's some issue with a Jolt Physics setting and it crashes at runtime. But the main point is that the engine is now completely platform-independent and IDE-independent. I'll add a tutorial to the README later on what xmake code to run in the console to set up the project properly!!!<br><br><b>EDIT:</b> It runs on Linux too \ud83d\ude0e",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 10, 2026 - 08:10",
+    "isOwnMessage": false,
+    "text": "Super, thanks! Unfortunately, I won't have time this week to look into it in detail. I think I can at least check tomorrow how my home machine handles a quick build and I'll let you know! However, I won't be home next week, so I'll be able to test it better the week of the 22nd.<br><br>Which VS Code extension is worth using for it?",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 10, 2026 - 08:45",
+    "isOwnMessage": true,
+    "text": "Okay, no problem, I just wrote it as a status update so you don't accidentally start rewriting it to CMake, because the Linux stuff is already done with xmake.<br><br>In VS Code, it's worth using the official XMake extension, and then the xmake settings, build, debug, and run will appear on the blue bar at the bottom, making it quite intuitive.<br><br>But I'll update the README today then, and I'll add a description on exactly how to do the VS Code setup, CMake setup, or even the VS26 setup, cmd codes, etc. The description will probably be at the end of the README in the Build section.<br><br>I also set up CI/CD; it built for Linux in GitHub Actions without any problems.",
+    "images": [
+      "/Devblog/Journey/06-10-github-actions-ci-cd.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 11, 2026 - 10:50",
+    "isOwnMessage": true,
+    "text": "Oh, and it just randomly occurred to me that the renderer presented in the article could be optimized even further.<br><br>Because I just realized that the 8-bucket system should be further split into AlphaTesting / No AlphaTesting materials. Right now, alpha testing is hardcoded into the shader, but this means early fragment testing is always disabled, right. So it needs to be split further, and then a 16-bucket system will be the final one.<br><br>The alpha testing ones will have <code>discard</code>, so there will be no early fragment test here, and for the no alpha testing ones, the early fragment test will be strictly enabled.",
+    "images": [
+      "/Devblog/Journey/06-11-alpha-testing-buckets.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 11, 2026 - 11:37",
+    "isOwnMessage": true,
+    "text": "+ I managed to fix the Forward+ tile problem that I showed you in the lab.<br><br><b>Faulty code:</b> You shouldn't sample the Hi-Z texture using nearest clamp edge and UV values, because it can be slightly inaccurate sometimes...<br><pre>vec2 halfTile = vec2(float(ctx.tileSize) * 0.5);\nvec2 uv = (vec2(tileId * ctx.tileSize) + halfTile) / vec2(ctx.screenWidth, ctx.screenHeight);\nvec2 hizValue = textureLod(hizDepth, uv, ctx.hizMipLevel).xy;</pre><br><b>Good solution:</b> With this, we directly read the texture's XY coordinate value, making it always 100% accurate (I think I'll change it to this for culling as well, by the way, because that was also UV-based until now...)<br><pre>ivec2 mipSize = textureSize(hizDepth, int(ctx.hizMipLevel));\nivec2 texelCoord = min(tileId, mipSize - 1);\nvec2 hizValue = texelFetch(hizDepth, texelCoord, int(ctx.hizMipLevel)).xy;</pre>",
+    "images": [
+      "/Devblog/Journey/06-11-hiz-texelfetch.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 13, 2026 - 12:08",
+    "isOwnMessage": false,
+    "text": "Oh, this is quite interesting... I would think that it should do the same thing. However, the second code is perhaps cleaner and the intent is more visible, so I like it better too.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 21, 2026 - 10:26",
+    "isOwnMessage": true,
+    "text": "<b>THE SPOT LIGHT GPU-DRIVEN SHADOW GEOMETRY ATLAS CULLING IS WORKING!</b><br><br>Wow, listen... This spot light part was absolutely brutal. There were so many buffers, data, indirect dispatches, and zeroing out to pay attention to that my brain almost melted.<br><br>However, it works completely in both CPU-driven and GPU-driven modes, and this can be freely toggled at runtime too.<br><br><b>Final architecture:</b><br><ol><li>Determining visible spot lights (Spot vs. Camera Frustum) (Count + Instance index list).</li><li>Among the visible spots, determining the spot lights that cast shadows (Count + Instance index list).</li><li>Then comes a setup pass where we zero out the draw call <code>instanceCount</code>s and indirect dispatch sizes.</li><li>Model culling compute pass: GroupX = Model count, GroupY = Visible Shadow Spot Light count; this number is generated in the compute shader in step 2, so we copy it over from the count buffer.<br><ul><li>For every model, for every spotlight: Sphere vs. Cone test.</li><li>There is a fast path here too if the model consists of only a few meshes.</li></ul></li><li>Mesh culling compute pass: Collaborative mesh processing for a given spot light. 1 thread processes a (Model | Spot Light) pair.</li></ol><br>For spot lights, the instance index buffers are quite cumbersome; the offsets cannot be allocated in advance.<br>Since the size of a spot light is relatively limited and it's expected to intersect with few meshes, I use the following instance index distribution.<br>So there is 1 atomic counter, and we will compactly append the (Entity, Light) pairs one after another. They are unordered, so they must be sorted with a radix sort.<br><i>(If there were a hardcoded fixed entity/light count, we could pack the (Entity, Light) pairs into a single <code>uint</code>, but right now there can be any amount of either in the engine, so it's a <code>uvec2</code>).</i><br><ol start=\"6\"><li><b>KeyBuffer:</b> Draw command index (identifies meshes completely uniquely).<br><b>ValuesBuffer:</b> Index buffer that will store the value of the atomic counter used for the instance index buffer.<br><b>InstanceBuffer:</b> (Entity | Light) pairs; the value from the values buffer indexes into this.</li><li>Radix sort on the key and values buffers. (The values buffer is needed because the sort only works on <code>uint</code>, it cannot sort <code>uvec2</code> values!)<br>We essentially sort the data by mesh.</li><li>A compute shader iterates through the entire key, values, and instance buffers.<br><ul><li>We have to sort the Instance Buffer based on the values buffer so that identical meshes (Entity, Light) sit compactly next to each other in the shadow geometry renderer.</li><li>We also need an offset to know where the data starts in the instance buffer.</li><li>The point is that this compute shader executes these steps.</li></ul></li><li>Shadow Geometry Rendering, where again there is 1 massive indirect draw call; this is pretty much the same as presented in the article.</li><li>We can render all identical meshes and all lights together since we have 1 texture atlas. The shader just projects the positions onto the corresponding region.</li></ol><br>I suppose even without the code it's not easy to follow, but the point is it's fully GPU-driven, and the rendering is very beautiful.<br>Oh yeah, and there will be static BVH/Morton BVH-based chunk culling for static objects.<br>And I was also thinking I could do a Morton BVH partitioning for the shadow spot lights (grouping 4-8 spots together).<br>And then it wouldn't be Model vs. Light, but Model vs. Chunk -> then Model vs. Light inside the Chunk.<br>Or eventually even Chunk vs. Chunk -> then Model inside the Chunk vs. Light inside the Chunk will work too.<br><br>And everything can be implemented using Work Graphs later!!!",
+    "images": [
+      "/Devblog/Journey/06-21-spot-light-culling.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 22, 2026 - 09:41",
+    "isOwnMessage": false,
+    "text": "Very cool! It really isn't easy to wrap my head around the whole thing like this, but thanks for putting it together!<br><br>Regarding the texture atlas, does it only contain the spot/directional ones, or the cubes too?",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 22, 2026 - 09:43",
+    "isOwnMessage": true,
+    "text": "Right now, this one only contains the spot light.<br>Every light type has its own texture atlas.<br>Currently, there is a 2K texture for the directional light.<br>There is a 4K texture for the spot light.<br>And when I start on the point light, it will also have a 4K texture.<br><br>So there are 3 large atlases in total.",
+    "images": [
+      "/Devblog/Journey/06-22-light-atlas-1.png",
+      "/Devblog/Journey/06-22-light-atlas-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 22, 2026 - 09:45",
+    "isOwnMessage": false,
+    "text": "I see, okay. By the way, how do you handle addressing at the edges of the textures? I mean, in theory, interpolation could cause artifacts at the edges of the shadow maps.<br><br>Ah, and then you can even do PCF manually.<br>The original problem would have occurred with automatic PCF, right?",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 22, 2026 - 09:48",
+    "isOwnMessage": true,
+    "text": "I haven't implemented the shadow simulation yet (when we sample these in the PBR shaders).<br>But I'll look into it, I can clamp by UV, right, that will probably help a lot.<br>Or it's also possible that I won't use a nearest sample, but <code>texelFetch</code>, where I'll sample by coordinate like the Hi-Z texture in Forward+. I think it will be 100% perfect with that.<br>From the atlas region data and the UV, I can even calculate back the actual XY texture coordinates, and then <code>texelFetch</code> should theoretically solve this problem.<br><br>Yes, and actually we could even generate Hi-Z from these textures.<br>In fact, I do generate them, but I don't think it will be worth it because it's slow.<br>And here we can speed up the PCF, because we can just sample from a higher mip level, and this way the fully inside and fully outside PCF areas can be skipped instantly.",
+    "images": [
+      "/Devblog/Journey/06-22-shadow-pcf.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 25, 2026 - 11:39",
+    "isOwnMessage": true,
+    "text": "I also implemented the virtualized shadow map for point lights. (The 6 faces of the cube are flattened out, taking up 3x2 chunks).<br>Also, I finished the shadow rendering for spot lights (Dir and Point will come later).<br>For spots, the shadow works perfectly, it will work for the others too, I just need to write the shaders...<br><br><b>EDIT:</b> Point light is working too \ud83d\ude0e<br><b>EDIT 2:</b> Dir light cascade is working too!!",
+    "images": [
+      "/Devblog/Journey/06-25-shadow-maps-1.png",
+      "/Devblog/Journey/06-25-shadow-maps-2.png",
+      "/Devblog/Journey/06-25-shadow-maps-3.png",
+      "/Devblog/Journey/06-25-shadow-maps-4.png",
+      "/Devblog/Journey/06-25-shadow-maps-5.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 25, 2026 - 11:50",
+    "isOwnMessage": true,
+    "text": "Amidst all the big shadow mapping stuff, I started thinking about how we could simulate shadows for transparent objects as well, because they also cast shadows, just corresponding to their own color, and not as strongly. So if we have a big red cube that is transparent, it would also have a shadow. You can't use a traditional shadow map for this, obviously. The question is, do engines even usually bother with this? My gut feeling says it's not worth dealing with at all because it would introduce a lot of slowdown, but I'm still interested in the topic.<br><br>I was thinking that the A-buffer solution from the GPU lab could actually be applied to this whole thing, and it would work perfectly with virtual shadow mapping.<br><ol><li>We render the opaque objects into the virtual shadow map, just like now.</li><li>We render the transparent objects from the lights' perspective, using the virtual shadow map as the depth buffer to discard the ones behind opaque objects, right, and we actually use the A-buffer from the GPU lab to save the transparent data (Depth, Color, Next Pointer). This A-buffer texture could be 1:1 in sync with the virtual shadow map, and then we handle all the transparent data belonging to all shadows together.</li><li>A compute shader sorts the linked lists in the A-buffer by depth using some nice little sorting algorithm.</li><li>Then in the light simulating forward+/deferred shader, the transparent part comes after the traditional opaque shadow map, where we traverse the list. We know the depth so we can simulate a shadow, we know the color so we can do a colored shadow, or even mixed colored shadows generated by multiple transparent objects.</li></ol><br>What do you think about this? It surely wouldn't be worth it, I'm just interested in the topic, and thought I might put it in later if this is a roughly correct approach.<br><br><b>EDIT:</b> Or would it need full ray tracing with RTX cores??? hmm<br><br>In fact, it just occurred to me, the transparent depth virtual shadow map could even be 2K instead of 4K, having smaller light resolutions, while the opaque one stays nice and detailed since that will be dominant. So anyway, you could actually tinker a lot with all sorts of things to make it run in a relatively reasonable time.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 26, 2026 - 20:52",
+    "isOwnMessage": true,
+    "text": "Engine UI update, workspaces",
+    "images": [
+      "/Devblog/Journey/06-26-engine-ui-workspace-1.png",
+      "/Devblog/Journey/06-26-engine-ui-workspace-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 27, 2026 - 09:23",
+    "isOwnMessage": false,
+    "text": "The images are getting more and more spectacular! Are these last pictures the material editor already?<br><br><a href=\"https://graphics.stanford.edu/papers/deepshadows/deepshad.pdf\" target=\"_blank\">https://graphics.stanford.edu/papers/deepshadows/deepshad.pdf</a><br>This paper comes to mind regarding what you wrote.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 27, 2026 - 09:25",
+    "isOwnMessage": true,
+    "text": "Yeah, there are 4 types of workspaces you can switch between in the top right menu bar. There's the default scene workspace that you've seen many times.<br>There is a texture workspace where you'll be able to manage textures, and a material workspace where materials can be edited, even using a node graph.<br>And one that isn't finished yet is a model workspace, where you can inspect loaded models and break them down mesh by mesh.<br>There will be an infinite grid there, and always only the currently selected model/mesh will be visible.<br><br>Thanks, I'm definitely going to read this!!",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 27, 2026 - 09:37",
+    "isOwnMessage": false,
+    "text": "So with a deep shadow map like this, you can actually implement quite a few extra effects, not just transparent shadows. If you only need colored shadows, a simple method could be if the shadow map stores not only depth but also RGB attenuation factors. Of course, this makes generating it more expensive, but if you're doing frustum culling before rendering anyway to see what gets included, you could even check there if there's a transparent shadow caster, and if so, only then would this map go into the 4-channel shadow atlas.<br><br>The problem here, of course, is that the attenuation function cannot really be described with a single value, so it's not suitable for complex scenes. But where this would be most common, e.g., a stained glass window in a church where we know there will only be one transparent layer, it could work. An opaque shadow caster behind the window could be problematic, but if that's important, you can do it in two passes: separately for the opaque and the transparent.<br><br>But of course, deep shadows or the linked-list solution, where the goal is to store the full visibility function, could handle the more complex cases as well. I'm not sure how this deep shadow paper approximates the function, but ideas from moment/wavelet shadows are probably applicable here too.<br><br>Ray tracing, of course, greatly simplifies the logic of the whole thing, but in return, you get a lot of other complexities: you need temporal noise filtering, which introduces blur and ghosting. You have to manage the acceleration structures, which is an extra pain for animated objects.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jun 27, 2026 - 09:49",
+    "isOwnMessage": true,
+    "text": "Yeah, I'll probably end up implementing multiple techniques, and then we can use whichever one is needed completely on a scene-specific basis. If there's little transparency and shadows don't make sense, then it won't be simulated. If there is 1 layer and the colored transparency is enough (where transparent doesn't cast a shadow on transparent), then that renderpass will run. If a fully detailed visualization is needed, where there are multiple layers of transparency, or even transparent materials and textures casting shadows on each other, then the A-buffer, or Ray-Tracing, or the paper you sent (I just still need to read it). I think I'll do something like this, and then we'll configure it to what the scene demands. At least we'll be able to compare how slow each one is and what issues they have.<br><br>Ray Tracing is still appealing though, I don't really get the RTX shader stuff yet, I've never looked into it deeply.<br>But the shadow is now completely chunk->model->mesh->meshlet culled, as shown in the article, the dir/point/spot culling is fully GPU-driven. And we already exclude a ton of objects by default, and even software ray tracing could be done really well here, since I know which objects are visible.<br>In the background, I could build a BVH-like acceleration structure for the meshlets, and even the triangles within them, and then at least the software ray tracing would be super efficient.<br><br>With the hardware one, what I don't get is whether the hardware builds the acceleration structure dynamically, or if the scene is given, I upload it, it builds the BVH from the triangles, and always uses that? Just because then this isn't very compatible with culling, because it would be best if, after culling, the hardware built the BVH from the triangles belonging to the visible meshlets, and the hardware ray tracing only ran on that.<br>I just haven't looked into exactly how the ray tracing shader and the necessary preparations and techniques work yet, but this will also be an exciting part of the development later.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jun 27, 2026 - 09:56",
+    "isOwnMessage": false,
+    "text": "The AS is divided into two parts, there is a top level and a bottom level. The bottom level contains the mesh data. For a static mesh, this obviously only needs to be done once. If it's animated, it has to be updated, but this often happens via an update from a fixed, nearby state.<br><br>The top level then gathers these bottom levels into a scene.<br><br><blockquote>The API defines two types of operations to produce acceleration structures from geometry:<br><br>A build operation is used to construct an acceleration structure.<br>An update operation is used to modify an existing acceleration structure.<br>An update operation imposes certain constraints on the input, in exchange for considerably faster execution. When performing an update, the application is required to provide a full description of the acceleration structure, but is prohibited from changing anything other than instance definitions, transform matrices, and vertex or AABB positions. All other aspects of the description must exactly match the one from the original build.<br>More precisely, the application must not use an update operation to do any of the following:<br><br>- Change primitives or instances from active to inactive, or vice versa (as defined in Inactive Primitives and Instances).<br>- Change the index or vertex formats of triangle geometry.<br>- Change triangle geometry transform pointers from null to non-null or vice versa.<br>- Change the number of geometries or instances in the structure.<br>- Change the geometry flags for any geometry in the structure.<br>- Change the number of vertices or primitives for any geometry in the structure.</blockquote><br>This is the relevant excerpt from the API. Based on this, it seems to me that the update operation isn't really compatible with culling, because you can't change the number of instances.<br><br>Which means you need a more complex system that speculatively culls objects and keeps more in it than strictly necessary so you don't have to rebuild it constantly.<br><br>A custom BVH is an interesting idea, but to do that, you definitely need to be able to compare it against the hardware one. So I would approach it by having the hardware version integrated first.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 02, 2026 - 19:57",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>The UI is also coming together, now you can swap models, animations, and materials too.<br>I made a quick demo video, mainly focusing on the material management; this is the material table solution described in the article, but now I could finally visualize it properly.<br>With the <code>MaterialOverride</code> component, you can share or even override the material per mesh within a model, which I demonstrated in the video using Sponza.<br><br><a href=\"https://youtu.be/xK25IwS-iAw\" target=\"_blank\">https://youtu.be/xK25IwS-iAw</a><br><br>Oh, and regarding the shadow atlas management. Everything works perfectly, but in the meantime, I thought of another really cool improvement, and I'd be interested in your opinion on it.<br><br>Right now there's 1 large dedicated 4K atlas for spot lights; the area is allocated and scaled based on the visible spot's size, and I render all objects into this. During rendering, there is chunk->model->mesh->meshlet culling, working for every object and light source in a fully GPU and CPU driven way.<br><br>However, the problem is that there is no occlusion culling currently. Although I can build a Hi-Z chain for the texture, it's not worth it because doing it for a 4K texture every frame is very expensive... And this gave me the idea that since we already have static/dynamic/stream partitioned entities by default (where static entities don't change, or only very rarely), the whole shadow simulation could be split in two.<br><br><b>So:</b><br>We will have two textures: a 4K for the static ones, and a 4K for the dynamic entities. (The 4K resolution can be customized, maybe because of the movement 2K is enough for the dynamic ones??) We only render static objects into the static one, so this is essentially a \"BAKE\" mechanism, and we only do this for lights that are also static and don't move. We build a Hi-Z depth chain for this, and we can use it for occlusion culling. Because it's static, we rarely need to build or re-render this. We render the dynamic moving entities into the other 4K texture, these obviously have to be done every frame, specifically using the current model->mesh->meshlet culling logic. (Because of the ECS, the static/dynamic/stream regions are cleanly separated, making it super easy in the compute shader). Here it doesn't matter if the light is static or dynamic. And then there's the case when the light itself is dynamic and moving fully: then it goes through the entire existing static/dynamic/stream region with chunk->model->mesh->meshlet culling, and ends up in the dynamic texture. So for the shadow simulation, there will actually be 2 texture reads, from the static + dynamic; maybe it means a slowdown, even because of the PCF??? hmmm<br><br><b>EDIT:</b> It just occurred to me that these 2 reads could even be remedied if we don't clear the dynamic texture to 1 at the beginning of the frame, but instead copy the static texture's data 1:1 to the dynamic one. So it starts from the static one, and after the dynamic render everything will be in it, resulting in only 1 depth read, and faster PCF too???<br><br><b>In summary:</b><br><ul><li>Into the static texture: Static objects and static lights -> Baking</li><li>From the static texture: Hi-Z pyramid generation and occlusion culling.</li><li>Into the dynamic texture: Dynamic moving objects and static/dynamic lights.</li><li>Into the dynamic texture: Dynamically moving lights -> Full static/dynamic/stream objects culled</li></ul>",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://www.youtube.com/embed/xK25IwS-iAw"
+    ]
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jul 06, 2026 - 10:22",
+    "isOwnMessage": false,
+    "text": "Hi! I was only just now able to properly look at your message, because I wasn't home last week.<br><br>Regarding shadows. So if I understand correctly, you are trying to optimize the shadow generation of static light sources by rendering a shadow map with only static objects once onto a fixed pre-allocated texture area, and generating a pyramid from this. After that, dynamic objects go into another texture, which can logically start from the static one. And the Z pyramid would help with culling. On the one hand, in a good case we are talking about depth-only rendering here, which means the GPU utilization characteristics will be different (no fragment shader, a different scale of savings). Because of this, I think this is something that can only be decided by measuring whether the rasterization saved by occlusion culling is better, or simply leaving the whole thing to depth testing.<br><br>From another perspective, whether it's a good idea to initialize the final, dynamic shadow map from a static version (which I think is actually independent of the idea above), it's worth considering that a static light source fixed in world position isn't completely static from a view perspective. After all, even now you set the size of the shadow map in the atlas based on how much area it covers projected from the camera's perspective. So if this static-static shadow map is fixed, then its size has to be set mostly independent of the camera (of course, it could be regenerated within certain limits).<br><br>I also think it's important to consider what happens if the size of the static version and the dynamic version differ. In this case, I think very strong shadow acne or other occlusion artifacts would appear because you have to copy shadow maps of different resolutions and use some kind of filtering.<br><br>It could yield a nice result if the static-static shadow map is very large. And the dynamic one starts from a potentially smaller maximum filtering (depending on the camera), which if I guess correctly could be one of the levels of the Z pyramid? This might be artifact-free, and then its performance should be compared to the fully dynamic one.<br><br>Another point to consider is what kind of light sources this would be useful for. E.g., a spot light in a room. Here the room's geometry itself, which is static, will already be a limiting factor, so it wouldn't be complicated to simply limit the spot light's distance based on the static geometry surrounding it. I think in many cases this will be simpler and more efficient than using an extra shadow map for it.<br><br>So it might be more interesting for outdoor scenes, where there is no easily definable maximum distance for the light source.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 07, 2026 - 19:32",
+    "isOwnMessage": true,
+    "text": "Hmm... yeah, thanks a lot, every problem you raised here regarding the idea is valid.<br><br>Thanks really, I think I'll put the shadow part on the back burner for now, because there would really be too much to think through regarding this.<br><br>The problem is with the massive amount of static objects, right, because I always render them over and over unnecessarily, since they don't move. The Morton chunk partitioning and such help a lot, just not in the case of the directional light, because it covers too much space, and a huge amount of static objects have to be rendered over and over again. With Point/Spot lights there is no problem with this, because their volume is small.<br><br>Although, while writing this message I just realized that my idea might actually work perfectly if I only did it for the directional light. Because there's a fixed allocation there, the texture is fixed at 1K for every cascade, there's no visibility check, and no dynamic screen space size check for the directional light, right. So actually, for point/spot it might be best to leave the whole thing and just use the chunk solution. And for the directional light, maybe use what I wrote, because its field of view is really too big, and we draw a ton of static objects over and over...<br><br>It's just that the directional light's view matrix is calculated from the camera's cascade. This has to be done cleverly so that the static objects don't have to be constantly re-rendered—giving the cascades some room to move by always overestimating a bit. And then the view matrix won't change every frame... hmm well okay, I'll think about it some more.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 08, 2026 - 10:24",
+    "isOwnMessage": true,
+    "text": "By the way, I made it so that if someone finally downloads the project, it automatically downloads all the assets as well; they are uploaded in the release.<br>The xmake project setup is great because it uses Lua scripts, and I was able to write a script that downloads the assets from GitHub...<br>I always had an issue with this, because it's not good practice to track assets in a GitHub repo, but finally, this is sorted out too.<br><br>Also, there is a HDR skysphere now, and the model workspace and material workspace are taking shape too.",
+    "images": [
+      "/Devblog/Journey/07-08-hdr-skysphere.png",
+      "/Devblog/Journey/07-08-model-workspace.png",
+      "/Devblog/Journey/07-08-material-workspace.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 13, 2026 - 11:12",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>I'm mostly done with the workspace windows too. I'll also make an animation workspace later where there will be an animation timeline, but right now I feel like what I initially planned to achieve in the engine is about 98% complete.<br><br>Here are the 4 workspaces: scene, model, material, texture.<br>I also made some really nice little preview cards.",
+    "images": [
+      "/Devblog/Journey/07-13-workspace-scene.png",
+      "/Devblog/Journey/07-13-workspace-model.png",
+      "/Devblog/Journey/07-13-workspace-material.png",
+      "/Devblog/Journey/07-13-workspace-texture.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 13, 2026 - 11:15",
+    "isOwnMessage": true,
+    "text": "I have one of these 2K textures, and 128x128 sections are allocated. As a material/model, etc., changes... these are instantly regenerated too. The animation will have something like this as well, but I won't deal with that anymore right now.<br><br>A good few minor improvements are left, all noted down, and there are several major developments that I'll probably start working on in the second half of the summer. The ones I'm specifically interested in:<br><ul><li>DX12 + Metal support, full RHI</li><li>Slang??</li><li>Virtual Textures</li><li>Raytracing + RTX</li><li>Nanite (I already looked into this; no joke, I think I'll actually be able to do a Nanite implementation in this engine because it didn't seem that complicated xd)</li><li>Scripting</li></ul><br>But anyway, the main point is, I feel like I'm done with the engine to the extent that I want to share the codebase with the international audience and various groups. I really think the clean code and the incredible amount of ideas and implementations in the engine are worth their weight in gold. I'm going to pause development for a while now, and I want to make a \"GDC Talk\"-style video where I basically explain the core things in English. And for this, I'm making a presentation PPT similar to what we did for the Grafgeo conference, but this one will have everything in it. So on one hand, it will be like educational material (what task/mesh shaders are, etc... you know), and on the other hand, truly everything from GPU-driven rendering, ECS, Forward+, modern Vulkan, key design patterns in the engine, shaders, shadow maps, and so on. So everything I feel is important to showcase (I'm planning a 100+ page PPT and a 1-2 hour video).<br><br>And when I'm done with this, I'll share the engine on Reddit or wherever, along with this video.",
+    "images": [
+      "/Devblog/Journey/07-13-preview-cards-atlas.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jul 13, 2026 - 11:42",
+    "isOwnMessage": false,
+    "text": "Hi! Super, thanks for the status update! I also think the video/PPT is a good idea. Once it's done, let me know where I can find it.<br><br>Of course, feel free to send it! I'll be mostly at home until the end of August now, so I'll be able to take a look.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 23, 2026 - 12:52",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>A quick status update!<br><br>- I made a lot of progress with the presentation, it's going to be very serious. I really want to create something truly valuable and lasting on a global scale; currently, I'm already at 80 pages. It's very hard to find truly in-depth presentations on this topic that convey a lot of ideas and thoughts. I'm making one right now about the entire Synapse Engine; I've already written down the Entity-Component-System and the architectural solutions and thoughts, and I just started the graphics parts. I will really compile everything I've been sending you this year nicely organized in the style of the GrafGeo presentation, because I think this will really fill a gap in this field. I'll probably only finish it in August. (I'm planning for 150-200 pages).<br><br>- I wrote earlier, you know, about the 16-bucket system, that Alpha Tested should also be included in the draw command allocation bucket system, since this way for non-alpha tested there is no discard, meaning there is an early fragment test. I implemented this, it works great. All shaders remained, I figured out that defines can be added in the shader compiler, and then if it's alpha tested, the test and discard are included; if it's not alpha tested, the enabling of the early fragment test is explicitly written in.<br><br>- I looked into the <code>device_generated_commands</code> extension you recommended earlier. In its current form, I won't use it in the engine because it's not needed. Basically, on my end, the CPU side already sorts the draw command allocation among the 16 buckets, and culling happens accordingly [Opaque 1 Sided | Opaque 2 Sided | ... etc]. Well, this extension is exactly designed for when your draw command buffer isn't sorted by default, and culling just throws the draw commands together in bulk, so the driver can dynamically bind the corresponding pipeline and push constants per draw command. It might be useful later for some subsystem, but my entire architecture inherently eliminates this with the CPU-side sorted allocation.<br><br>- I found a great glTF asset repo, I added it as a subrepo: <a href=\"https://github.com/KhronosGroup/glTF-Sample-Assets\" target=\"_blank\">https://github.com/KhronosGroup/glTF-Sample-Assets</a>. You can test a ton of things with this, and everything is PBR compatible, so now Sponza is finally PBR too!<br><br>- I finally implemented the statistics collection and window. With Vulkan Query Statistics I can track all sorts of things: how many fs, vs, task, mesh invocations started, which pipeline processed how many vertices and triangles, how many triangles were discarded, and so on. And guess what, I found something weird, or a bug I don't know yet, but if the task/mesh shader statistics collection is enabled, it slows down from 1ms to 250ms. I tried to read up on it, but I couldn't find info about this anywhere. It's very suspicious to me that it might be a driver bug?? I can't test it on AMD; if it doesn't happen there, then it's an Nvidia bug; if it's that slow there too, then I have no idea why pipeline statistics handling for task/mesh shaders even exists. I also thought that maybe because of the exact invocation count, the operation somehow becomes more sequential, and that slows it down this much?? Anyway, I wrote on the Nvidia Vulkan forum, maybe they will answer...<br><br>Massive performance drop with VK_QUERY_PIPELINE_STATISTIC_TASK/MESH_SHADER_INVOCATIONS_BIT_EXT on RTX 4060 - APIs / Vulkan - NVIDIA Developer Forums<br><br><a href=\"https://forums.developer.nvidia.com/t/massive-performance-drop-with-vk-query-pipeline-statistic-task-mesh-shader-invocations-bit-ext-on-rtx-4060/376792\" target=\"_blank\">https://forums.developer.nvidia.com/t/massive-performance-drop-with-vk-query-pipeline-statistic-task-mesh-shader-invocations-bit-ext-on-rtx-4060/376792</a><br><br>This is what the statistics window looks like.<br>And there are multiple modes, you can view the data for the full scene, just the scene, or dir/point/spot shadows.",
+    "images": [
+      "/Devblog/Journey/07-23-statistics-window.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Jul 23, 2026 - 12:59",
+    "isOwnMessage": true,
+    "text": "Here is the presentation, if you want to take a look. You don't have to review it or anything because it's insanely long, and I just started the graphics part. But this is roughly what all the GPU-driven culling rendering, the GPU-driven culling of virtual shadow mapping, and the rest will look like. Everything will be nicely and systematically explained in it.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "07-23-Synapse-Engine-Presentation-v1.pdf",
+        "fileUrl": "/Devblog/Journey/07-23-Synapse-Engine-Presentation-v1.pdf",
+        "previewUrl": "/Devblog/Journey/07-23-presentation-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Jul 24, 2026 - 12:28",
+    "isOwnMessage": false,
+    "text": "Hi!<br><br>I checked out the repo and even built it on Linux. Everything went well based on the description, the only thing was that for the xmake command I first had to go into an extra <code>SynapseEngine</code> subfolder. And in <code>HdrImageLoader.cpp</code> the <code>memcpy</code> function call wasn't recognized because an include was missing.<br><br>Unfortunately, I couldn't run it: <i>Failed to find a suitable GPU with Vulkan support</i><br>Probably some extension is missing on my 7900 XTX.<br>The repo turned out very impressive! I also really liked the xmake build system. Now that I've seen it live like this, I'll definitely look into it more, because it's truly a night and day difference compared to CMake. \ud83d\ude04<br><br>It's also good that you were able to look into this device generated commands, and even better that it's not needed, so this questionable branch can be checked off too.<br>Thanks for sending the presentation! For now I just scrolled through it, I really like its style and structure as well!<br><br>As I can see, on one hand, my card+driver combination doesn't support the Descriptor heap extension, but if I remove that, it ironically dies because my GPU doesn't support the <code>meshShaderQueries</code> feature \ud83d\ude04 exactly what we wanted to check. \ud83d\ude04",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 03, 2026 - 13:44",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>Returning from vacation, I'm continuing the presentation with renewed energy!!<br><br>I've finished the Rendering intro section, so the main points of representation and GPU-Driven rendering are done. I'm currently at 112 pages.<br><br><b>What's still left:</b><br><ul><li>GPU-Driven culling, presenting the full chunk->model->mesh->meshlet pipeline similarly to the rendering part.</li><li>Lighting simulation: Deferred shading + Forward+ shading + Bloom, explaining the problems and solutions in detail everywhere with diagrams.</li><li>GPU-Driven shadow culling + Rendering: Showcasing the atlas-based, Doom-like shadow mapping here.</li></ul><br>I think the presentation is of a very high level, I'm really trying to include almost all the knowledge, problems, and insights I've gathered so far. Not just describing what the engine contains, but rather building a cause-and-effect mental model of how I actually arrived at this final solution, so it really makes sense and the 'whys' are answered.<br><br>If you have the time and mood, I think the Rendering part will be more up your alley, I think it turned out quite exciting. You don't need to point out where there are typos and such in the text, I'll handle those at the end. I'd mostly need help with how well-structured it is from an outside perspective, how well the images match the text, how well a given slide comes across, and how nicely the train of thought builds upon itself. So I'm more interested in an overall impression from an outside point of view.<br><br>If you don't like something, feel free to let me know and I'll change the text/image and such.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "08-03-Synapse-Engine-Presentation-v2.pdf",
+        "fileUrl": "/Devblog/Journey/08-03-Synapse-Engine-Presentation-v2.pdf",
+        "previewUrl": "/Devblog/Journey/08-03-presentation-v2-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Aug 05, 2026 - 13:45",
+    "isOwnMessage": false,
+    "text": "Hi! Thanks for sending the slides, I read through the Rendering part for now! It's really very informative and I think it's easy to understand. There were a few typos or weird sentences, but I didn't collect them for now.<br><br>Actually, what could perhaps be elaborated or explained better was the bucket system. What I mean here is that it's visible that with every new variation, the number of buckets grows exponentially. This goes up to 16 right now (which could perhaps be halved in a production version by throwing out the traditional vertex shader pipeline), but I think it might be worth highlighting why significantly more variations won't be needed during, say, a real game. What are the options whose changing results in a new bucket, and what can be gotten away with (e.g., shader changes can theoretically be handled with \"uber shaders\").<br><br>The other thing could be a summary of what trade-offs were made in the architecture. The two that are immediately obvious right now are the 32-bit index metadata written next to the vertex position, and the multi-level hierarchical material structure. I'm thinking of something like: this means X% extra memory footprint for traditional animated/static models, but in exchange what flexible functionality, more comfortable architecture, or speedup do we get.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 05, 2026 - 13:55",
+    "isOwnMessage": true,
+    "text": "Ahha, okay, thanks for reading it!!<br>Then I'll fix these in it later, and add slides like this too!<br><br>By the way, that 3, or rather now 4-layer architecture I came up with—I showed it to you at the beginning of last semester, but it's also in the article, and it's presented in this presentation too, you know, the Raw->Cooked->Gpu->Cpu, and the processor, pipeline-based model management.<br>That was a brutally good generalization, because I literally just implemented audio finally in the engine (2D/3D too with miniaudio), and I used exactly this same design pattern there too.<br>It's the same logic for Animation and Texture management, and right now I'm rewriting the Shader management to this pipelined Raw/Cooked approach, and it fits perfectly here too.<br>And it's really great because I'll finally be able to handle GLSL, HLSL, and SLANG code simultaneously; a separate compiler will compile them, a separate reflector, you can write shaders procedurally from code as a string and it will be able to compile that too, you can write a processor that resolves includes (e.g., this is great for OpenGL, because there's no include resolution by default there).<br><br>That pattern is really good, I'm using the exact same logic in like 5 places in the engine.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 06, 2026 - 16:26",
+    "isOwnMessage": true,
+    "text": "The animation workspace is also coming together in the meantime. The preview texture is animated, constantly moving there as well, and there's already a sequencer at the bottom. Functionally it doesn't work yet, but a part of the backend code is done, and later you'll be able to create animations here, as well as tweak loaded animations. There will also be a property editor in it.",
+    "images": [
+      "/Devblog/Journey/08-06-animation-workspace.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 06, 2026 - 16:30",
+    "isOwnMessage": true,
+    "text": "I also started making an Audio editor workspace, the ones on the left are preview textures too, I generate the waveform procedurally from the audio data, and there will be a similar sequencer here as in the animation, with the only difference being that there will be a little sound player window where you can jump around in the audio, play it forwards and backwards, but this is still in its early stages:<br><br><a href=\"https://youtu.be/5Rdv-zo7o9I\" target=\"_blank\">https://youtu.be/5Rdv-zo7o9I</a><br><br><b>EDIT:</b> In the meantime, the player is finished.",
+    "images": [
+      "/Devblog/Journey/08-06-audio-workspace.png"
+    ],
+    "attachments": [],
+    "videos": [
+      "https://www.youtube.com/embed/5Rdv-zo7o9I"
+    ]
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 06, 2026 - 16:45",
+    "isOwnMessage": true,
+    "text": "And you see, everything is in a little preview atlas like this.<br><br>Oh yeah, I wanted to ask, I'd like to load, support, and render videos later on. So displaying a random MP4 video on a cube, or actually on any surface. And I was thinking about what the most practical solution is. Naturally, pre-loading a multi-minute video into textures wouldn't be good at all, so it will have to be streamed. But on the shader side, do I just have 1 texture that I treat traditionally exactly like any other texture, except in the background I continuously update the texture's content with the streamed video's pixels? And then the texture itself feels like a continuous video?",
+    "images": [
+      "/Devblog/Journey/08-06-preview-atlas.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Aug 07, 2026 - 07:29",
+    "isOwnMessage": false,
+    "text": "I'm currently at Balaton so I'll just answer this latter one quickly. Actually, the final phase is indeed that the texture needs to be updated. The question is who and where will decode the video that is in an encoded state on the disk. It can be CPU decoding, and then the CPU streams the finished frames up in advance (some time ahead), or it can be GPU decoding, in which case only the raw video stream goes up to the GPU and the frame drawn into the texture is generated there. But there might be other pitfalls here to watch out for, I'm not entirely sure.",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 07, 2026 - 17:10",
+    "isOwnMessage": true,
+    "text": "By the way, I actually did it! The whole engine is built so well that I can create entire subsystems in it in 1 day.<br>I used the same Raw/Cooked/GPU pipeline for the videos here too. FFmpeg CPU loading and CPU-side video decoding and streaming work in it, and Vulkan has extensions: <code>VK_KHR_video_queue</code>, <code>VK_KHR_video_decode_queue</code>, <code>VK_KHR_video_decode_h264</code>, which can be used to do GPU-side decoding; the engine supports this too, you can set which one you want to use at the moment!! Video streaming is done too <br><br><a href=\"https://www.youtube.com/watch?v=9ZgdC-Fxi_w\" target=\"_blank\">https://www.youtube.com/watch?v=9ZgdC-Fxi_w</a>",
+    "images": [],
+    "attachments": [],
+    "videos": [
+      "https://www.youtube.com/embed/9ZgdC-Fxi_w"
+    ]
+  },
+{
+    "author": "Tamás Péter",
+    "timestamp": "Aug 15, 2026 - 20:32",
+    "isOwnMessage": true,
+    "text": "Hi!<br><br>I made a lot of progress with the presentation, slowly but surely I'm nearing the end.<br>I'm currently at 189 pages, almost everything I wanted to talk about is already in it.<br>What's still coming is the shadow part, detailing the dir/point/spot GPU-driven atlas-based shadow mapping, the problems with simple shadow mapping, etc. Once the shadow part is done, the presentation will contain every main backbone element, concept, and solution of the engine. The full engine, by the way, is a ridiculously massive 90,000 lines of code, and even so, a lot of things were left out of the presentation, but I really just want to present the core concepts and elements.<br>After the shadows, there will be a list of what else the engine can do, 1-1 slide for these: video, sound, physics, editor windows, which won't discuss implementation anymore, but just showcase that it can do these too.<br>And once this is done, I'll be finished with the presentation. I'll make a 5-10 minute engine showcase YouTube video in English, fix some bugs and stuff, and then the engine will be ready for publishing. Hopefully, this happens in August, if not, then 100% everything will be done in September.<br><br>Start from page 113, I expanded the rendering part with animation, because I forgot that. The changes you suggested aren't in it yet, I'll do those at the end. Again, no need to look for grammar mistakes or typos, I fixed like 100 places last time too. What's important: How well does the given slide come across, how well is the logic and cause-and-effect built up, how well does the slide build a mental model of the topic, so to speak. How well does the image match the text. There will probably be repetition in a few places, because naturally I didn't do it in one sitting, and it's hard to keep in mind exactly what was said on which slide, so maybe 1 or 2 thoughts repeat multiple times, although it's not a problem because what is mentioned often is probably important.<br><br>Culling, Deferred Shading, Forward+ are discussed this way from 113-189. I think it turned out really awesome. Whenever you have time, just read through it, no need to do it all at once, maybe during lunch or if you're bored. There's still plenty of time until release anyway, and thanks again for the help.<br><br>(Oh, and all the full diagrams and such, I have them in a unified draw.io file, so anyone can export any diagram from here for themselves. Even you guys, if you ever want to use slides or just diagrams from the presentation for lectures or educational materials, feel free to do so!!!)",
+    "images": [],
+    "attachments": [
+      {
+        "name": "08-15-Synapse-Engine-Presentation-v3.pdf",
+        "fileUrl": "/Devblog/Journey/08-15-Synapse-Engine-Presentation-v3.pdf",
+        "previewUrl": "/Devblog/Journey/08-15-presentation-v3-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 19, 2026 - 14:05",
+    "isOwnMessage": true,
+    "text": "By the way, I also implemented Image Based Lighting. This was a PBR feature that I had wanted to do for a long time, but it seemed too complex, and I could always make progress with other things. But now the SkyBox acts as a light source too. I generate the irradiance cubemaps needed for the diffuse/specular simulation using compute shaders, completely with async compute shaders.<br>(You can see on the helmet that the skybox is reflected)",
+    "images": [
+      "/Devblog/Journey/08-19-ibl-helmet-1.png",
+      "/Devblog/Journey/08-19-ibl-helmet-2.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 19, 2026 - 14:10",
+    "isOwnMessage": true,
+    "text": "And before I started the shadow presentation, I wanted to implement colored transparent shadow handling. In the end, I save the color values into an R16G16B16A16 texture. Compared to a D32 depth, this is really just +32 bits, so it doesn't eat up that much memory. Oh, and what was interesting about it is that I had never come across this before, maybe you haven't either, but the depth is saved in the A16 channel because this is needed to discard the self-shadow at the 1st transparent object, so during rendering, the depth goes into A16.<br><br>And how you do that is that for the blend state, you can provide separate RGB and Alpha states, and then the Alpha channel gets a MIN operation, which naturally stores the closest depth. I just thought I'd write this down too, because I've only just really understood the usefulness of being able to set blend states separately.<br><br><pre><code>            .blendStates = {\n                {\n                    .enable = VK_TRUE,\n                    .srcColorFactor = VK_BLEND_FACTOR_ZERO,\n                    .dstColorFactor = VK_BLEND_FACTOR_SRC_COLOR,\n                    .colorBlendOp = VK_BLEND_OP_ADD,\n                    .srcAlphaFactor = VK_BLEND_FACTOR_ONE,\n                    .dstAlphaFactor = VK_BLEND_FACTOR_ONE,\n                    .alphaBlendOp = VK_BLEND_OP_MIN\n                }\n            },</code></pre>",
+    "images": [
+      "/Devblog/Journey/08-19-transparent-shadow-1.png",
+      "/Devblog/Journey/08-19-transparent-shadow-2.png",
+      "/Devblog/Journey/08-19-transparent-shadow-3.png"
+    ],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Fridvalszky András",
+    "timestamp": "Aug 21, 2026 - 13:48",
+    "isOwnMessage": false,
+    "text": "Awesome!<br>I actually haven't had to program colored shadows yet, so I didn't immediately know that it's worth using this here :D",
+    "images": [],
+    "attachments": [],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 25, 2026 - 21:19",
+    "isOwnMessage": true,
+    "text": "I'm 99% done with the presentation, every technical part I wanted to cover is in it. There are still a few pages left about the future of the engine, what developments are still expected, but that's really just a few pages. It ended up being 233 pages of technical content.<br><br>I haven't reread it yet, I'll go through the whole thing again tomorrow and make some more fixes.<br><br><a href=\"https://synapseengine.dev/\" target=\"_blank\">https://synapseengine.dev/</a><br><br>I also made a website for the engine (it's github.io in the background by the way). I thought I'd modernize this too because the previous one wasn't put together that well, but I really like this one now. I plan to have a devblog here in the future (learnopengl-like stuff), but I won't deal with that for now, because everything is in the presentation.<br><br>Oh yeah, I was also thinking about having a Journey section in the devblog. Actually, the messages I've been sending you here from the very beginning follow exactly how the engine evolved, because I documented it for you from the complete rewrite.<br><br>Maybe it would be super exciting to see how it took shape step-by-step. I just wanted to ask if it would bother you if I put our conversations from here (specifically the ones related to the engine and techniques from the rewrite onwards) on the website? Translated into English, of course.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "08-25-Synapse-Engine-Presentation-v4.pdf",
+        "fileUrl": "/Devblog/Journey/08-25-Synapse-Engine-Presentation-v4.pdf",
+        "previewUrl": "/Devblog/Journey/08-25-presentation-v4-preview.png"
+      }
+    ],
+    "videos": []
+  },
+  {
+    "author": "Tamás Péter",
+    "timestamp": "Aug 27, 2026 - 18:00",
+    "isOwnMessage": true,
+    "text": "Here is the actually final one xd<br>I also expanded it with future directions, like what I'm interested in and what else I want to do in the future.<br>247 pages is actually the end.",
+    "images": [],
+    "attachments": [
+      {
+        "name": "08-27-Synapse-Engine-Presentation-Final.pdf",
+        "fileUrl": "/Devblog/Journey/08-27-Synapse-Engine-Presentation-Final.pdf",
+        "previewUrl": "/Devblog/Journey/08-27-presentation-final-preview.png"
+      }
+    ],
+    "videos": []
   }
 ]
