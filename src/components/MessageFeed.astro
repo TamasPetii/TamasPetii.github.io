@@ -11,7 +11,10 @@ import messages from '../data/journey.json';
             timestamp={msg.timestamp} 
             isOwnMessage={msg.isOwnMessage}
         >
-            <p class="whitespace-pre-wrap" set:html={msg.text} />
+            <div 
+                class="whitespace-pre-wrap break-words min-w-0 [&_pre]:overflow-x-auto [&_pre]:max-w-full [&_pre]:bg-black/15 dark:[&_pre]:bg-black/30 [&_pre]:p-3 [&_pre]:rounded-lg [&_pre]:text-xs [&_pre]:font-mono [&_pre]:mt-2 [&_pre]:mb-2 [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full [&_table]:w-max [&_table]:mt-2 [&_table]:mb-2 [&_table]:text-sm [&_td]:p-1 [&_th]:p-1" 
+                set:html={msg.text} 
+            />
             
             {msg.images && msg.images.length > 0 && (
                 <ChatImageGrid>
