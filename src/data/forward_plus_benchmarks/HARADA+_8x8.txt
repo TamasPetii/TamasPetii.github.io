@@ -1,4 +1,4 @@
-Harada+ 8x8 szál, 16 cluster: 8x8 tile
+Harada+ 8x8 thread, 16 cluster: 8x8 tile
 | ForwardPlusClusterPasses                                                         |      5.755 |    54.7% |
 |   |- TileSetupPassHaradaPlus                                                     |      0.058 |        - |
 |   |- ClusterSetupPassHaradaPlus                                                  |      0.061 |        - |
@@ -18,7 +18,7 @@ Harada+ 8x8 szál, 16 cluster: 8x8 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
 
-Harada+ 8x8 szál, 16 cluster: 16x16 tile
+Harada+ 8x8 thread, 16 cluster: 16x16 tile
 | ForwardPlusClusterPasses                                                         |      1.559 |    25.6% |
 |   |- TileSetupPassHaradaPlus                                                     |      0.025 |        - |
 |   |- ClusterSetupPassHaradaPlus                                                  |      0.022 |        - |
@@ -38,7 +38,7 @@ Harada+ 8x8 szál, 16 cluster: 16x16 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
 
-Harada+ 8x8 szál, 16 cluster: 32x32 tile
+Harada+ 8x8 thread, 16 cluster: 32x32 tile
 | ForwardPlusClusterPasses                                                         |      0.549 |     9.7% |
 |   |- TileSetupPassHaradaPlus                                                     |      0.037 |        - |
 |   |- ClusterSetupPassHaradaPlus                                                  |      0.011 |        - |
@@ -58,7 +58,7 @@ Harada+ 8x8 szál, 16 cluster: 32x32 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.033 |        - |
 
-Harada+ 8x8 szál, 16 cluster: 64x64 tile
+Harada+ 8x8 thread, 16 cluster: 64x64 tile
 | ForwardPlusClusterPasses                                                         |      0.166 |     3.0% |
 |   |- TileSetupPassHaradaPlus                                                     |      0.036 |        - |
 |   |- ClusterSetupPassHaradaPlus                                                  |      0.008 |        - |
@@ -78,7 +78,7 @@ Harada+ 8x8 szál, 16 cluster: 64x64 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
 
-Harada+ 8x8 szál, 16 cluster: 128x128 tile
+Harada+ 8x8 thread, 16 cluster: 128x128 tile
 | ForwardPlusClusterPasses                                                         |      0.113 |     1.8% |
 |   |- TileSetupPassHaradaPlus                                                     |      0.055 |        - |
 |   |- ClusterSetupPassHaradaPlus                                                  |      0.008 |        - |

@@ -1,4 +1,4 @@
-Wicked 16x16 szál: 16x16 tile
+Wicked 16x16 thread: 16x16 tile
 | ForwardPlusClusterPasses                                                         |      0.503 |     5.4% |
 |   |- ClusterUberCullingPassWicked                                                |      0.503 |        - |
 |   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
@@ -14,7 +14,7 @@ Wicked 16x16 szál: 16x16 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
 
-Wicked 16x16 szál: 32x32 tile
+Wicked 16x16 thread: 32x32 tile
 | ForwardPlusClusterPasses                                                         |      0.114 |     1.1% |
 |   |- ClusterUberCullingPassWicked                                                |      0.114 |        - |
 |   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
@@ -30,7 +30,7 @@ Wicked 16x16 szál: 32x32 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
 
-Wicked 16x16 szál: 64x64 tile
+Wicked 16x16 thread: 64x64 tile
 | ForwardPlusClusterPasses                                                         |      0.087 |     0.7% |
 |   |- ClusterUberCullingPassWicked                                                |      0.087 |        - |
 |   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
@@ -46,7 +46,7 @@ Wicked 16x16 szál: 64x64 tile
 |   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
 |   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
 
-Wicked 16x16 szál: 128x128 tile
+Wicked 16x16 thread: 128x128 tile
 | ForwardPlusClusterPasses                                                         |      0.098 |     0.7% |
 |   |- ClusterUberCullingPassWicked                                                |      0.098 |        - |
 |   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
