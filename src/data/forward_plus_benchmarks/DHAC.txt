@@ -1,0 +1,119 @@
+DHAC: 8x8 | Time: 7.801 ms
+| ForwardPlusClusterPasses                                                         |      5.501 |    59.1% |
+|   |- ClusterSetupPassDHAC                                                        |      0.051 |        - |
+|   |- ClusterDispatchSetupPassDHAC                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDHAC                                             |      1.347 |        - |
+|   |- ClusterSpotLightSinglePassDHAC                                              |      3.984 |        - |
+|   |- ClusterPointLightCountPassDHAC                                              |      0.023 |        - |
+|   |- ClusterSpotLightCountPassDHAC                                               |      0.023 |        - |
+|   |- ClusterPrefixSumPassDHAC                                                    |      0.024 |        - |
+|   |- ClusterPointLightWritePassDHAC                                              |      0.023 |        - |
+|   |- ClusterSpotLightWritePassDHAC                                               |      0.023 |        - |
+|   \- ClusterLightWriteSyncPassDHAC                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.300 |    24.7% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.538 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.317 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.172 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.177 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.024 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.025 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.024 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.024 |        - |
+
+DHAC: 16x16 | Time: 4.213 ms
+| ForwardPlusClusterPasses                                                         |      1.488 |    25.3% |
+|   |- ClusterSetupPassDHAC                                                        |      0.019 |        - |
+|   |- ClusterDispatchSetupPassDHAC                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDHAC                                             |      0.530 |        - |
+|   |- ClusterSpotLightSinglePassDHAC                                              |      0.923 |        - |
+|   |- ClusterPointLightCountPassDHAC                                              |      0.002 |        - |
+|   |- ClusterSpotLightCountPassDHAC                                               |      0.002 |        - |
+|   |- ClusterPrefixSumPassDHAC                                                    |      0.003 |        - |
+|   |- ClusterPointLightWritePassDHAC                                              |      0.002 |        - |
+|   |- ClusterSpotLightWritePassDHAC                                               |      0.002 |        - |
+|   \- ClusterLightWriteSyncPassDHAC                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.725 |    46.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.975 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.313 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.166 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.175 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.024 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.025 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.024 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.024 |        - |
+
+DHAC: 32x32 | Time: 3.083 ms
+| ForwardPlusClusterPasses                                                         |      0.299 |     6.6% |
+|   |- ClusterSetupPassDHAC                                                        |      0.012 |        - |
+|   |- ClusterDispatchSetupPassDHAC                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDHAC                                             |      0.099 |        - |
+|   |- ClusterSpotLightSinglePassDHAC                                              |      0.173 |        - |
+|   |- ClusterPointLightCountPassDHAC                                              |      0.002 |        - |
+|   |- ClusterSpotLightCountPassDHAC                                               |      0.001 |        - |
+|   |- ClusterPrefixSumPassDHAC                                                    |      0.002 |        - |
+|   |- ClusterPointLightWritePassDHAC                                              |      0.003 |        - |
+|   |- ClusterSpotLightWritePassDHAC                                               |      0.002 |        - |
+|   \- ClusterLightWriteSyncPassDHAC                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.784 |    61.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.986 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.333 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.171 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.190 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.024 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.024 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.024 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.034 |        - |
+
+DHAC:64x64 | Time: 3.578 ms
+| ForwardPlusClusterPasses                                                         |      0.116 |     2.0% |
+|   |- ClusterSetupPassDHAC                                                        |      0.009 |        - |
+|   |- ClusterDispatchSetupPassDHAC                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDHAC                                             |      0.034 |        - |
+|   |- ClusterSpotLightSinglePassDHAC                                              |      0.057 |        - |
+|   |- ClusterPointLightCountPassDHAC                                              |      0.002 |        - |
+|   |- ClusterSpotLightCountPassDHAC                                               |      0.002 |        - |
+|   |- ClusterPrefixSumPassDHAC                                                    |      0.002 |        - |
+|   |- ClusterPointLightWritePassDHAC                                              |      0.003 |        - |
+|   |- ClusterSpotLightWritePassDHAC                                               |      0.002 |        - |
+|   \- ClusterLightWriteSyncPassDHAC                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      3.462 |    61.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      2.181 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.368 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.529 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.207 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.046 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.043 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.044 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.044 |        - |
+
+DHAC:128x128 | Time: 3.657 ms
+| ForwardPlusClusterPasses                                                         |      0.068 |     1.3% |
+|   |- ClusterSetupPassDHAC                                                        |      0.009 |        - |
+|   |- ClusterDispatchSetupPassDHAC                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDHAC                                             |      0.017 |        - |
+|   |- ClusterSpotLightSinglePassDHAC                                              |      0.025 |        - |
+|   |- ClusterPointLightCountPassDHAC                                              |      0.002 |        - |
+|   |- ClusterSpotLightCountPassDHAC                                               |      0.002 |        - |
+|   |- ClusterPrefixSumPassDHAC                                                    |      0.002 |        - |
+|   |- ClusterPointLightWritePassDHAC                                              |      0.003 |        - |
+|   |- ClusterSpotLightWritePassDHAC                                               |      0.003 |        - |
+|   \- ClusterLightWriteSyncPassDHAC                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      3.589 |    67.6% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      2.500 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.482 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.243 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.269 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.024 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.024 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.025 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.024 |        - |

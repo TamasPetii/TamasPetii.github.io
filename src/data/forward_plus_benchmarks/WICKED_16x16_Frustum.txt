@@ -1,0 +1,64 @@
+Wicked 8x8 szál, frustum culling: 16x16 tile
+| ForwardPlusClusterPasses                                                         |      0.871 |     8.8% |
+|   |- ClusterUberCullingPassWicked                                                |      0.871 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.149 |    72.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.001 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      4.775 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.992 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.624 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.640 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+Wicked 8x8 szál, frustum culling: 32x32 tile
+| ForwardPlusClusterPasses                                                         |      0.120 |     1.2% |
+|   |- ClusterUberCullingPassWicked                                                |      0.120 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.685 |    75.9% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.074 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.093 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.682 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.719 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Wicked 8x8 szál, frustum culling: 64x64 tile
+| ForwardPlusClusterPasses                                                         |      0.085 |     0.8% |
+|   |- ClusterUberCullingPassWicked                                                |      0.085 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      8.600 |    78.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.606 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.266 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.810 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.800 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Wicked 8x8 szál, frustum culling: 128x128 tile
+| ForwardPlusClusterPasses                                                         |      0.092 |     0.7% |
+|   |- ClusterUberCullingPassWicked                                                |      0.092 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |     10.671 |    83.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      7.327 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.403 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.920 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.904 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+

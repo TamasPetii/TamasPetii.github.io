@@ -1,0 +1,104 @@
+DOOM 32 slice: 8x8 | Time: 43.077 ms
+| ForwardPlusClusterPasses                                                         |     38.313 |    85.3% |
+|   |- ClusterSetupPassDoom                                                        |      0.138 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      8.075 |        - |
+|   \- ClusterSpotLightSinglePassDoom                                              |     30.095 |        - |
+|                                                                                  |            |          |
+| UndefinedPasses                                                                  |      0.000 |     0.0% |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      4.764 |    10.6% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.181 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.709 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.367 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.390 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice: 16x16 | Time: 10.901 ms
+| ForwardPlusClusterPasses                                                         |      6.409 |    50.4% |
+|   |- ClusterSetupPassDoom                                                        |      0.038 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      3.811 |        - |
+|   \- ClusterSpotLightSinglePassDoom                                              |      2.555 |        - |
+|                                                                                  |            |          |
+| UndefinedPasses                                                                  |      0.000 |     0.0% |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      4.492 |    35.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.001 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.655 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.340 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.373 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.035 |        - |
+
+DOOM 32 slice: 32x32 | Time: 5.971 ms
+| ForwardPlusClusterPasses                                                         |      1.454 |    18.6% |
+|   |- ClusterSetupPassDoom                                                        |      0.015 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      0.782 |        - |
+|   \- ClusterSpotLightSinglePassDoom                                              |      0.652 |        - |
+|                                                                                  |            |          |
+| UndefinedPasses                                                                  |      0.000 |     0.0% |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      4.517 |    57.8% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.019 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.678 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.349 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.354 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+DOOM 32 slice: 64x64 | Time: 5.480 ms
+| ForwardPlusClusterPasses                                                         |      0.287 |     3.9% |
+|   |- ClusterSetupPassDoom                                                        |      0.012 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      0.099 |        - |
+|   \- ClusterSpotLightSinglePassDoom                                              |      0.171 |        - |
+|                                                                                  |            |          |
+| UndefinedPasses                                                                  |      0.000 |     0.0% |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      5.193 |    71.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.593 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.715 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.369 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.398 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice: 128x128 | Time: 6.732 ms
+| ForwardPlusClusterPasses                                                         |      0.099 |     1.2% |
+|   |- ClusterSetupPassDoom                                                        |      0.009 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      0.033 |        - |
+|   \- ClusterSpotLightSinglePassDoom                                              |      0.053 |        - |
+|                                                                                  |            |          |
+| UndefinedPasses                                                                  |      0.000 |     0.0% |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      6.633 |    77.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      4.880 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.799 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.398 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.438 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |

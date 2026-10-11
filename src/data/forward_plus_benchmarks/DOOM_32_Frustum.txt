@@ -1,0 +1,94 @@
+DOOM 32 slice, frustum: 8x8
+| ForwardPlusClusterPasses                                                         |     46.279 |    82.5% |
+|   |- ClusterSetupPassDoom                                                        |      0.161 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.006 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      9.805 |        - |
+|   |- ClusterSpotLightSinglePassDoom                                              |     36.307 |        - |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.986 |    14.2% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.506 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.110 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.626 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.627 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice, frustum: 16x16
+| ForwardPlusClusterPasses                                                         |      7.863 |    45.3% |
+|   |- ClusterSetupPassDoom                                                        |      0.031 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      4.729 |        - |
+|   |- ClusterSpotLightSinglePassDoom                                              |      3.096 |        - |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.002 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.604 |    43.8% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.294 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.034 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.562 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.596 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice, frustum: 32x32
+| ForwardPlusClusterPasses                                                         |      1.846 |    16.2% |
+|   |- ClusterSetupPassDoom                                                        |      0.016 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      1.050 |        - |
+|   |- ClusterSpotLightSinglePassDoom                                              |      0.775 |        - |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.665 |    67.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.366 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.035 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.575 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.570 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice, frustum: 64x64
+| ForwardPlusClusterPasses                                                         |      0.851 |     7.9% |
+|   |- ClusterSetupPassDoom                                                        |      0.014 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      0.151 |        - |
+|   |- ClusterSpotLightSinglePassDoom                                              |      0.680 |        - |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.930 |    74.0% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.526 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.101 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.579 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.607 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+DOOM 32 slice, frustum: 128x128
+| ForwardPlusClusterPasses                                                         |      0.119 |     1.1% |
+|   |- ClusterSetupPassDoom                                                        |      0.008 |        - |
+|   |- ClusterDispatchSetupPassDoom                                                |      0.005 |        - |
+|   |- ClusterPointLightSinglePassDoom                                             |      0.046 |        - |
+|   |- ClusterSpotLightSinglePassDoom                                              |      0.059 |        - |
+|   \- ClusterLightWriteSyncPassDoom                                               |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      8.410 |    77.6% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.001 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.816 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.177 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.643 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.656 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |

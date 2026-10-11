@@ -1,0 +1,63 @@
+Wicked 16x16 szál: 16x16 tile
+| ForwardPlusClusterPasses                                                         |      0.503 |     5.4% |
+|   |- ClusterUberCullingPassWicked                                                |      0.503 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      6.433 |    68.9% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.630 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.050 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.765 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.871 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+Wicked 16x16 szál: 32x32 tile
+| ForwardPlusClusterPasses                                                         |      0.114 |     1.1% |
+|   |- ClusterUberCullingPassWicked                                                |      0.114 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.939 |    76.6% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      4.490 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.286 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.980 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.066 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Wicked 16x16 szál: 64x64 tile
+| ForwardPlusClusterPasses                                                         |      0.087 |     0.7% |
+|   |- ClusterUberCullingPassWicked                                                |      0.087 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      9.906 |    80.6% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.635 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.651 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      1.148 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.353 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.032 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Wicked 16x16 szál: 128x128 tile
+| ForwardPlusClusterPasses                                                         |      0.098 |     0.7% |
+|   |- ClusterUberCullingPassWicked                                                |      0.098 |        - |
+|   \- ClusterLightWriteSyncPassWicked                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |     12.730 |    84.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      7.610 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      2.106 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      1.393 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.503 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |

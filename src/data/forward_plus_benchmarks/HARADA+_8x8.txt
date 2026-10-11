@@ -1,0 +1,99 @@
+Harada+ 8x8 szál, 16 cluster: 8x8 tile
+| ForwardPlusClusterPasses                                                         |      5.755 |    54.7% |
+|   |- TileSetupPassHaradaPlus                                                     |      0.058 |        - |
+|   |- ClusterSetupPassHaradaPlus                                                  |      0.061 |        - |
+|   |- ClusterDispatchSetupPassHaradaPlus                                          |      0.005 |        - |
+|   |- ClusterPointLightSinglePassHaradaPlus                                       |      1.924 |        - |
+|   |- ClusterSpotLightSinglePassHaradaPlus                                        |      3.707 |        - |
+|   \- ClusterLightWriteSyncPassHaradaPlus                                         |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.826 |    26.8% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.913 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.372 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.211 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.214 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+Harada+ 8x8 szál, 16 cluster: 16x16 tile
+| ForwardPlusClusterPasses                                                         |      1.559 |    25.6% |
+|   |- TileSetupPassHaradaPlus                                                     |      0.025 |        - |
+|   |- ClusterSetupPassHaradaPlus                                                  |      0.022 |        - |
+|   |- ClusterDispatchSetupPassHaradaPlus                                          |      0.005 |        - |
+|   |- ClusterPointLightSinglePassHaradaPlus                                       |      0.840 |        - |
+|   |- ClusterSpotLightSinglePassHaradaPlus                                        |      0.667 |        - |
+|   \- ClusterLightWriteSyncPassHaradaPlus                                         |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.722 |    44.7% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.845 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.349 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.208 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.202 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Harada+ 8x8 szál, 16 cluster: 32x32 tile
+| ForwardPlusClusterPasses                                                         |      0.549 |     9.7% |
+|   |- TileSetupPassHaradaPlus                                                     |      0.037 |        - |
+|   |- ClusterSetupPassHaradaPlus                                                  |      0.011 |        - |
+|   |- ClusterDispatchSetupPassHaradaPlus                                          |      0.005 |        - |
+|   |- ClusterPointLightSinglePassHaradaPlus                                       |      0.139 |        - |
+|   |- ClusterSpotLightSinglePassHaradaPlus                                        |      0.357 |        - |
+|   \- ClusterLightWriteSyncPassHaradaPlus                                         |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      2.826 |    49.7% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      1.902 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.370 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.213 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.221 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.033 |        - |
+
+Harada+ 8x8 szál, 16 cluster: 64x64 tile
+| ForwardPlusClusterPasses                                                         |      0.166 |     3.0% |
+|   |- TileSetupPassHaradaPlus                                                     |      0.036 |        - |
+|   |- ClusterSetupPassHaradaPlus                                                  |      0.008 |        - |
+|   |- ClusterDispatchSetupPassHaradaPlus                                          |      0.005 |        - |
+|   |- ClusterPointLightSinglePassHaradaPlus                                       |      0.045 |        - |
+|   |- ClusterSpotLightSinglePassHaradaPlus                                        |      0.071 |        - |
+|   \- ClusterLightWriteSyncPassHaradaPlus                                         |      0.001 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      3.550 |    63.7% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      2.523 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.427 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.238 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.245 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Harada+ 8x8 szál, 16 cluster: 128x128 tile
+| ForwardPlusClusterPasses                                                         |      0.113 |     1.8% |
+|   |- TileSetupPassHaradaPlus                                                     |      0.055 |        - |
+|   |- ClusterSetupPassHaradaPlus                                                  |      0.008 |        - |
+|   |- ClusterDispatchSetupPassHaradaPlus                                          |      0.005 |        - |
+|   |- ClusterPointLightSinglePassHaradaPlus                                       |      0.019 |        - |
+|   |- ClusterSpotLightSinglePassHaradaPlus                                        |      0.026 |        - |
+|   \- ClusterLightWriteSyncPassHaradaPlus                                         |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      4.225 |    68.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.001 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      2.961 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      0.547 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.297 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.301 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |

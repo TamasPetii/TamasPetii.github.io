@@ -1,0 +1,79 @@
+HARADA 8x8 thread: 8x8 tile
+| ForwardPlusClusterPasses                                                         |      1.138 |    11.6% |
+|   |- ClusterUberCullingPassHarada                                                |      1.138 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      6.798 |    69.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.001 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      3.903 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.062 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.786 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.928 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+HARADA 8x8 thread: 16x16 tile
+| ForwardPlusClusterPasses                                                         |      0.199 |     2.0% |
+|   |- ClusterUberCullingPassHarada                                                |      0.199 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.904 |    78.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      4.550 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.322 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.905 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.010 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+HARADA 8x8 thread: 32x32 tile
+| ForwardPlusClusterPasses                                                         |      0.128 |     1.2% |
+|   |- ClusterUberCullingPassHarada                                                |      0.128 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      9.177 |    82.5% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.454 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.444 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      1.049 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.113 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+HARADA 8x8 thread: 64x64 tile
+| ForwardPlusClusterPasses                                                         |      0.049 |     0.4% |
+|   |- ClusterUberCullingPassHarada                                                |      0.049 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |     11.144 |    85.1% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      6.679 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.689 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      1.246 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.413 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+HARADA 8x8 thread: 128x128 tile
+| ForwardPlusClusterPasses                                                         |      0.067 |     0.4% |
+|   |- ClusterUberCullingPassHarada                                                |      0.067 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |     14.567 |    87.7% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      8.968 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      2.382 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      1.457 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      1.642 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |

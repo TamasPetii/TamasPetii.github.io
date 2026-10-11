@@ -1,0 +1,63 @@
+Harada 16x16 thread, frustum culling: 16x16 tile
+| ForwardPlusClusterPasses                                                         |      0.886 |     8.9% |
+|   |- ClusterUberCullingPassHarada                                                |      0.886 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      7.169 |    72.3% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      4.731 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.054 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.637 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.631 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.029 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.030 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Harada 16x16 thread, frustum culling: 32x32 tile
+| ForwardPlusClusterPasses                                                         |      0.104 |     1.0% |
+|   |- ClusterUberCullingPassHarada                                                |      0.104 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      8.153 |    80.9% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      5.517 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.139 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.697 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.683 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.030 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.029 |        - |
+
+Harada 16x16 thread, frustum culling: 64x64 tile
+| ForwardPlusClusterPasses                                                         |      0.058 |     0.5% |
+|   |- ClusterUberCullingPassHarada                                                |      0.058 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |      9.317 |    83.1% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.001 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      6.385 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.276 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.782 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.757 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
+
+Harada 16x16 thread, frustum culling: 128x128 tile
+| ForwardPlusClusterPasses                                                         |      0.095 |     0.8% |
+|   |- ClusterUberCullingPassHarada                                                |      0.095 |        - |
+|   \- ClusterLightWriteSyncPassHarada                                             |      0.000 |        - |
+|                                                                                  |            |          |
+| ForwardPlusLightingPasses                                                        |     10.198 |    80.4% |
+|   |- OpaqueForwardTransitionPass                                                 |      0.000 |        - |
+|   |- MeshletOpaqueForward1Sided                                                  |      6.756 |        - |
+|   |- MeshletOpaqueForward2Sided                                                  |      1.508 |        - |
+|   |- TraditionalOpaqueForward1Sided                                              |      0.926 |        - |
+|   |- TraditionalOpaqueForward2Sided                                              |      0.891 |        - |
+|   |- MeshletOpaqueAlphaTestedForward1Sided                                       |      0.030 |        - |
+|   |- MeshletOpaqueAlphaTestedForward2Sided                                       |      0.029 |        - |
+|   |- TraditionalOpaqueAlphaTestedForward1Sided                                   |      0.029 |        - |
+|   \- TraditionalOpaqueAlphaTestedForward2Sided                                   |      0.030 |        - |
