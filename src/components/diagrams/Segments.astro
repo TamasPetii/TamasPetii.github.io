@@ -1,0 +1,48 @@
+---
+/**
+ * Segmented dense array (TDK figure 2.3): one pool, three regions split by boundary indices.
+ */
+const cells = [
+    { id: 2, seg: 'static' }, { id: 0, seg: 'static' }, { id: 3, seg: 'static' },
+    { id: 6, seg: 'dynamic' }, { id: 5, seg: 'dynamic' }, { id: 1, seg: 'dynamic' },
+    { id: 10, seg: 'stream' }, { id: 8, seg: 'stream' }, { id: 9, seg: 'stream' }, { id: 4, seg: 'stream' },
+];
+const segs = [
+    { key: 'static', label: 'Static', end: 'static end' },
+    { key: 'dynamic', label: 'Dynamic', end: 'dynamic end' },
+    { key: 'stream', label: 'Stream', end: 'stream end' },
+];
+---
+<div class="w-full overflow-x-auto">
+    <div class="min-w-[520px]">
+        <div class="flex gap-6 mb-3">
+            {segs.map((s) => (
+                <div class="flex gap-1.5" style={`flex:${cells.filter((c) => c.seg === s.key).length}`}>
+                    <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint">{s.label}</span>
+                </div>
+            ))}
+        </div>
+        <div class="flex gap-6">
+            {segs.map((s) => (
+                <div class="flex gap-1.5" style={`flex:${cells.filter((c) => c.seg === s.key).length}`}>
+                    {cells.filter((c) => c.seg === s.key).map((c) => (
+                        <span class:list={['seg-cell flex-1 h-11 rounded-md border flex items-center justify-center font-mono text-sm text-fg', `seg-${s.key}`]}>{c.id}</span>
+                    ))}
+                </div>
+            ))}
+        </div>
+        <div class="flex gap-6 mt-2">
+            {segs.map((s) => (
+                <div class="flex justify-end" style={`flex:${cells.filter((c) => c.seg === s.key).length}`}>
+                    <span class="font-mono text-[11px] text-faint">↑ {s.end}</span>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+<style>
+    .seg-static { background: color-mix(in srgb, var(--fg) 7%, var(--bg)); border-color: var(--line); }
+    .seg-dynamic { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+    .seg-stream { background: color-mix(in srgb, var(--accent) 38%, var(--bg)); border-color: color-mix(in srgb, var(--accent) 70%, transparent); }
+</style>

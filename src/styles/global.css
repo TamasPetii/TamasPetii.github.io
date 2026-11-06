@@ -1,3 +1,146 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   Design tokens
+   One neutral palette + a single accent. Light/dark are swapped via
+   CSS variables, so components only use bg-bg, text-fg, border-line …
+   ------------------------------------------------------------------ */
+:root {
+    --bg: #ffffff;
+    --surface: #f5f5f6;
+    --fg: #0c0c0e;
+    --muted: #55585f;
+    --faint: #8a8d94;
+    --line: #e3e3e6;
+    --accent: #5b3fd9;
+    --accent-fg: #ffffff;
+    color-scheme: light;
+}
+
+.dark {
+    --bg: #0b0b0d;
+    --surface: #141417;
+    --fg: #ececee;
+    --muted: #a3a6ad;
+    --faint: #6d7078;
+    --line: #26272c;
+    --accent: #a08bff;
+    --accent-fg: #0b0b0d;
+    color-scheme: dark;
+}
+
+@theme inline {
+    --color-bg: var(--bg);
+    --color-surface: var(--surface);
+    --color-fg: var(--fg);
+    --color-muted: var(--muted);
+    --color-faint: var(--faint);
+    --color-line: var(--line);
+    --color-accent: var(--accent);
+    --color-accent-fg: var(--accent-fg);
+}
+
+@theme {
+    --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+    html {
+        font-feature-settings: "cv11", "ss01";
+        -webkit-font-smoothing: antialiased;
+    }
+    body {
+        @apply bg-bg text-fg font-sans;
+    }
+    ::selection {
+        background: color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+}
+
+@layer components {
+    /* Page width */
+    .wrap {
+        @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+    }
+    .wrap-wide {
+        @apply mx-auto w-full max-w-[88rem] px-5 sm:px-8;
+    }
+    .wrap-narrow {
+        @apply mx-auto w-full max-w-3xl px-5 sm:px-8;
+    }
+
+    /* Small uppercase label above headings */
+    .eyebrow {
+        @apply font-mono text-xs uppercase tracking-[0.12em] text-faint;
+    }
+
+    /* Section heading */
+    .h-section {
+        @apply text-3xl md:text-[2.6rem] font-semibold tracking-tight leading-[1.1] text-fg;
+    }
+    .h-sub {
+        @apply text-xl md:text-2xl font-semibold tracking-tight text-fg;
+    }
+    .lead {
+        @apply text-lg md:text-xl leading-relaxed text-muted;
+    }
+    .body {
+        @apply text-base leading-relaxed text-muted;
+    }
+    .body strong {
+        @apply font-semibold text-fg;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors;
+    }
+    .btn-primary {
+        @apply border border-fg bg-fg text-bg hover:opacity-85;
+    }
+    .btn-secondary {
+        @apply border border-line text-fg hover:bg-surface;
+    }
+
+    /* Inline text link with arrow */
+    .link {
+        @apply inline-flex items-center gap-1 text-sm font-medium text-fg underline decoration-line underline-offset-4 hover:decoration-fg transition-colors;
+    }
+
+    /* Figures */
+    .figure img {
+        @apply block w-full rounded-lg border border-line bg-surface;
+    }
+    .figure figcaption {
+        @apply mt-3 text-sm leading-snug text-faint;
+    }
+    .figure figcaption b {
+        @apply font-medium text-muted;
+    }
+
+    /* Data tables */
+    .data-table {
+        @apply w-full text-sm border-collapse;
+    }
+    .data-table th {
+        @apply py-2.5 pr-4 text-left font-mono text-xs font-normal uppercase tracking-wider text-faint border-b border-line;
+    }
+    .data-table td {
+        @apply py-2.5 pr-4 border-b border-line text-muted align-top;
+    }
+    .data-table td.num,
+    .data-table th.num {
+        @apply text-right font-mono tabular-nums;
+    }
+    .data-table tr.hl td {
+        @apply text-fg font-medium;
+    }
+
+    .rule {
+        @apply border-t border-line;
+    }
+}

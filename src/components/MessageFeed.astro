@@ -4,7 +4,7 @@ import ChatImageGrid from './ChatImageGrid.astro';
 import messages from '../data/journey.json';
 ---
 
-<div class="mt-12 space-y-2">
+<div class="not-prose mt-12">
     {messages.map((msg) => (
         <ChatBubble 
             author={msg.author} 
@@ -12,15 +12,15 @@ import messages from '../data/journey.json';
             isOwnMessage={msg.isOwnMessage}
         >
             <div 
-                class="whitespace-pre-wrap break-words min-w-0 [&_pre]:overflow-x-auto [&_pre]:max-w-full [&_pre]:bg-black/15 dark:[&_pre]:bg-black/30 [&_pre]:p-3 [&_pre]:rounded-lg [&_pre]:text-xs [&_pre]:font-mono [&_pre]:mt-2 [&_pre]:mb-2 [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full [&_table]:w-max [&_table]:mt-2 [&_table]:mb-2 [&_table]:text-sm [&_td]:p-1 [&_th]:p-1" 
+                class="whitespace-pre-wrap break-words min-w-0 [&_pre]:overflow-x-auto [&_pre]:max-w-full [&_pre]:bg-bg [&_pre]:border [&_pre]:border-line [&_pre]:p-3 [&_pre]:rounded-lg [&_pre]:text-xs [&_pre]:font-mono [&_pre]:mt-2 [&_pre]:mb-2 [&_table]:block [&_table]:overflow-x-auto [&_table]:max-w-full [&_table]:w-max [&_table]:mt-2 [&_table]:mb-2 [&_table]:text-sm [&_td]:p-1 [&_th]:p-1" 
                 set:html={msg.text} 
             />
             
             {msg.images && msg.images.length > 0 && (
                 <ChatImageGrid>
                     {msg.images.map((img) => (
-                        <a href={img} target="_blank" rel="noopener noreferrer" class="block cursor-zoom-in group">
-                            <img src={img} alt="Log attachment" class="rounded-lg w-full object-cover border border-purple-400/30 group-hover:opacity-80 transition-opacity duration-200" loading="lazy" />
+                        <a href={img} target="_blank" rel="noopener noreferrer" class="block cursor-zoom-in">
+                            <img src={img} alt="Log attachment" class="rounded-md w-full object-cover border border-line hover:opacity-90 transition-opacity" loading="lazy" />
                         </a>
                     ))}
                 </ChatImageGrid>
@@ -40,7 +40,7 @@ import messages from '../data/journey.json';
                         }
 
                         return (
-                            <div class="relative rounded-lg overflow-hidden border border-purple-400/30 bg-black/50 aspect-video">
+                            <div class="relative rounded-md overflow-hidden border border-line bg-black aspect-video">
                                 {isYouTube ? (
                                     <iframe 
                                         class="w-full h-full object-cover" 
@@ -69,11 +69,11 @@ import messages from '../data/journey.json';
             {msg.attachments && msg.attachments.length > 0 && (
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
                     {msg.attachments.map((file) => (
-                        <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" class="block group relative border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                        <a href={file.fileUrl} target="_blank" rel="noopener noreferrer" class="block group relative border border-line rounded-md overflow-hidden">
                             <img src={file.previewUrl} alt={file.name} class="w-full h-32 object-cover group-hover:opacity-75 transition-opacity duration-200" loading="lazy" />
-                            <div class="absolute bottom-0 inset-x-0 bg-gray-900/70 backdrop-blur-sm px-3 py-2">
-                                <span class="text-xs font-bold text-white flex items-center gap-2">
-                                    📄 {file.name}
+                            <div class="absolute bottom-0 inset-x-0 bg-black/70 px-3 py-2">
+                                <span class="text-xs font-medium text-white flex items-center gap-2">
+                                    {file.name}
                                 </span>
                             </div>
                         </a>

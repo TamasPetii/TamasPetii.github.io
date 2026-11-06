@@ -1,0 +1,77 @@
+---
+/**
+ * Sparse-set component pool (TDK figure 2.1), drawn in SVG so it follows the site theme.
+ * Entity 3, 0 and 7 own a component, packed densely in that order.
+ */
+const entities = [0, 1, 2, 3, 4, 5, 6, 7];
+const sparse: (number | null)[] = [1, null, null, 0, null, null, null, 2];
+const dense = [3, 0, 7];
+
+const W = 46, H = 34, GAP = 8;
+const LABEL = 150;
+const X0 = LABEL;
+const rowY = { entity: 16, sparse: 96, dense: 196, data: 276, flags: 346 };
+
+const cx = (i: number) => X0 + i * (W + GAP);
+const denseX = (i: number) => X0 + 2 * (W + GAP) + i * (W + GAP); // dense block sits under the middle
+const width = X0 + entities.length * (W + GAP);
+const height = rowY.flags + H + 16;
+
+const rows = [
+    { y: rowY.entity, label: 'Entity ID' },
+    { y: rowY.sparse, label: 'Sparse index' },
+    { y: rowY.dense, label: 'Dense index' },
+    { y: rowY.data, label: 'Components' },
+    { y: rowY.flags, label: 'Change flags' },
+];
+---
+<svg viewBox={`0 0 ${width} ${height}`} class="w-full h-auto" role="img" aria-label="Sparse-set component pool">
+    <defs>
+        <marker id="ss-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L8 4 L0 8 z" fill="var(--faint)" />
+        </marker>
+    </defs>
+
+    {rows.map((r) => (
+        <text x="0" y={r.y + H / 2 + 4} fill="var(--muted)" font-size="13" font-family="Inter, sans-serif">{r.label}</text>
+    ))}
+
+    <!-- entity -> sparse -->
+    {entities.map((e, i) => (
+        <line x1={cx(i) + W / 2} y1={rowY.entity + H} x2={cx(i) + W / 2} y2={rowY.sparse - 2} stroke="var(--faint)" stroke-width="1" marker-end="url(#ss-arrow)" />
+    ))}
+    <!-- sparse -> dense -->
+    {sparse.map((s, i) => s !== null && (
+        <line x1={cx(i) + W / 2} y1={rowY.sparse + H} x2={denseX(s) + W / 2} y2={rowY.dense - 2} stroke="var(--fg)" stroke-opacity="0.55" stroke-width="1.2" marker-end="url(#ss-arrow)" />
+    ))}
+    <!-- dense -> data -> flags -->
+    {dense.map((_, i) => (
+        <>
+            <line x1={denseX(i) + W / 2} y1={rowY.dense + H} x2={denseX(i) + W / 2} y2={rowY.data - 2} stroke="var(--faint)" stroke-width="1" marker-end="url(#ss-arrow)" />
+            <line x1={denseX(i) + W / 2} y1={rowY.data + H} x2={denseX(i) + W / 2} y2={rowY.flags - 2} stroke="var(--faint)" stroke-width="1" marker-end="url(#ss-arrow)" />
+        </>
+    ))}
+
+    {entities.map((e, i) => (
+        <g>
+            <rect x={cx(i)} y={rowY.entity} width={W} height={H} rx="6" fill="var(--bg)" stroke="var(--line)" />
+            <text x={cx(i) + W / 2} y={rowY.entity + H / 2 + 4} text-anchor="middle" fill="var(--fg)" font-size="13" font-family="JetBrains Mono, monospace">{e}</text>
+        </g>
+    ))}
+    {sparse.map((s, i) => (
+        <g>
+            <rect x={cx(i)} y={rowY.sparse} width={W} height={H} rx="6" fill="var(--bg)" stroke="var(--line)" />
+            <text x={cx(i) + W / 2} y={rowY.sparse + H / 2 + 4} text-anchor="middle" fill={s === null ? 'var(--faint)' : 'var(--fg)'} font-size="13" font-family="JetBrains Mono, monospace">{s === null ? '·' : s}</text>
+        </g>
+    ))}
+    {dense.map((d, i) => (
+        <g>
+            <rect x={denseX(i)} y={rowY.dense} width={W} height={H} rx="6" fill="var(--bg)" stroke="var(--fg)" stroke-opacity="0.5" />
+            <text x={denseX(i) + W / 2} y={rowY.dense + H / 2 + 4} text-anchor="middle" fill="var(--fg)" font-size="13" font-family="JetBrains Mono, monospace">{d}</text>
+            <rect x={denseX(i)} y={rowY.data} width={W} height={H} rx="6" fill="var(--accent)" fill-opacity="0.18" stroke="var(--accent)" stroke-opacity="0.6" />
+            <text x={denseX(i) + W / 2} y={rowY.data + H / 2 + 4} text-anchor="middle" fill="var(--fg)" font-size="12" font-family="Inter, sans-serif">data</text>
+            <rect x={denseX(i)} y={rowY.flags} width={W} height={H} rx="6" fill="var(--bg)" stroke="var(--line)" />
+            <text x={denseX(i) + W / 2} y={rowY.flags + H / 2 + 4} text-anchor="middle" fill="var(--muted)" font-size="12" font-family="JetBrains Mono, monospace">bits</text>
+        </g>
+    ))}
+</svg>

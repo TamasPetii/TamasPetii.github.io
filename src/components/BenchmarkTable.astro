@@ -7,11 +7,9 @@ interface Props {
 const { title, rawText } = Astro.props;
 ---
 
-<div class="my-8 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-sm transition-colors duration-300">
-    <div class="bg-gray-100 dark:bg-gray-900 px-5 py-3 border-b border-gray-200 dark:border-gray-800">
-        <h4 class="m-0 font-bold text-gray-900 dark:text-white text-lg">{title}</h4>
+<figure class="not-prose my-8 border border-line rounded-lg overflow-hidden">
+    <figcaption class="px-5 py-3 border-b border-line bg-surface font-mono text-xs uppercase tracking-wider text-muted">{title}</figcaption>
+    <div class="p-5 overflow-x-auto">
+        <pre class="m-0 text-xs sm:text-sm font-mono text-fg"><code>{rawText}</code></pre>
     </div>
-    <div class="p-5 bg-white dark:bg-gray-950 overflow-x-auto">
-        <pre class="!m-0 !p-0 !bg-transparent text-xs sm:text-sm font-mono text-gray-700 dark:text-gray-300"><code>{rawText}</code></pre>
-    </div>
-</div>
+</figure>

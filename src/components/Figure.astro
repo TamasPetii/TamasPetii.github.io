@@ -1,0 +1,23 @@
+---
+interface Props {
+    src: string;
+    alt: string;
+    class?: string;
+    /** Use "eager" for images above the fold. */
+    loading?: 'lazy' | 'eager';
+    /**
+     * Crop to a uniform frame so images in a grid line up.
+     * `true` gives 16:10, or pass an aspect class such as "aspect-[4/3]".
+     */
+    crop?: boolean | string;
+}
+const { src, alt, class: className, loading = 'lazy', crop = false } = Astro.props;
+const cropClass = crop === true ? 'aspect-[16/10] object-cover' : crop ? `${crop} object-cover` : undefined;
+const hasCaption = Astro.slots.has('default');
+---
+<figure class:list={['figure', className]}>
+    <a href={src} target="_blank" rel="noopener" class="block cursor-zoom-in">
+        <img src={src} alt={alt} loading={loading} decoding="async" class:list={[cropClass]} />
+    </a>
+    {hasCaption && <figcaption><slot /></figcaption>}
+</figure>

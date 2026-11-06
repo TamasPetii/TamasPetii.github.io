@@ -1,0 +1,21 @@
+---
+/** One image in a blog Gallery, with an optional title and caption. */
+interface Props {
+    src: string;
+    title?: string;
+    caption?: string;
+    alt?: string;
+}
+const { src, title, caption, alt } = Astro.props;
+---
+<figure>
+    <a href={src} target="_blank" rel="noopener" class="block cursor-zoom-in">
+        <img src={src} alt={alt ?? title ?? ''} loading="lazy" decoding="async" class="block w-full aspect-[16/10] object-cover rounded-lg border border-line bg-surface" />
+    </a>
+    {(title || caption) && (
+        <figcaption class="mt-3">
+            {title && <span class="block text-sm font-medium text-fg">{title}</span>}
+            {caption && <span class="block mt-1 text-sm leading-snug text-muted">{caption}</span>}
+        </figcaption>
+    )}
+</figure>

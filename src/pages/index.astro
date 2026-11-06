@@ -1,196 +1,1352 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Figure from '../components/Figure.astro';
+import SparseSet from '../components/diagrams/SparseSet.astro';
+import Segments from '../components/diagrams/Segments.astro';
+
+const IMG = '/Images/Home';
+const DEEP_DIVE = '/Presentations/SynapseEnginePresentation.pdf';
+const DHAC_TALK = '/Presentations/Budapest_Graphics_Forum_2026_DHAC.pdf';
+const DHAC_CODE = 'https://github.com/TamasPetii/SynapseEngine/tree/feature/paper/SynapseEngine/Engine/Shaders/Passes/Shading/ForwardPlus/Techniques';
+const DHAC_BENCHMARK_POST = '/devblog';
+
+const landscapeCols = ['Open source', 'Modern GPU-driven pipeline', 'Complete engine architecture', 'Built for research', 'Transparent for research'];
+
+const landscape = [
+    { name: 'Unity Engine',  v: ['no', 'part', 'yes', 'no', 'no'] },
+    { name: 'Northlight',    v: ['no', 'yes', 'yes', 'no', 'no'] },
+    { name: 'Unreal Engine', v: ['part', 'yes', 'yes', 'no', 'part'] },
+    { name: 'Godot Engine',  v: ['yes', 'part', 'yes', 'no', 'part'] },
+    { name: 'Wicked Engine', v: ['yes', 'part', 'yes', 'no', 'part'] },
+    { name: 'NVIDIA Falcor', v: ['yes', 'part', 'no', 'yes', 'yes'] },
+];
+
+const audiences = [
+    {
+        tag: 'Research',
+        title: 'University research groups',
+        text: 'A modern, high-performance engine on Vulkan 1.4 and its newest extensions, ready to use. No need for every group to maintain its own framework.',
+        goal: 'The long-term goal is a shared benchmark platform. Many research algorithms implemented in one engine, measured under the same conditions and citable in papers.',
+    },
+    {
+        tag: 'Industry R&D',
+        title: 'Companies and R&D teams',
+        text: 'A clean, lean engine for prototyping new rendering ideas fast, without fighting a huge codebase first.',
+        goal: 'Try an algorithm, measure it, change it. Then take what works to your production engine.',
+    },
+    {
+        tag: 'Education',
+        title: 'Students and graphics enthusiasts',
+        text: 'Not just Vulkan, but how a complete modern engine is built. Clean code, clear layers and state-of-the-art graphics techniques.',
+        goal: 'I am planning a lot of learning material and visual devblogs to go with the code.',
+    },
+];
+
+const dhacBench = [
+    { name: 'DHAC', config: 'Dual-HiZ, 16 slices', tile: '32×32', ms: 3.083, speedup: '1.00×', ours: true },
+    { name: 'DHAC-', config: 'No Hi-Z, 8×8 threads', tile: '32×32', ms: 3.375, speedup: '1.09×', ours: true },
+    { name: 'DOOM (2016)', config: '32 slices', tile: '64×64', ms: 5.480, speedup: '1.78×' },
+    { name: 'Wicked Engine', config: '8×8 threads', tile: '8×8', ms: 6.923, speedup: '2.25×' },
+    { name: 'Harada et al.', config: '16×16 threads', tile: '16×16', ms: 7.671, speedup: '2.49×' },
+];
+
+const dhacMax = Math.max(...dhacBench.map((b) => b.ms));
+
+const dhacLinks = [
+    { kind: 'Devblog', title: 'Detailed benchmark', text: 'Every technique, tile size and run parameter.', href: DHAC_BENCHMARK_POST },
+    { kind: 'Talk · PDF', title: 'Budapest Graphics Forum 2026', text: 'The full method, explained step by step.', href: DHAC_TALK },
+    { kind: 'GitHub', title: 'Source code', text: 'The Forward+ techniques in the engine.', href: DHAC_CODE },
+];
+
+/* ---------- Data for the sections below the divider (not reworked yet) ---------- */
+
+const cullingLevels = [
+    {
+        level: 'Model',
+        text: 'Each model is tested by its own thread. Simple models are finished right here, complex ones move on to the next pass.',
+        img: 'Culling_NoMesh.png',
+        caption: 'After model culling',
+    },
+    {
+        level: 'Mesh',
+        text: 'A group of 32 threads works on one model together. They test every mesh, pick the LOD and write the indirect draw commands.',
+        img: 'Culling_NoMeshlet.png',
+        caption: 'After mesh culling',
+    },
+    {
+        level: 'Meshlet',
+        text: 'The task shader tests every meshlet. Only the meshlets that survive launch mesh shader work.',
+        img: 'Culling_Result.png',
+        caption: 'After meshlet culling, the final result',
+    },
+];
+
+const cullingTests = [
+    {
+        name: 'Frustum',
+        text: 'A cheap sphere test runs first, the box test only when needed. Objects fully inside are flagged, so their meshes and meshlets skip the test.',
+        img: 'Culling_Frustum.png',
+    },
+    {
+        name: 'Occlusion',
+        text: 'Bounds are tested against a Hi-Z depth pyramid built from the previous frame. Anything hidden behind other geometry is dropped.',
+        img: 'Culling_Occlusion.png',
+    },
+    {
+        name: 'Contribution',
+        text: 'Objects that cover too few pixels on screen are dropped before any depth is read. The threshold can be tuned per scene.',
+        img: 'Culling_Contribution.png',
+    },
+    {
+        name: 'Cone',
+        text: 'Every meshlet stores a cone of its normals. If the cone faces away from the camera, the meshlet is skipped.',
+        img: 'Culling_Cone.png',
+    },
+];
+
+// TDK tables 4.3 and 4.4: model culling and full GPU time by entity count
+const scalingGpus = [
+    {
+        gpu: 'RTX 4060',
+        rows: [
+            { n: '10,000', model: 0.013, total: 0.253 },
+            { n: '100,000', model: 0.050, total: 0.549 },
+            { n: '1,000,000', model: 0.360, total: 0.671, hl: true },
+            { n: '2,000,000', model: 0.680, total: 0.992 },
+        ],
+    },
+    {
+        gpu: 'RTX 4070 SUPER',
+        rows: [
+            { n: '10,000', model: 0.009, total: 0.140 },
+            { n: '100,000', model: 0.036, total: 0.285 },
+            { n: '1,000,000', model: 0.223, total: 0.406, hl: true },
+            { n: '2,000,000', model: 0.404, total: 0.578 },
+        ],
+    },
+];
+
+// TDK table 4.1: CPU-driven vs GPU-driven culling, 1M entities
+const cpuVsGpu = [
+    { name: 'CPU-driven culling', cpu: 12.244, gpu: null, fps: 79, strong: true },
+    { name: 'with full mesh shader path', cpu: null, gpu: 3.481, fps: null, sub: true },
+    { name: 'with mesh shaders, no occlusion', cpu: null, gpu: 4.504, fps: null, sub: true },
+    { name: 'with vertex shaders', cpu: null, gpu: 7.687, fps: null, sub: true },
+    { name: 'GPU-driven culling', cpu: 0.153, gpu: 0.677, fps: 1344, strong: true, hl: true },
+];
+
+// TDK table 4.2: cumulative visibility tests, 1M entities
+const cumulative = [
+    { stage: 'No culling', ms: 124.407 },
+    { stage: '+ Cone culling', ms: 94.123 },
+    { stage: '+ Hierarchical frustum culling', ms: 2.878 },
+    { stage: '+ Hierarchical Hi-Z occlusion culling', ms: 0.681 },
+    { stage: '+ Dynamic LOD selection', ms: 0.653, hl: true },
+];
+
+// TDK tables 4.5 to 4.8: three-level vs four-level (Morton chunk) culling
+const mortonScenes = [
+    {
+        title: '10M entities, heavily occluded',
+        rows: [
+            { stage: 'Reset commands', a: 0.006, b: 0.005 },
+            { stage: 'Morton chunk culling', a: null, b: 0.069 },
+            { stage: 'Morton model culling', a: null, b: 0.164 },
+            { stage: 'Model culling', a: 5.885, b: 0.005 },
+            { stage: 'Mesh culling', a: 0.003, b: 0.003 },
+            { stage: 'Total', a: 5.908, b: 0.264, hl: true },
+        ],
+    },
+    {
+        title: '2.5M entities, high visible load',
+        rows: [
+            { stage: 'Reset commands', a: 0.008, b: 0.007 },
+            { stage: 'Morton chunk culling', a: null, b: 0.021 },
+            { stage: 'Morton model culling', a: null, b: 0.972 },
+            { stage: 'Model culling', a: 1.796, b: 0.005 },
+            { stage: 'Mesh culling', a: 0.018, b: 0.018 },
+            { stage: 'Total', a: 1.823, b: 1.023, hl: true },
+        ],
+    },
+];
+
+const cullingLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 114 to 150', text: 'GPU-driven rendering and the full culling pipeline.', href: `${DEEP_DIVE}#page=114` },
+    { kind: 'GitHub', title: 'Source code', text: 'The geometry culling passes in the engine.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Shaders/Passes/Culling/Geometry' },
+];
+
+const ms = (v: number | null, d = 3) => (v === null ? '' : `${v.toFixed(d)} ms`);
+
+// TDK figure 3.4, split into its four steps
+const meshSteps = [
+    { title: 'The scene', text: 'Only a small part of the dragon is visible from the camera.', img: 'Mesh_Scene.png' },
+    { title: 'Vertex shader', text: 'Every vertex of the mesh is still read and transformed, visible or not.', img: 'Mesh_VertexShader.png' },
+    { title: 'Task shader', text: 'Each meshlet is tested first. Hidden meshlets are dropped before a single vertex is read.', img: 'Mesh_TaskShader.png' },
+    { title: 'Mesh shader', text: 'Only the triangles of the visible meshlets are processed and rasterized.', img: 'Mesh_MeshShader.png' },
+];
+
+// TDK figure 3.7
+const lodShots = [
+    { img: 'LOD0_Meshlets.png', caption: 'LOD0, full detail, meshlets' },
+    { img: 'LOD0_Triangles.png', caption: 'LOD0, full detail, triangles' },
+    { img: 'LOD3_Meshlets.png', caption: 'LOD3, 12.5% detail, meshlets' },
+    { img: 'LOD3_Triangles.png', caption: 'LOD3, 12.5% detail, triangles' },
+];
+
+const shadowLights = [
+    {
+        name: 'Directional light',
+        text: [
+            'A directional light covers the whole view, so the camera frustum is split into four cascades. Each cascade works like its own light and gets its own region in the atlas.',
+            'Static and dynamic objects go into two separate atlases. The static one is only redrawn when something static changes or the light moves. The shader reads both, so nothing has to be copied between them.',
+        ],
+        atlas: 'Shadow_DirAtlas.png',
+        result: 'Shadow_DirResult.png',
+    },
+    {
+        name: 'Spot light',
+        text: [
+            'A spot light gets one region in the atlas. Its size follows how big the light is on screen, from 512 × 512 close to the camera down to 64 × 64 far away.',
+            'Objects are tested against the real cone of the light, so only geometry inside the cone is drawn into its region.',
+        ],
+        atlas: 'Shadow_SpotAtlas.png',
+        result: 'Shadow_SpotResult.png',
+    },
+    {
+        name: 'Point light',
+        text: [
+            'A point light looks in six directions. Instead of cube maps, the six faces are laid out in a 2 × 3 grid inside the atlas.',
+            'Objects are tested against the light sphere first, then against each of the six face frustums. A face only draws the objects it can really see.',
+        ],
+        atlas: 'Shadow_PointAtlas.png',
+        result: 'Shadow_PointResult.png',
+    },
+];
+
+const mortonLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 135 to 139', text: 'How the Morton chunk hierarchy is built on the GPU.', href: `${DEEP_DIVE}#page=135` },
+    { kind: 'GitHub', title: 'Source code', text: 'The Morton code, sorting and chunk building passes.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Shaders/Passes/Morton' },
+];
+
+const meshLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 95 to 98', text: 'Meshlets, task shaders and mesh shaders.', href: `${DEEP_DIVE}#page=95` },
+    { kind: 'GitHub', title: 'Source code', text: 'The task and mesh shaders in the engine.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Shaders/Passes/Shading/Common' },
+];
+
+const shadowLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 193 to 219', text: 'The full shadow pipeline, step by step.', href: `${DEEP_DIVE}#page=193` },
+    { kind: 'GitHub', title: 'Shadow culling', text: 'Culling passes for every light type.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Shaders/Passes/Culling' },
+    { kind: 'GitHub', title: 'Shadow rendering', text: 'Atlas rendering and shadow passes.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Shaders/Passes/Shadow' },
+];
+
+/* ---------- ECS ---------- */
+
+const ecsProps = [
+    { title: 'O(1) access', text: 'The sparse array maps an entity ID straight to its component. No hashing, no search.' },
+    { title: 'Cache friendly', text: 'Components of one type are packed together, so the CPU reads them in one straight line.' },
+    { title: 'Fast add and remove', text: 'Adding appends to the end. Removing swaps in the last element, so there are never holes.' },
+    { title: 'SIMD friendly', text: 'Tightly packed plain data is ideal for vectorized processing.' },
+    { title: 'Parallel systems', text: 'About thirty systems run as a Taskflow dependency graph. Independent systems run at the same time on every core.' },
+    { title: 'Ready for the GPU', text: 'Dense arrays are copied to GPU memory as they are, without any conversion.' },
+];
+
+const ecsSegments = [
+    { key: 'static', name: 'Static', text: 'Rarely changes, like level geometry. Updated only through a dedicated list. Morton chunks and static shadows build on it.' },
+    { key: 'dynamic', name: 'Dynamic', text: 'Changes now and then. Change flags mark what was touched, and untouched blocks are skipped.' },
+    { key: 'stream', name: 'Stream', text: 'Changes every frame. Simply processed every frame, no tracking needed.' },
+];
+
+const ecsLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 8 to 40', text: 'The ECS, the segmented pools and the template design.', href: `${DEEP_DIVE}#page=8` },
+    { kind: 'GitHub', title: 'Source code', text: 'The registry and component pools.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Registry' },
+];
+
+/* ---------- Architecture ---------- */
+
+const modelStages = [
+    { name: 'Raw model', text: 'Loaded from a file through Assimp or TinyObj, or generated procedurally, like cubes, spheres and Bézier surfaces.' },
+    { name: 'Cooked model', text: 'Normals, tangents and colliders are generated. LOD levels and meshlets are built with meshoptimizer.' },
+    { name: 'GPU model', text: 'Converted into the GPU layout and uploaded, ready for the GPU-driven pipeline.' },
+    { name: 'CPU model', text: 'A CPU-side copy for engine systems that need the geometry on the CPU, with welded vertices and batched indices.' },
+];
+
+const archLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 41 to 55', text: 'The layered architecture and the model pipeline.', href: `${DEEP_DIVE}#page=41` },
+    { kind: 'GitHub', title: 'Source code', text: 'The mesh and model pipeline.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/Engine/Mesh' },
+];
+
+/* ---------- MVI and editor ---------- */
+
+const editorLayers = [
+    { name: 'Editor', role: 'View', text: 'Windows, viewports and controls. It draws the state it gets and turns user actions into intents.' },
+    { name: 'EditorCore', role: 'ViewModel', text: 'State, intents and business logic for every editor window. It knows nothing about the UI framework.' },
+    { name: 'Engine', role: 'Data', text: 'The runtime itself. ECS, renderer, Vulkan resources, physics and asset managers.' },
+];
+
+const editors = [
+    { img: 'Editor_Material.png', name: 'Materials', text: 'Create and tune materials with a live preview.' },
+    { img: 'Editor_Model.png', name: 'Models', text: 'Inspect imported and procedural models.' },
+    { img: 'Editor_Texture.png', name: 'Textures', text: 'Browse and check textures.' },
+    { img: 'Editor_Animation.png', name: 'Animation', text: 'Preview skeletal animations.' },
+    { img: 'Editor_Audio.png', name: 'Audio', text: 'Listen to sounds and see their waveform.' },
+];
+
+const editorLinks = [
+    { kind: 'Technical deep dive', title: 'Pages 56 to 65', text: 'The MVI architecture and the editor.', href: `${DEEP_DIVE}#page=56` },
+    { kind: 'GitHub', title: 'Source code', text: 'EditorCore, the ViewModels and intents.', href: 'https://github.com/TamasPetii/SynapseEngine/tree/main/SynapseEngine/EditorCore' },
+];
+
+const ecsBench = [
+    { op: 'Add', s: 59.66, e: 35.59 },
+    { op: 'Remove', s: 26.18, e: 37.01 },
+    { op: 'Iterate (sequential)', s: 2.46, e: 2.25 },
+    { op: 'Iterate (parallel)', s: 2.15, e: 2.26 },
+    { op: 'Full engine update', s: 1.15, e: 1.76 },
+];
+
+// IDK thesis, tables 6.1 and 6.2
+const requirements = [
+    {
+        group: 'Hardware',
+        rows: [
+            ['Graphics API', 'Vulkan 1.4 with an up-to-date driver'],
+            ['Minimum GPU', 'NVIDIA RTX 20 series or newer'],
+            ['Tested GPUs', 'RTX 4050 Laptop, RTX 4060, RTX 4070 SUPER'],
+            ['AMD and Intel', 'Validation in progress'],
+            ['Vulkan features', 'Buffer device address, bindless resources, descriptor buffer, shader objects, task and mesh shaders, dynamic rendering'],
+            ['CPU', 'Modern multi-core x86-64 with AVX2. More cores help the parallel systems.'],
+            ['Memory', 'No fixed minimum. It depends on the scene and the techniques in use.'],
+        ],
+    },
+    {
+        group: 'Development',
+        rows: [
+            ['Language', 'C++23 and GLSL'],
+            ['Platforms', 'Tested on Windows and Linux'],
+            ['Build system', 'Xmake, with dependencies built by vcpkg'],
+            ['Compiler', 'MSVC recommended on Windows, Clang and GCC also work'],
+            ['Configurations', 'debug, release, dist, performance'],
+            ['Sample assets', 'Downloaded automatically from the GitHub release if missing'],
+        ],
+    },
+    {
+        group: 'Size',
+        rows: [
+            ['Repository', 'About 3.5 GB with the sample models and assets'],
+            ['Full build', 'About 34 GB, of which about 21 GB are vcpkg dependencies'],
+            ['Runtime', 'About 180 MB for the executable and its binaries'],
+        ],
+    },
+];
+
+const talks = [
+    { date: 'Dec 2026', kind: 'MSc thesis', title: 'Master’s thesis', venue: 'BME VIK', lang: 'HU', soon: true },
+    { date: 'Nov 2026', kind: 'Thesis', title: 'High-performance GPU-driven rendering techniques on next-generation graphics hardware', venue: 'Scientific Students’ Association (TDK), BME VIK', lang: 'HU', soon: true },
+    { date: 'Nov 2026', kind: 'Thesis', title: 'Synapse Engine, a high-performance open-source engine for research and education', venue: 'Innovation TDK (IDK), BME VIK', lang: 'HU', soon: true },
+    { date: 'Oct 2026', kind: 'Talk', title: 'Dual-HiZ Adaptive Clustered Forward+', venue: 'Budapest Graphics Forum 2026, October 14', lang: 'EN', href: '/Presentations/Budapest_Graphics_Forum_2026_DHAC.pdf' },
+    { date: 'Aug 2026', kind: 'Deep dive', title: 'Synapse Engine technical deep dive', venue: '250 pages', lang: 'EN', href: '/Presentations/SynapseEnginePresentation.pdf' },
+    { date: 'May 2026', kind: 'Paper', title: 'High-Performance GPU-Driven Rendering', venue: 'GRAFGEO, Hungarian Conference on Computer Graphics and Geometry', lang: 'EN', href: '/Presentations/Grafgeo_High_Performance_Gpu_Driven_Rendering.pdf' },
+    { date: 'May 2026', kind: 'Talk', title: 'High-Performance GPU-Driven Rendering', venue: 'GRAFGEO conference presentation', lang: 'HU', href: '/Presentations/BEMUTATO_GRAFGEO_TAMAS_PETER.pdf' },
+    { date: 'Earlier', kind: 'Slides', title: 'Synapse Engine v1.1', venue: 'University Project Laboratory 2, BME', lang: 'HU', href: '/Presentations/SynapseEngine_v1.1.pdf' },
+    { date: 'Earlier', kind: 'Slides', title: 'Synapse Engine v1.0', venue: 'University Project Laboratory, BME', lang: 'HU', href: '/Presentations/SynapseEngine_v1.0.pdf' },
+];
+
 ---
 
-<Layout title="Synapse Engine | Modern GPU-Driven Architecture">
-    
-    <header class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-        <div class="absolute inset-0 bg-[url('/Images/Sponza.png')] bg-cover bg-center opacity-10 dark:opacity-30"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-50/70 via-gray-50/90 to-gray-50 dark:from-gray-950/40 dark:via-gray-950/80 dark:to-gray-950"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/10 dark:bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+<Layout title="Synapse Engine | Open-source GPU-driven engine for graphics research and education">
 
-        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center py-20 mt-10">
-            
-            <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-6 text-gray-900 dark:text-white drop-shadow-2xl">
-                Synapse <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-fuchsia-600 dark:from-purple-400 dark:to-fuchsia-500 pb-1 pt-1 pr-2">Engine</span>
+    <!-- ============================== HERO (full screen) ============================== -->
+    <section class="relative isolate overflow-hidden min-h-[calc(100svh-4rem)] flex flex-col">
+        <div class="absolute inset-0 -z-10 bg-[url('/Images/Home/Home.png')] bg-cover bg-center opacity-100 dark:opacity-100"></div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-bg/60 via-bg/80 to-bg"></div>
+
+        <div class="wrap flex-1 flex flex-col items-center justify-center text-center py-20">
+            <p class="eyebrow mb-8">Open source · C++23 · Vulkan 1.4</p>
+            <h1 class="max-w-5xl text-[2.75rem] leading-[1.04] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-[-0.035em]">
+                A modern game engine architecture, built for graphics research.
             </h1>
-            
-            <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-                A strictly research-oriented, high-performance rendering framework built on a custom <strong class="text-gray-900 dark:text-white">Data-Oriented ECS</strong> and a fully <strong class="text-gray-900 dark:text-white">GPU-driven</strong> pipeline.
+            <p class="lead mt-8 max-w-2xl">
+                Synapse Engine is an open-source, fully GPU-driven game engine designed for university research groups,
+                PhD students and anyone who wants to understand how a state-of-the-art renderer is put together.
             </p>
-
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <span class="px-4 py-1.5 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium backdrop-blur-md">C++23</span>
-                <span class="px-4 py-1.5 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium backdrop-blur-md">Modern Vulkan</span>
-                <span class="px-4 py-1.5 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium backdrop-blur-md">GPU-Driven</span>
-                <span class="px-4 py-1.5 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium backdrop-blur-md">Data-Oriented ECS</span>
-                <span class="px-4 py-1.5 rounded-full bg-white/80 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium backdrop-blur-md">AAA-Grade Architecture</span>
-            </div>
-            
-            <div class="flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
-                
-                <a href="/Presentations/SynapseEnginePresentation.pdf" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-500 transition-all shadow-[0_0_30px_rgba(168,85,247,0.3)] dark:shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_50px_rgba(168,85,247,0.4)] dark:hover:shadow-[0_0_50px_rgba(168,85,247,0.6)] hover:-translate-y-1 flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
-                    View Presentation
+            <div class="mt-10 flex flex-wrap justify-center gap-3">
+                <a href="https://github.com/TamasPetii/SynapseEngine" target="_blank" rel="noopener" class="btn-primary">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Source code
                 </a>
-
-                <a href="/Presentations/Grafgeo_High_Performance_Gpu_Driven_Rendering.pdf" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-200 font-bold rounded-xl border border-fuchsia-200 dark:border-fuchsia-500/30 hover:bg-fuchsia-200 dark:hover:bg-fuchsia-800/50 hover:text-fuchsia-900 dark:hover:text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                    Read Research Paper
+                <a href={DHAC_TALK} target="_blank" rel="noopener" class="btn-secondary bg-bg/60 backdrop-blur-sm">Dual-HiZ talk</a>
+                <a href={DEEP_DIVE} target="_blank" rel="noopener" class="btn-secondary bg-bg/60 backdrop-blur-sm">
+                    Technical deep dive <span class="font-mono text-xs text-faint">250 p</span>
                 </a>
-
-                <a href="https://github.com/TamasPetii/SynapseEngine" target="_blank" class="px-8 py-4 w-full sm:w-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm text-gray-700 dark:text-gray-300 font-bold rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 hover:text-gray-900 dark:hover:text-white transition-all flex items-center justify-center gap-2 hover:-translate-y-1">
-                    GitHub Repository
-                </a>
-
-            </div>
-        </div>
-    </header>
-
-    <section class="max-w-7xl mx-auto px-6 py-24 space-y-32">
-
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Editor & <span class="text-purple-600 dark:text-purple-400">Workspaces</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Designed for developer productivity, the engine features a comprehensive editor environment built on the Model-View-Intent (MVI) architecture. This approach cleanly decouples the rendering logic from the user interface, enabling highly customizable workspaces, real-time asset management, and intuitive visual debugging tools without sacrificing performance.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Editor.png" alt="Editor and Workspaces" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
             </div>
         </div>
 
-        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Data-Oriented <span class="text-purple-600 dark:text-purple-400">ECS</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Overcoming the severe performance bottlenecks of traditional object-oriented programming. The engine utilizes a fully custom Segmented Sparse-Set Entity-Component-System. Components are strictly laid out in contiguous memory using a Static-Dynamic-Stream partition, ensuring maximum CPU cache locality, O(1) lookups, and zero CPU-GPU synchronization overhead.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Pool.svg" alt="Data-Oriented ECS" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Thoughtful <span class="text-purple-600 dark:text-purple-400">Architecture</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Built from the ground up to be heavily multi-threaded and decoupled. By leveraging Taskflow, the engine distributes work across all available CPU cores efficiently through graph-based parallel execution. This ensures that rendering, physics simulation, and engine logic run asynchronously without blocking the main execution thread.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Architecture.svg" alt="Thoughtful Architecture" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">GPU-Driven <span class="text-purple-600 dark:text-purple-400">Culling</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    The CPU generates zero direct draw calls. Complete visibility determination is executed entirely on the GPU. Using advanced compute shaders, the pipeline performs Frustum, Hi-Z Occlusion, and Zero-Pixel Triangle culling, ensuring that only the truly visible geometry is pushed to the rasterizer, drastically reducing driver overhead.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Culling.png" alt="GPU-Driven Culling" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11l-7 4-7-4m14-3l-7 4-7-4m14 6l-7 4-7-4" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Material <span class="text-purple-600 dark:text-purple-400">Bucketing</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    To maintain maximum efficiency across diverse materials and rendering pipelines, the architecture utilizes a custom eight-bucket indirect draw command system. Combined with a double-indirection material override mechanism and bindless resources, meshes of varying types (e.g., Opaque, Transparent) are dynamically routed and batched entirely on the GPU, completely eliminating traditional CPU-side binding bottlenecks.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Rendering.png" alt="Material Bucketing and Indirect Draw" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Mesh <span class="text-purple-600 dark:text-purple-400">Shaders</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Completely replacing the traditional vertex pipeline, high-poly geometry is partitioned into small, optimized meshlets. The modern Task and Mesh shader pipeline processes these clusters in parallel, applying highly efficient cone culling at the meshlet level to discard back-facing geometry before it even reaches the rasterization stage.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Meshlet.png" alt="Mesh Shaders" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Adaptive <span class="text-purple-600 dark:text-purple-400">Forward+</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    A proprietary Dual-HiZ Adaptive Clustered Forward+ rendering technique developed to dynamically adapt light culling without relying on fixed 3D spatial grids. This approach is fully integrated with bindless textures, Screen-Space Ambient Occlusion (SSAO), and Image-Based Lighting (IBL) for highly performant, physically accurate illumination.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-fuchsia-500/20 to-orange-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Forward+.png" alt="Adaptive Forward+" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
-            <div class="flex-1 space-y-6">
-                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-2 border border-purple-200 dark:border-purple-500/30">
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-                </div>
-                <h2 class="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">Virtual <span class="text-purple-600 dark:text-purple-400">Shadows</span></h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Delivering high-resolution, robust shadow mapping without the severe memory and performance overhead of traditional cascaded setups. The modern shadow pipeline supports advanced filtering and transparent colored shadow mapping, allowing for physically accurate light interactions through translucent surfaces.
-                </p>
-            </div>
-            <div class="flex-1 w-full relative group">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all opacity-50"></div>
-                <img src="/Images/Shadow.png" alt="Virtual Shadow Mapping" class="relative rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl object-cover w-full aspect-video bg-white dark:bg-gray-900" />
-            </div>
-        </div>
-
+        <a href="#why" class="mx-auto pb-8 flex flex-col items-center gap-1.5 text-xs text-faint hover:text-fg transition-colors">
+            Scroll
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0-6-6m6 6 6-6"/></svg>
+        </a>
     </section>
 
-    <section class="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 py-20 relative overflow-hidden transition-colors duration-300">
-        <div class="absolute inset-0 bg-[url('/Images/grid.svg')] opacity-[0.03] dark:opacity-10 bg-center"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <img src="/Images/Profile.png" alt="Tamás Péter" class="w-24 h-24 mx-auto rounded-full mb-6 border-4 border-gray-200 dark:border-gray-800 shadow-xl object-cover" />
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Tamás Péter</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-                Computer Engineering M.Sc. student specializing in low-level graphics programming, shader development, and engine architecture.
+    <!-- ============================== THE GAP + WHO IT'S FOR ============================== -->
+    <section id="why" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Why Synapse exists</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">The gap between AAA engines and university research.</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    Unreal and Unity are built to ship games. Their codebases have grown for decades, so isolating one algorithm
+                    or measuring it fairly is hard work, even when the source is open.
+                </p>
+                <p>
+                    Research frameworks like NVIDIA Falcor are great for prototyping a single rendering pass, but they don't
+                    model a full modern engine. So most university groups end up maintaining a small framework of their own.
+                </p>
+            </div>
+            <p class="mt-8 text-xl font-medium text-fg">Synapse Engine is built to fill that gap.</p>
+
+            <!-- Comparison table -->
+            <div class="mt-12 rounded-lg border border-line bg-bg">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-6 pt-6 pb-4">
+                    <h3 class="text-base font-semibold">How existing engines fit research use</h3>
+                    <div class="flex flex-wrap items-center gap-4 text-xs text-muted">
+                        <span class="inline-flex items-center gap-1.5"><span class="mark mark-yes">✓</span> Yes</span>
+                        <span class="inline-flex items-center gap-1.5"><span class="mark mark-part">∼</span> Partly</span>
+                        <span class="inline-flex items-center gap-1.5"><span class="mark mark-no">×</span> No</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full min-w-[760px] text-sm border-collapse">
+                        <thead>
+                            <tr class="border-y border-line">
+                                <th class="py-3 pl-6 pr-4 text-left text-xs font-medium text-muted w-[22%]">Engine</th>
+                                {landscapeCols.map((c) => (
+                                    <th class="py-3 px-2 text-center text-xs font-medium text-muted leading-snug">{c}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {landscape.map((row) => (
+                                <tr class="border-b border-line">
+                                    <td class="py-3.5 pl-6 pr-4 text-fg">{row.name}</td>
+                                    {row.v.map((s) => (
+                                        <td class="py-3.5 px-2 text-center">
+                                            <span class:list={['mark', `mark-${s}`]}>{s === 'yes' ? '✓' : s === 'part' ? '∼' : '×'}</span>
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                            <tr class="bg-surface">
+                                <td class="py-4 pl-6 pr-4 font-semibold text-fg rounded-bl-lg">Synapse Engine</td>
+                                {landscapeCols.map((_, i) => (
+                                    <td class:list={['py-4 px-2 text-center', i === landscapeCols.length - 1 && 'rounded-br-lg']}>
+                                        <span class="mark mark-ours">✓</span>
+                                    </td>
+                                ))}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Who it's for -->
+            <div class="mt-20 md:mt-24">
+                <div class="grid md:grid-cols-3 border-t border-line md:divide-x divide-line">
+                    {audiences.map((a, i) => (
+                        <div class:list={['pt-8 pb-2 md:px-8', i === 0 && 'md:pl-0', i === audiences.length - 1 && 'md:pr-0', i > 0 && 'border-t md:border-t-0 border-line mt-8 md:mt-0']}>
+                            <p class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-5">{a.tag}</p>
+                            <h4 class="text-lg font-semibold mb-3">{a.title}</h4>
+                            <p class="body text-[15px] mb-4">{a.text}</p>
+                            <p class="text-[15px] leading-relaxed text-fg">{a.goal}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== INNOVATION: DHAC ============================== -->
+    <section id="dhac" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Synapse Engine innovation</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Dual-HiZ Adaptive Clustered Forward+</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    DHAC is a next-generation Forward+ technique I developed in Synapse Engine. It is also the proof of what the
+                    engine is for. A new research idea, built and measured on top of the existing GPU-driven pipeline, without
+                    writing a new framework first.
+                </p>
+                <p>
+                    Clusters are only created where geometry exists, and only across the depth range it really occupies. Tile
+                    bounds come from two Hi-Z pyramids, so transparent surfaces are included as well. Light assignment switches
+                    between a fast and a scalable path, depending on how many lights are visible.
+                </p>
+            </div>
+
+            <Figure class="mt-14" src={`${IMG}/DHAC_Lighting.png`} alt="Sponza lit by thousands of dynamic point and spot lights with DHAC">
+                Sponza with thousands of dynamic point and spot lights, shaded with DHAC.
+            </Figure>
+            <div class="mt-6 grid gap-6 sm:grid-cols-2">
+                <Figure src={`${IMG}/DHAC_ClusterHeatmap.png`} alt="Heatmap of depth clusters per 16×16 tile" crop>
+                    <b>Clusters.</b> Depth clusters created for each 16×16 tile.
+                </Figure>
+                <Figure src={`${IMG}/DHAC_LightHeatmap.png`} alt="Heatmap of lights intersecting each tile" crop>
+                    <b>Light heatmap.</b> Number of lights intersecting each tile.
+                </Figure>
+            </div>
+
+            <!-- Benchmark -->
+            <div class="mt-20 grid gap-10 lg:grid-cols-12 items-start">
+                <div class="lg:col-span-5 min-w-0">
+                    <h3 class="h-sub mb-4">Benchmark</h3>
+                    <Figure src={`${IMG}/DHAC_BenchmarkScene.png`} alt="Benchmark scene with Sponza, 500,000 objects and 2048 lights" crop>
+                        Sponza, 500,000 objects, 1024 point and 1024 spot lights. Full HD, 1920×1080.
+                    </Figure>
+                </div>
+                <div class="lg:col-span-7 min-w-0 lg:pt-12">
+                    <div class="overflow-x-auto">
+                        <table class="data-table min-w-[520px]">
+                            <thead>
+                                <tr>
+                                    <th>Technique</th>
+                                    <th>Best configuration</th>
+                                    <th class="num">Tile</th>
+                                    <th class="w-[34%]">Frame time</th>
+                                    <th class="num">Speedup</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dhacBench.map((b, i) => (
+                                    <tr class:list={[i === 0 && 'hl']}>
+                                        <td class:list={[b.ours && 'text-fg font-medium']}>{b.name}</td>
+                                        <td>{b.config}</td>
+                                        <td class="num">{b.tile}</td>
+                                        <td>
+                                            <div class="flex items-center gap-3">
+                                                <div class="h-1.5 flex-1 bg-surface rounded-full overflow-hidden">
+                                                    <div class:list={['h-full rounded-full', b.ours ? 'bg-accent' : 'bg-faint']} style={`width:${(b.ms / dhacMax) * 100}%`}></div>
+                                                </div>
+                                                <span class="font-mono tabular-nums text-xs w-16 text-right">{b.ms.toFixed(3)} ms</span>
+                                            </div>
+                                        </td>
+                                        <td class="num">{b.speedup}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-4 text-sm text-faint">
+                        Best run of each technique, all implemented in Synapse Engine and measured in the same scene.
+                        DHAC- is the variant without Hi-Z. The full table with every run parameter is on the{' '}
+                        <a href={DHAC_BENCHMARK_POST} class="text-muted underline decoration-line underline-offset-4 hover:text-fg">devblog</a>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-3">
+                    {dhacLinks.map((l) => (
+                        <a href={l.href}
+                           target={l.href.startsWith('/devblog') ? undefined : '_blank'}
+                           rel={l.href.startsWith('/devblog') ? undefined : 'noopener'}
+                           class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+                <p class="mt-5 text-sm text-muted">
+                    DHAC is also covered in the 250-page{' '}
+                    <a href={`${DEEP_DIVE}#page=166`} target="_blank" rel="noopener" class="text-fg underline decoration-line underline-offset-4 hover:decoration-fg">technical deep dive</a>,
+                    on pages 166 to 188.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== GPU-DRIVEN RENDERING AND CULLING ============================== -->
+    <section id="gpu-driven" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Rendering architecture</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Fully GPU-driven rendering and culling</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    In a classic renderer the CPU decides what is visible and records the draw calls. With millions of objects
+                    this becomes the bottleneck. In Synapse Engine the scene lives in GPU memory, and only changed data is
+                    uploaded from the ECS.
+                </p>
+                <p>
+                    The GPU does the rest. It runs the visibility tests, picks the level of detail and writes its own indirect
+                    draw commands. The whole scene is drawn with at most 16 indirect draw calls, no matter how complex it is.
+                </p>
+            </div>
+
+            <div class="mt-14 grid gap-6 md:grid-cols-2">
+                <Figure src={`${IMG}/Culling_Camera.png`} crop alt="Complex scene from the main camera">
+                    <b>Main camera view</b> of a dense test scene.
+                </Figure>
+                <Figure src={`${IMG}/Culling_Result.png`} crop alt="Geometry that survives visibility testing, seen from outside">
+                    <b>What actually gets rendered.</b> The same frame seen from outside, after all visibility tests.
+                </Figure>
+            </div>
+
+            <!-- Scaling -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Scaling with entity count</h3>
+                <p class="body max-w-2xl mb-10">
+                    Model culling time and full GPU time of culling and rendering, from ten thousand to two million entities.
+                </p>
+                <div class="grid gap-6 lg:grid-cols-2">
+                    {scalingGpus.map((g) => (
+                        <div class="rounded-lg border border-line bg-bg min-w-0">
+                            <div class="px-6 pt-5 pb-1 text-sm font-semibold">{g.gpu}</div>
+                            <div class="px-6 pb-2 overflow-x-auto">
+                                <table class="data-table">
+                                    <thead><tr><th>Entities</th><th class="num">Model culling</th><th class="num">Full GPU time</th></tr></thead>
+                                    <tbody>
+                                        {g.rows.map((r, i) => (
+                                            <tr class:list={[r.hl && 'row-strong', i === g.rows.length - 1 && 'last-row']}>
+                                                <td class="font-mono tabular-nums">{r.n}</td>
+                                                <td class="num">{ms(r.model)}</td>
+                                                <td class="num">{ms(r.total)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Three-level hierarchy -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Three-level hierarchical culling</h3>
+                <p class="body max-w-2xl mb-10">
+                    Visibility is resolved from coarse to fine. Anything rejected at a higher level never creates work below it.
+                </p>
+                <div class="grid gap-x-6 gap-y-10 md:grid-cols-3">
+                    {cullingLevels.map((l) => (
+                        <div>
+                            <Figure src={`${IMG}/${l.img}`} crop alt={l.caption} />
+                            <h4 class="mt-5 text-lg font-semibold mb-2">{l.level} culling</h4>
+                            <p class="text-sm leading-relaxed text-muted">{l.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Visibility tests -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Four visibility tests</h3>
+                <p class="body max-w-2xl mb-10">
+                    The same tests run on every level of the hierarchy. Cone culling only runs on meshlets.
+                </p>
+                <div class="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+                    {cullingTests.map((t) => (
+                        <div>
+                            <Figure src={`${IMG}/${t.img}`} crop="aspect-[4/3]" alt={`${t.name} culling`} />
+                            <h4 class="mt-5 text-lg font-semibold mb-2">{t.name} culling</h4>
+                            <p class="text-sm leading-relaxed text-muted">{t.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- CPU vs GPU + cumulative -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Measured on one million entities</h3>
+                <p class="body max-w-2xl mb-10">
+                    Moving culling from the CPU to the GPU took the frame rate from 79 to 1344 FPS. Turning the stages on one by
+                    one shows where the gain comes from. GPU time drops from 124 ms to 0.65 ms.
+                </p>
+                <div class="grid gap-6 lg:grid-cols-2">
+                    <div class="rounded-lg border border-line bg-bg min-w-0">
+                        <div class="px-6 pt-5 pb-1 text-sm font-semibold">CPU-driven vs GPU-driven</div>
+                        <div class="px-6 pb-2 overflow-x-auto">
+                            <table class="data-table min-w-[440px]">
+                                <thead><tr><th>Configuration</th><th class="num">CPU</th><th class="num">GPU</th><th class="num">FPS</th></tr></thead>
+                                <tbody>
+                                    {cpuVsGpu.map((r, i) => (
+                                        <tr class:list={[r.hl && 'row-strong', i === cpuVsGpu.length - 1 && 'last-row']}>
+                                            <td class:list={[r.sub ? 'pl-4! text-faint' : 'text-fg']}>{r.name}</td>
+                                            <td class="num">{ms(r.cpu)}</td>
+                                            <td class="num">{ms(r.gpu)}</td>
+                                            <td class="num">{r.fps ?? ''}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="rounded-lg border border-line bg-bg min-w-0">
+                        <div class="px-6 pt-5 pb-1 text-sm font-semibold">Cumulative effect</div>
+                        <div class="px-6 pb-2 overflow-x-auto">
+                            <table class="data-table min-w-[380px]">
+                                <thead><tr><th>Active stages</th><th class="num">GPU time</th></tr></thead>
+                                <tbody>
+                                    {cumulative.map((c, i) => (
+                                        <tr class:list={[c.hl && 'row-strong', i === cumulative.length - 1 && 'last-row']}>
+                                            <td>{c.stage}</td>
+                                            <td class="num">{ms(c.ms)}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {cullingLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== MORTON CHUNK HIERARCHY ============================== -->
+    <section id="morton" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Beyond a million objects</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">GPU-built Morton chunk hierarchy</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    With millions of static objects, even launching the culling threads becomes measurable. So for static
+                    geometry the engine adds one more level above the models.
+                </p>
+                <p>
+                    The GPU computes a Morton code for every static entity, sorts them with a radix sort and groups them into
+                    chunks of 32 nearby models. One rejected chunk removes 32 models at once. Building it on the GPU takes
+                    about 3 ms instead of 130 ms on the CPU.
+                </p>
+            </div>
+
+            <div class="mt-14 grid gap-6 md:grid-cols-2">
+                <Figure src={`${IMG}/Morton_Outside.png`} crop alt="Morton chunks seen from outside">Chunk bounds seen from outside.</Figure>
+                <Figure src={`${IMG}/Morton_Inside.png`} crop alt="Morton chunks seen from inside">Chunk bounds seen from inside.</Figure>
+            </div>
+
+            <!-- Benchmark -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-4">Three levels vs four levels</h3>
+                <p class="body max-w-2xl mb-10">GPU time of each culling stage, without and with the Morton chunk level.</p>
+                <div class="grid gap-6 lg:grid-cols-2">
+                    {mortonScenes.map((sc) => (
+                        <div class="rounded-lg border border-line bg-surface min-w-0">
+                            <div class="px-6 pt-5 pb-1 text-sm font-semibold">{sc.title}</div>
+                            <div class="px-6 pb-2 overflow-x-auto">
+                                <table class="data-table min-w-[380px]">
+                                    <thead><tr><th>Stage</th><th class="num">3 levels</th><th class="num">4 levels</th></tr></thead>
+                                    <tbody>
+                                        {sc.rows.map((r, i) => (
+                                            <tr class:list={[r.hl && 'row-strong', i === sc.rows.length - 1 && 'last-row']}>
+                                                <td>{r.stage}</td>
+                                                <td class="num">{ms(r.a)}</td>
+                                                <td class="num">{ms(r.b)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div class="mt-8 grid gap-x-12 gap-y-5 md:grid-cols-2 body">
+                    <p>
+                        The 10 million entity scene is extremely dense. Hi-Z occlusion removes almost everything, so most of the
+                        three-level cost is just launching threads for models that are thrown away anyway. That is why the
+                        difference is about 22× there.
+                    </p>
+                    <p>
+                        So I also measured a less crowded scene with 2.5 million entities and much more visible geometry.
+                        It is closer to a typical case, and the four-level version is still clearly faster.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {mortonLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== MESH SHADERS AND LOD ============================== -->
+    <section id="mesh-shaders" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Geometry pipeline</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Meshlets and mesh shaders</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    With a classic vertex shader the smallest unit you can throw away is a whole mesh. If only a corner of a large
+                    model is on screen, the GPU still reads and transforms every vertex of it.
+                </p>
+                <p>
+                    Synapse Engine splits every mesh into meshlets, small clusters of 64 to 126 triangles. A task shader tests each
+                    meshlet and drops the hidden ones on chip. The mesh shader then only gets the meshlets that are really visible.
+                </p>
+            </div>
+
+            <div class="mt-14 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+                {meshSteps.map((st, i) => (
+                    <div>
+                        <Figure src={`${IMG}/${st.img}`} crop alt={st.title} />
+                        <h4 class="mt-5 text-lg font-semibold mb-2">
+                            <span class="font-mono text-sm font-normal text-faint mr-2">{i + 1}</span>{st.title}
+                        </h4>
+                        <p class="text-sm leading-relaxed text-muted">{st.text}</p>
+                    </div>
+                ))}
+            </div>
+
+            <!-- LOD -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Level of detail</h3>
+                <div class="grid gap-x-12 gap-y-5 md:grid-cols-2 body mb-10">
+                    <p>
+                        Every model gets four LOD levels when it is loaded, together with their meshlets and bounding volumes. The
+                        culling shaders pick the level on the GPU, based on how large the mesh is on screen.
+                    </p>
+                    <p>
+                        Up close you see every triangle. Far away the lowest level keeps only 12.5% of them, and from that distance you
+                        can't tell the difference.
+                    </p>
+                </div>
+                <div class="grid gap-6 grid-cols-2 lg:grid-cols-4">
+                    {lodShots.map((l) => (
+                        <Figure src={`${IMG}/${l.img}`} crop alt={l.caption}>{l.caption}</Figure>
+                    ))}
+                </div>
+
+                <div class="mt-10 rounded-lg border border-line bg-bg p-6 md:flex md:items-center md:gap-10">
+                    <p class="font-mono text-xs uppercase tracking-[0.12em] text-accent mb-3 md:mb-0 shrink-0">Coming next</p>
+                    <p class="text-fg">
+                        Continuous LOD in the style of Nanite. Detail will change between small meshlet clusters instead of whole
+                        meshes, so transitions become practically invisible. This is one of the main features I am working on next.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {meshLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== VIRTUAL SHADOW ATLAS ============================== -->
+    <section id="shadows" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Shadows</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">GPU-driven virtual shadow atlas</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    Shadows run on the same GPU-driven pipeline as the main view. The same four-level culling, the same material
+                    buckets and still one draw call per bucket, even with hundreds of shadow casting lights.
+                </p>
+                <p>
+                    Switching a separate depth texture for every light would break that model. So each light type has one 4K
+                    atlas, and every light gets its own region in it. With many lights, the visible instances are sorted on the GPU
+                    with a radix sort, so every draw reads one tight block of memory.
+                </p>
+            </div>
+
+            <div class="mt-16 space-y-20">
+                {shadowLights.map((l) => (
+                    <div class="border-t border-line pt-10">
+                        <h3 class="h-sub mb-4">{l.name}</h3>
+                        <div class="grid gap-x-12 gap-y-4 md:grid-cols-2 body mb-8">
+                            {l.text.map((t) => <p>{t}</p>)}
+                        </div>
+                        <div class="grid gap-6 md:grid-cols-2">
+                            <Figure src={`${IMG}/${l.atlas}`} crop alt={`${l.name} shadow atlas`}>Shadow atlas, depth</Figure>
+                            <Figure src={`${IMG}/${l.result}`} crop alt={`${l.name} shadows in the scene`}>Result in the scene</Figure>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-3">
+                    {shadowLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== ECS AND PARALLELISM ============================== -->
+    <section id="ecs" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Data</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Data-oriented ECS and parallelism</h2>
+            <p class="mt-8 max-w-2xl body text-[17px]">
+                Synapse Engine runs on its own sparse-set based Entity-Component-System. Entities are plain IDs, components
+                are plain data, and every component type lives in its own tightly packed pool.
             </p>
-            <a href="/about" class="px-6 py-3 bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 transition-colors inline-block">
-                View Full Profile
-            </a>
+
+            <div class="mt-12 rounded-lg border border-line bg-bg p-6 md:p-10">
+                <div class="mx-auto max-w-3xl">
+                    <SparseSet />
+                </div>
+            </div>
+
+            <dl class="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+                {ecsProps.map((p) => (
+                    <div class="border-t border-line pt-4">
+                        <dt class="font-semibold text-fg mb-1">{p.title}</dt>
+                        <dd class="text-sm leading-relaxed text-muted">{p.text}</dd>
+                    </div>
+                ))}
+            </dl>
+
+            <!-- Segments -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Static, dynamic and stream</h3>
+                <p class="body max-w-2xl mb-10">
+                    A plain sparse set, like the one in EnTT, was not enough for a GPU-driven pipeline. Walking millions of
+                    components costs time even when nothing changed. So every pool is split into three segments.
+                </p>
+                <div class="rounded-lg border border-line bg-bg p-6 md:p-8">
+                    <Segments />
+                </div>
+                <div class="mt-6 grid gap-6 md:grid-cols-3">
+                    {ecsSegments.map((s) => (
+                        <div class="rounded-lg border border-line bg-bg p-6">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class:list={['h-3 w-3 rounded-sm border', `swatch-${s.key}`]}></span>
+                                <h4 class="font-semibold">{s.name}</h4>
+                            </div>
+                            <p class="text-sm leading-relaxed text-muted">{s.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- EnTT -->
+            <div class="mt-24 grid gap-10 lg:grid-cols-12 items-start">
+                <div class="lg:col-span-5">
+                    <h3 class="h-sub mb-4">Compared with EnTT</h3>
+                    <p class="body">
+                        Adding components is faster in EnTT. Removing them and the full engine update are faster in Synapse,
+                        because unchanged data is skipped.
+                    </p>
+                </div>
+                <div class="lg:col-span-7 min-w-0">
+                    <div class="rounded-lg border border-line bg-bg min-w-0">
+                        <div class="px-6 pt-5 pb-1 text-sm font-semibold">1 million entities</div>
+                        <div class="px-6 pb-2 overflow-x-auto">
+                            <table class="data-table">
+                                <thead><tr><th>Operation</th><th class="num">Synapse</th><th class="num">EnTT</th></tr></thead>
+                                <tbody>
+                                    {ecsBench.map((r, i) => (
+                                        <tr class:list={[r.op === 'Full engine update' && 'row-strong', i === ecsBench.length - 1 && 'last-row']}>
+                                            <td>{r.op}</td>
+                                            <td class="num">{ms(r.s, 2)}</td>
+                                            <td class="num">{ms(r.e, 2)}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {ecsLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== ARCHITECTURE AND CLEAN CODE ============================== -->
+    <section id="architecture" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Architecture</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Readable first, and still fast</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    The goal was a codebase people can actually read. SOLID principles, clean code and clear layers, without
+                    giving up performance.
+                </p>
+                <p>
+                    For research this matters a lot. If you can't find an algorithm in the code, you can't change it or
+                    measure it either.
+                </p>
+            </div>
+
+            <!-- Model pipeline -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-4">Example: the model pipeline</h3>
+                <p class="body max-w-2xl mb-10">
+                    A model goes through clear stages, each with its own representation. Every step is a small class behind an
+                    interface, so a new format or processing step never touches the rest.
+                </p>
+                <ol class="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+                    {modelStages.map((s, i) => (
+                        <li class="border-t border-fg pt-5">
+                            <span class="font-mono text-xs text-faint">{String(i + 1).padStart(2, '0')}</span>
+                            <h4 class="text-lg font-semibold mt-2 mb-2">{s.name}</h4>
+                            <p class="text-sm leading-relaxed text-muted">{s.text}</p>
+                        </li>
+                    ))}
+                </ol>
+                <Figure class="mt-12" src={`${IMG}/Architecture_ModelPipeline.png`} alt="Class diagram of the layered model pipeline">
+                    The full model pipeline. Sources, processors, converters and uploaders, each behind its own interface.
+                </Figure>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {archLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== MVI AND EDITOR ============================== -->
+    <section id="editor" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Editor</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">MVI architecture and the editor</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    The editor follows Model-View-Intent. The UI never changes engine state directly. When you press a button or
+                    edit a value, the view sends an intent, and the ViewModel in EditorCore decides what happens.
+                </p>
+                <p>
+                    This keeps the editor logic independent from the UI framework. Today the views are written in ImGui. Moving to
+                    another framework would mean rewriting the views only, while all the editor logic stays the same.
+                </p>
+            </div>
+
+            <div class="mt-14 rounded-lg border border-line bg-bg p-6 md:p-8">
+                <div class="grid gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-stretch">
+                    {editorLayers.map((l, i) => (
+                        <>
+                            <div class="rounded-md border border-line bg-surface p-5">
+                                <p class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-2">{l.role}</p>
+                                <p class="font-semibold mb-1">{l.name}</p>
+                                <p class="text-sm leading-relaxed text-muted">{l.text}</p>
+                            </div>
+                            {i < editorLayers.length - 1 && (
+                                <div class="flex md:flex-col items-center justify-center gap-1 font-mono text-xs text-faint py-1">
+                                    <span>{i === 0 ? 'intent →' : 'calls →'}</span>
+                                    <span>{i === 0 ? '← state' : '← sync'}</span>
+                                </div>
+                            )}
+                        </>
+                    ))}
+                </div>
+            </div>
+            <Figure class="mt-6" src={`${IMG}/Architecture_MVI.png`} alt="MVI layered architecture of the editor">
+                The detailed MVI structure of the editor.
+            </Figure>
+
+            <!-- Editors -->
+            <div class="mt-24">
+                <h3 class="h-sub mb-4">Workspaces</h3>
+                <p class="body max-w-2xl mb-10">
+                    Every asset type has its own workspace, so scenes, models, materials, textures, animations and sounds can be
+                    handled inside the engine without external tools.
+                </p>
+                <Figure src={`${IMG}/Editor_Scene.png`} alt="Scene workspace of the Synapse Engine editor">
+                    <b>Scene.</b> Entities and components, renderer settings, profiling and the asset browser.
+                </Figure>
+                <div class="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+                    {editors.map((e) => (
+                        <div>
+                            <Figure src={`${IMG}/${e.img}`} crop alt={`${e.name} workspace`} />
+                            <h4 class="mt-4 font-semibold mb-1">{e.name}</h4>
+                            <p class="text-sm leading-relaxed text-muted">{e.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <div class="grid gap-px bg-line border border-line rounded-lg overflow-hidden md:grid-cols-2">
+                    {editorLinks.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener" class="group bg-bg p-6 hover:bg-surface transition-colors flex flex-col">
+                            <span class="font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">{l.kind}</span>
+                            <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                                {l.title}
+                                <span class="text-faint group-hover:text-fg transition-colors">↗</span>
+                            </span>
+                            <span class="text-sm text-muted">{l.text}</span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== MODERN HARDWARE ONLY ============================== -->
+    <section id="requirements" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Requirements</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Built for modern hardware only</h2>
+
+            <div class="mt-10 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <p>
+                    Synapse Engine is made for research. New rendering ideas need the newest graphics API and the newest GPU
+                    architectures, so the engine is built around them from the start.
+                </p>
+                <p>
+                    Supporting old hardware would close the door on exactly the features that GPU-driven techniques rely on.
+                    So the engine will never support older GPUs. Only modern architectures.
+                </p>
+            </div>
+
+            <div class="mt-12 rounded-lg border border-line bg-surface">
+                {requirements.map((g, gi) => (
+                    <div class:list={[gi > 0 && 'border-t border-line']}>
+                        <div class="px-6 pt-6 pb-2 font-mono text-xs uppercase tracking-[0.12em] text-faint">{g.group}</div>
+                        <dl class="px-6 pb-3">
+                            {g.rows.map(([k, v], i) => (
+                                <div class:list={['grid gap-1 sm:grid-cols-[11rem_1fr] sm:gap-6 py-3 text-sm', i > 0 && 'border-t border-line']}>
+                                    <dt class="text-fg font-medium">{k}</dt>
+                                    <dd class="text-muted">{v}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== PUBLICATIONS AND TALKS ============================== -->
+    <section id="publications" class="border-y border-line bg-surface scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Publications</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">Publications and talks</h2>
+            <p class="mt-8 max-w-2xl body text-[17px]">
+                Some of these are in Hungarian, my native language. Feel free to run them through a translator, and look at the
+                figures too. They tell a lot on their own.
+            </p>
+
+            <ul class="mt-12 rounded-lg border border-line bg-bg overflow-hidden">
+                {talks.map((t, i) => {
+                    const inner = (
+                        <>
+                            <span class="font-mono text-xs text-faint sm:w-20 shrink-0 pt-0.5">{t.date}</span>
+                            <span class="flex-1 min-w-0">
+                                <span class="block text-fg text-[15px] leading-snug">{t.title}</span>
+                                <span class="block text-sm text-faint mt-1">{t.kind} · {t.venue}</span>
+                            </span>
+                            <span class="flex items-center gap-3 shrink-0">
+                                <span class:list={['font-mono text-[11px] rounded border px-1.5 py-0.5', t.lang === 'EN' ? 'border-fg/40 text-fg' : 'border-line text-muted']}>{t.lang}</span>
+                                {t.href
+                                    ? <span class="sm:w-20 text-right text-faint group-hover:text-fg transition-colors">↗</span>
+                                    : <span class="sm:w-20 text-right font-mono text-[11px] text-faint">coming</span>}
+                            </span>
+                        </>
+                    );
+                    return (
+                        <li class:list={[i > 0 && 'border-t border-line']}>
+                            {t.href
+                                ? <a href={t.href} target="_blank" rel="noopener" class="group flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 px-6 py-5 hover:bg-surface transition-colors">{inner}</a>
+                                : <div class="flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-6 px-6 py-5">{inner}</div>}
+                        </li>
+                    );
+                })}
+            </ul>
+            <p class="mt-4 text-sm text-faint">The theses will be linked here once they are finished.</p>
+
+            <!-- Go deeper -->
+            <div class="mt-20">
+                <h3 class="h-sub mb-6">Want to go deeper?</h3>
+                <a href="/devblog/01-the-synapse-journey" class="group block rounded-lg border border-line bg-bg p-6 hover:bg-surface transition-colors md:max-w-[50%]">
+                    <span class="block font-mono text-xs uppercase tracking-[0.12em] text-faint mb-4">Devblog</span>
+                    <span class="text-fg font-medium mb-1 flex items-center justify-between gap-3">
+                        Dev diary
+                        <span class="text-faint group-hover:text-fg transition-colors">→</span>
+                    </span>
+                    <span class="block text-sm text-muted">
+                        The messages between me and my supervisor. Progress updates, ideas and a lot of thinking about algorithms.
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== AI USE ============================== -->
+    <section id="ai" class="scroll-mt-16">
+        <div class="wrap py-20 md:py-28">
+            <p class="eyebrow mb-4">Transparency</p>
+            <h2 class="text-3xl md:text-4xl font-semibold tracking-tight leading-[1.15]">How I use AI</h2>
+
+            <p class="mt-10 max-w-4xl text-2xl md:text-[1.75rem] leading-snug font-medium tracking-tight text-fg">
+                Not a single line of code or idea went into this engine that I have not reviewed, that I don't understand,
+                or that I couldn't explain.
+            </p>
+
+            <div class="mt-12 grid gap-x-12 gap-y-5 md:grid-cols-2 body text-[17px]">
+                <div class="space-y-5">
+                    <p>
+                        I used AI while building Synapse Engine, mostly Google Gemini Pro through the student plan. I use it for
+                        almost everything around the thinking. Brainstorming ideas, finding papers and techniques, seeing how other
+                        engines solve a problem, planning the architecture and helping to write parts of the code.
+                    </p>
+                    <p>
+                        The mental model of the whole engine and every decision in it live in my head. That is the only reason I
+                        can keep moving forward. Every part is connected to every other part, and no AI keeps track of that on its own.
+                    </p>
+                </div>
+                <div class="space-y-5">
+                    <p>
+                        I have been building engines for three to four years. My BSc thesis, Dendrite Engine, was a fairly large
+                        engine written before AI tools existed, and I spent countless hours learning computer graphics the hard way.
+                    </p>
+                    <p>
+                        I think that is exactly why AI works for me. I know what to ask, I can read the answers critically, and
+                        after a while I can feel which algorithm will work and which won't. AI gives me more information and more
+                        ideas. The understanding and the decisions are still mine.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================== AUTHOR ============================== -->
+    <section class="wrap">
+        <div class="border-t border-line pt-10 flex flex-col sm:flex-row sm:items-center gap-6 justify-between">
+            <div class="flex items-center gap-5">
+                <img src="/Images/Profile.png" alt="Tamás Péter" class="h-14 w-14 rounded-full object-cover border border-line" />
+                <div>
+                    <p class="font-semibold">Tamás Péter</p>
+                    <p class="text-sm text-muted">Computer Engineering MSc, Visual Informatics, BME. Supervisor: András Máté Fridvalszky.</p>
+                </div>
+            </div>
+            <a href="/about" class="btn-secondary">About me</a>
         </div>
     </section>
 
 </Layout>
+
+<style>
+    .mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 9999px;
+        font-size: 0.9rem;
+        line-height: 1;
+    }
+    .mark-yes {
+        background: var(--fg);
+        color: var(--bg);
+        font-weight: 600;
+    }
+    .mark-part {
+        border: 1px solid var(--muted);
+        color: var(--fg);
+    }
+    .mark-no {
+        color: var(--faint);
+    }
+    .row-strong td {
+        color: var(--fg);
+        font-weight: 600;
+    }
+    .last-row td {
+        border-bottom: 0;
+    }
+    .swatch-static { background: color-mix(in srgb, var(--fg) 7%, var(--bg)); border-color: var(--line); }
+    .swatch-dynamic { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+    .swatch-stream { background: color-mix(in srgb, var(--accent) 38%, var(--bg)); border-color: color-mix(in srgb, var(--accent) 70%, transparent); }
+    .mark-ours {
+        background: var(--accent);
+        color: var(--accent-fg);
+        font-weight: 600;
+    }
+</style>
